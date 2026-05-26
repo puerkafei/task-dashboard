@@ -66,7 +66,7 @@ body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-ser
 .flow-step .step-body .step-meta .badge.red{background:var(--red-bg);color:var(--red)}
 .flow-step .step-body .step-meta .badge.amber{background:var(--amber-bg);color:var(--amber)}
 .flow-step .step-body .step-meta .badge.gray{background:var(--gray-bg);color:var(--text3)}
-.detail-section{background:var(--card);border-radius:var(--rad);padding:24px;box-shadow:var(--shadow)}
+.detail-section{background:var(--card);border-radius:var(--rad);padding:24px;box-shadow:var(--shadow);min-height:300px}
 .detail-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:300px;color:var(--text3);font-size:14px;gap:8px}
 .detail-placeholder .icon{font-size:40px;opacity:.3}
 .detail-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--card2);flex-wrap:wrap;gap:8px}
@@ -215,6 +215,7 @@ function renderFlow(steps) {
 }
 
 function selectStep(id) {
+  if (!data || !data.steps) return;
   var step = null;
   for (var i = 0; i < data.steps.length; i++) {
     if (data.steps[i].id === id) { step = data.steps[i]; break; }
@@ -228,9 +229,12 @@ function selectStep(id) {
 }
 
 function renderDetail(step) {
-  document.getElementById('detailPlaceholder').style.display = 'none';
+  if (!step) return;
+  var ph = document.getElementById('detailPlaceholder');
   var dc = document.getElementById('detailContent');
-  dc.style.display = 'block';
+  if (ph) ph.style.display = 'none';
+  if (dc) dc.style.display = 'block';
+  if (!dc) return;
   var statusMap = {completed:'已完成', in_progress:'进行中', error:'有异常', pending:'待开始'};
   var colorMap = {completed:'green', in_progress:'blue', error:'red', pending:'gray'};
   var toolsHtml = step.tools && step.tools.length ? (function() {
