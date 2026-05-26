@@ -10,8 +10,8 @@
 
 ## 在线访问
 
-> 部署于 jsDelivr CDN（GitHub Pages 因账户限制暂不可用）  
-> **URL：** [https://cdn.jsdelivr.net/gh/puerkafei/task-dashboard@main/index.html](https://cdn.jsdelivr.net/gh/puerkafei/task-dashboard@main/index.html)
+> 部署于 GitHub Pages  
+> **URL：** [https://puerkafei.github.io/task-dashboard/](https://puerkafei.github.io/task-dashboard/)
 
 ## 本地使用
 
