@@ -1,1 +1,122 @@
-{}
+{
+  "no_task": false,
+  "last_updated": "2026-05-26 19:57",
+  "current_task": {
+    "work_id": "TASK-20260526-bazi",
+    "name": "周易八字分析页面",
+    "type": "编程类（新任务）",
+    "upload": true,
+    "polish": true,
+    "progress": 25,
+    "assign_time": "2026-05-26 16:54"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "name": "曹操分派",
+      "assignee": "曹操",
+      "status": "completed",
+      "tools": ["sessions_spawn", "sessions_send"],
+      "content": "分派貂蝉编码、司马懿审核、曹植润色",
+      "reported_to": "已完成",
+      "reported_next": true,
+      "errors": 1,
+      "error_details": [
+        {
+          "type": "分派失败",
+          "detail": "分派曹植时使用错误 Agent ID 'zijian'（正确为 caozhi），sessions_send 失败",
+          "severity": "warning"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "貂蝉编码",
+      "assignee": "貂蝉（OpenCode）",
+      "status": "completed",
+      "tools": ["WebFetch", "Bash", "npm", "Read", "Write", "Edit", "Node.js"],
+      "content": "创建周易八字分析单页应用，含八字排盘、五行分析、喜用神推荐等功能，2304组批量测试验证",
+      "reported_to": "已完成",
+      "reported_next": true,
+      "errors": 4,
+      "error_details": [
+        {"type": "数据错误", "detail": "农历数据表不准确，通过 lunar-javascript 库重新生成", "severity": "error"},
+        {"type": "逻辑错误", "detail": "节气顺序错误，月柱计算节气数组顺序有误，修正后通过验证", "severity": "error"},
+        {"type": "逻辑错误", "detail": "日柱偏移计算，基准日期偏移量需验证修正", "severity": "error"},
+        {"type": "逻辑差异", "detail": "时柱差异，lunar-javascript 的时柱有早晚子时特殊规则，改用标准五鼠遁", "severity": "warning"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "司马懿审貂蝉",
+      "assignee": "司马懿",
+      "status": "pending",
+      "tools": [],
+      "content": "",
+      "reported_to": "未开始",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 4,
+      "name": "曹植润色",
+      "assignee": "曹植",
+      "status": "pending",
+      "tools": [],
+      "content": "",
+      "reported_to": "未开始",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 5,
+      "name": "司马懿审曹植",
+      "assignee": "司马懿",
+      "status": "pending",
+      "tools": [],
+      "content": "",
+      "reported_to": "未开始",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 6,
+      "name": "曹操下令上传",
+      "assignee": "曹操",
+      "status": "pending",
+      "tools": [],
+      "content": "",
+      "reported_to": "未开始",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 7,
+      "name": "貂蝉上传GitHub",
+      "assignee": "貂蝉（OpenCode）",
+      "status": "pending",
+      "tools": [],
+      "content": "",
+      "reported_to": "未开始",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 8,
+      "name": "曹操汇总",
+      "assignee": "曹操",
+      "status": "pending",
+      "tools": [],
+      "content": "",
+      "reported_to": "未开始",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    }
+  ]
+}

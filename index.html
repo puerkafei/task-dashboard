@@ -1,1 +1,262 @@
-<!DOCTYPE html><html><body><h1>Dashboard Test</h1></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>曹操团队 · 任务监控</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f172a;--card:#1e293b;--card2:#334155;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
+--green:#22c55e;--green-bg:rgba(34,197,94,0.12);--blue:#3b82f6;--blue-bg:rgba(59,130,246,0.12);
+--red:#ef4444;--red-bg:rgba(239,68,68,0.12);--amber:#f59e0b;--amber-bg:rgba(245,158,11,0.12);
+--gray:#6b7280;--gray-bg:rgba(107,114,128,0.12);--gold:#c9a84c;--rad:10px;--shadow:0 2px 12px rgba(0,0,0,.3)}
+body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.header h1{font-size:22px;font-weight:600;color:var(--gold);letter-spacing:1px}
+.header .meta{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--text2)}
+.header .meta .tag{padding:2px 10px;border-radius:20px;font-size:12px;background:var(--card2);color:var(--text2)}
+.header .meta .tag.online{background:var(--green-bg);color:var(--green)}
+.refresh-btn{padding:6px 16px;border-radius:6px;border:1px solid var(--text3);background:var(--card);color:var(--text2);cursor:pointer;font-size:13px;transition:.2s}
+.refresh-btn:hover{background:var(--card2);color:var(--text)}
+.main{display:grid;grid-template-columns:320px 1fr;gap:20px}
+@media(max-width:768px){.main{grid-template-columns:1fr}}
+.progress-section{grid-column:1/-1;background:var(--card);border-radius:var(--rad);padding:24px;display:flex;align-items:center;gap:28px;box-shadow:var(--shadow);flex-wrap:wrap}
+.ring-wrap{flex-shrink:0;position:relative;width:100px;height:100px}
+.ring-wrap svg{width:100px;height:100px;transform:rotate(-90deg)}
+.ring-wrap .ring-bg{fill:none;stroke:var(--card2);stroke-width:6}
+.ring-wrap .ring-fg{fill:none;stroke:var(--green);stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset .8s ease}
+.ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.ring-center .pct{font-size:24px;font-weight:700;color:var(--text)}
+.ring-center .label{font-size:11px;color:var(--text3)}
+.task-info{flex:1;min-width:200px}
+.task-info .name{font-size:18px;font-weight:600;margin-bottom:4px}
+.task-info .meta-row{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:8px;font-size:13px;color:var(--text2)}
+.task-info .meta-row span{display:flex;align-items:center;gap:4px}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+.status-dot.green{background:var(--green)}
+.status-dot.gray{background:var(--gray)}
+.status-dot.red{background:var(--red)}
+.status-dot.blue{background:var(--blue)}
+.flow-section{background:var(--card);border-radius:var(--rad);padding:20px;box-shadow:var(--shadow);overflow-y:auto;max-height:calc(100vh - 220px)}
+.flow-section::-webkit-scrollbar{width:4px}
+.flow-section::-webkit-scrollbar-thumb{background:var(--card2);border-radius:2px}
+.flow-title{font-size:14px;font-weight:600;color:var(--text2);margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.flow-step{display:flex;align-items:stretch;cursor:pointer;border-radius:8px;padding:10px 12px;margin-bottom:2px;transition:.2s;position:relative}
+.flow-step:hover{background:rgba(255,255,255,.04)}
+.flow-step.active{background:rgba(59,130,246,.1);border-left:3px solid var(--blue)}
+.flow-step.pending{opacity:.6}
+.flow-step.error{background:var(--red-bg)}
+.flow-step .connector{display:flex;flex-direction:column;align-items:center;width:24px;flex-shrink:0}
+.flow-step .connector .dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--gray);flex-shrink:0;transition:.3s;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff}
+.flow-step.completed .connector .dot{border-color:var(--green);background:var(--green)}
+.flow-step.in_progress .connector .dot{border-color:var(--blue);background:var(--blue);animation:pulse 1.5s infinite}
+.flow-step.error .connector .dot{border-color:var(--red);background:var(--red)}
+.flow-step.pending .connector .dot{background:var(--card2)}
+.flow-step .connector .line{width:2px;flex:1;min-height:18px;background:var(--card2);margin:4px 0}
+.flow-step:last-child .connector .line{display:none}
+.flow-step.completed .connector .line{background:var(--green)}
+.flow-step.in_progress .connector .line{background:var(--blue)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,130,246,.6)}70%{box-shadow:0 0 0 8px rgba(59,130,246,0)}100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}}
+.flow-step .step-body{flex:1;margin-left:10px;min-width:0}
+.flow-step .step-body .step-name{font-size:14px;font-weight:500;margin-bottom:2px}
+.flow-step .step-body .step-meta{font-size:12px;color:var(--text3);display:flex;flex-wrap:wrap;gap:4px 10px}
+.flow-step .step-body .step-meta .badge{font-size:10px;padding:1px 6px;border-radius:10px}
+.flow-step .step-body .step-meta .badge.green{background:var(--green-bg);color:var(--green)}
+.flow-step .step-body .step-meta .badge.blue{background:var(--blue-bg);color:var(--blue)}
+.flow-step .step-body .step-meta .badge.red{background:var(--red-bg);color:var(--red)}
+.flow-step .step-body .step-meta .badge.amber{background:var(--amber-bg);color:var(--amber)}
+.flow-step .step-body .step-meta .badge.gray{background:var(--gray-bg);color:var(--text3)}
+.detail-section{background:var(--card);border-radius:var(--rad);padding:24px;box-shadow:var(--shadow)}
+.detail-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:300px;color:var(--text3);font-size:14px;gap:8px}
+.detail-placeholder .icon{font-size:40px;opacity:.3}
+.detail-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--card2);flex-wrap:wrap;gap:8px}
+.detail-header .dh-left{display:flex;align-items:center;gap:10px}
+.detail-header .dh-left .dh-name{font-size:18px;font-weight:600}
+.detail-header .dh-left .dh-assignee{font-size:13px;color:var(--text2);background:var(--card2);padding:2px 10px;border-radius:20px}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.detail-grid{grid-template-columns:1fr}}
+.detail-card{background:var(--card2);border-radius:8px;padding:14px}
+.detail-card .dc-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.detail-card .dc-val{font-size:14px;color:var(--text);line-height:1.5}
+.detail-card .dc-val .tool-tag{display:inline-block;background:var(--card);color:var(--text2);padding:2px 8px;border-radius:4px;font-size:12px;margin:2px}
+.detail-card.full{grid-column:1/-1}
+.error-item{padding:10px 12px;border-radius:6px;margin-top:6px;font-size:13px;line-height:1.5;border-left:3px solid}
+.error-item.critical{background:var(--red-bg);border-color:var(--red);color:var(--red)}
+.error-item.error{background:var(--red-bg);border-color:var(--red);color:var(--text)}
+.error-item.warning{background:var(--amber-bg);border-color:var(--amber);color:var(--amber)}
+.error-item .ei-type{font-weight:600;margin-bottom:2px}
+.error-item .ei-detail{color:var(--text2);font-size:12px}
+.no-task{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;color:var(--text3)}
+.no-task .big-icon{font-size:64px;margin-bottom:16px;opacity:.3}
+.no-task p{font-size:16px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>曹操团队 · 任务监控</h1>
+    <div class="meta" style="margin-top:4px">
+      <span class="tag online" id="statusTag">● 运行中</span>
+      <span id="updateTime">更新于: --</span>
+    </div>
+  </div>
+  <button class="refresh-btn" onclick="loadData()">刷新</button>
+</div>
+
+<div class="main" id="app">
+  <div class="progress-section" id="progressSection"></div>
+  <div class="flow-section" id="flowSection">
+    <div class="flow-title">任务流程</div>
+    <div id="flowList"></div>
+  </div>
+  <div class="detail-section" id="detailSection">
+    <div class="detail-placeholder" id="detailPlaceholder">
+      <div class="icon">📋</div>
+      <p>点击左侧流程节点查看详情</p>
+    </div>
+    <div id="detailContent" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+var DATA_URL = './data/status.json';
+var data = null;
+var selectedStep = null;
+
+var FALLBACK_DATA = {
+  "no_task": false,
+  "last_updated": "2026-05-26 19:57",
+  "current_task": {
+    "work_id": "TASK-20260526-bazi",
+    "name": "周易八字分析页面",
+    "type": "编程类（新任务）",
+    "upload": true, "polish": true,
+    "progress": 25,
+    "assign_time": "2026-05-26 16:54"
+  },
+  "steps": [
+    {"id":1,"name":"曹操分派","assignee":"曹操","status":"completed","tools":["sessions_spawn","sessions_send"],"content":"分派貂蝉编码、司马懿审核、曹植润色","reported_to":"已完成","reported_next":true,"errors":1,"error_details":[{"type":"分派失败","detail":"分派曹植时使用错误 Agent ID，sessions_send 失败","severity":"warning"}]},
+    {"id":2,"name":"貂蝉编码","assignee":"貂蝉（OpenCode）","status":"completed","tools":["WebFetch","Bash","npm","Read","Write","Edit","Node.js"],"content":"创建周易八字分析单页应用，2304组批量测试验证","reported_to":"已完成","reported_next":true,"errors":4,"error_details":[
+      {"type":"数据错误","detail":"农历数据表不准确，通过 lunar-javascript 库重新生成","severity":"error"},
+      {"type":"逻辑错误","detail":"节气顺序错误，月柱计算节气数组顺序有误","severity":"error"},
+      {"type":"逻辑错误","detail":"日柱偏移计算，基准日期偏移量需验证修正","severity":"error"},
+      {"type":"逻辑差异","detail":"时柱差异，lunar-javascript 的时柱有早晚子时特殊规则","severity":"warning"}
+    ]},
+    {"id":3,"name":"司马懿审貂蝉","assignee":"司马懿","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
+    {"id":4,"name":"曹植润色","assignee":"曹植","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
+    {"id":5,"name":"司马懿审曹植","assignee":"司马懿","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
+    {"id":6,"name":"曹操下令上传","assignee":"曹操","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
+    {"id":7,"name":"貂蝉上传GitHub","assignee":"貂蝉（OpenCode）","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
+    {"id":8,"name":"曹操汇总","assignee":"曹操","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]}
+  ]
+};
+
+function loadData() {
+  fetch(DATA_URL + '?t=' + Date.now()).then(function(resp) {
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return resp.json();
+  }).then(function(d) {
+    data = d;
+    document.getElementById('statusTag').textContent = '● 运行中';
+    document.getElementById('statusTag').className = 'tag online';
+    document.getElementById('updateTime').textContent = '更新于: ' + (data.last_updated || '--');
+    render();
+  }).catch(function() {
+    data = FALLBACK_DATA;
+    document.getElementById('statusTag').textContent = '● 离线模式';
+    document.getElementById('statusTag').className = 'tag';
+    document.getElementById('updateTime').textContent = '更新于: ' + (data.last_updated || '--');
+    render();
+  });
+}
+
+function render() {
+  if (!data || data.no_task) {
+    document.getElementById('progressSection').innerHTML = '<div class="no-task" style="width:100%;padding:40px"><div class="big-icon">🛌</div><p>暂无任务 · 团队待命中</p></div>';
+    document.getElementById('flowList').innerHTML = '';
+    document.getElementById('detailPlaceholder').style.display = 'flex';
+    document.getElementById('detailContent').style.display = 'none';
+    return;
+  }
+  renderProgress(data.current_task);
+  renderFlow(data.steps);
+  if (selectedStep) {
+    var step = null;
+    for (var i = 0; i < data.steps.length; i++) {
+      if (data.steps[i].id === selectedStep.id) { step = data.steps[i]; break; }
+    }
+    if (step) renderDetail(step);
+  }
+}
+
+function renderProgress(task) {
+  var pct = task.progress || 0;
+  var r = 42, circ = 2 * Math.PI * r, offset = circ * (1 - pct / 100);
+  var sec = document.getElementById('progressSection');
+  sec.innerHTML = '<div class="ring-wrap"><svg viewBox="0 0 100 100"><circle class="ring-bg" cx="50" cy="50" r="' + r + '"/><circle class="ring-fg" cx="50" cy="50" r="' + r + '" stroke-dasharray="' + circ + '" stroke-dashoffset="' + offset + '"/></svg><div class="ring-center"><div class="pct">' + pct + '%</div><div class="label">进度</div></div></div><div class="task-info"><div class="name">' + esc(task.name) + '</div><div class="meta-row"><span>' + task.work_id + '</span><span>' + task.type + '</span><span>' + task.assign_time + '</span>' + (task.upload ? '<span>上传 GitHub</span>' : '') + (task.polish ? '<span>需润色</span>' : '') + '</div></div>';
+}
+
+function renderFlow(steps) {
+  var list = document.getElementById('flowList');
+  var html = '';
+  for (var i = 0; i < steps.length; i++) {
+    var s = steps[i];
+    var dot = s.status === 'completed' ? '&#10003;' : '';
+    var cls = s.status;
+    var badgeMap = {completed:'已完成', in_progress:'进行中', error:'有异常', pending:'待开始'};
+    var badgeColor = {completed:'green', in_progress:'blue', error:'red', pending:'gray'};
+    var badge = '<span class="badge ' + (badgeColor[s.status] || 'gray') + '">' + (badgeMap[s.status] || '待开始') + '</span>';
+    var errBadge = s.errors > 0 ? '<span class="badge ' + (s.status === 'error' ? 'red' : 'amber') + '">' + s.errors + '个问题</span>' : '';
+    var activeCls = selectedStep && selectedStep.id === s.id ? 'active' : '';
+    html += '<div class="flow-step ' + cls + ' ' + activeCls + '" onclick="selectStep(' + s.id + ')"><div class="connector"><div class="dot">' + dot + '</div><div class="line"></div></div><div class="step-body"><div class="step-name">' + s.id + '. ' + esc(s.name) + '</div><div class="step-meta"><span>' + esc(s.assignee) + '</span>' + badge + errBadge + '</div></div></div>';
+  }
+  list.innerHTML = html;
+}
+
+function selectStep(id) {
+  var step = null;
+  for (var i = 0; i < data.steps.length; i++) {
+    if (data.steps[i].id === id) { step = data.steps[i]; break; }
+  }
+  if (!step) return;
+  selectedStep = step;
+  renderFlow(data.steps);
+  renderDetail(step);
+  var active = document.querySelector('.flow-step.active');
+  if (active) active.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function renderDetail(step) {
+  document.getElementById('detailPlaceholder').style.display = 'none';
+  var dc = document.getElementById('detailContent');
+  dc.style.display = 'block';
+  var statusMap = {completed:'已完成', in_progress:'进行中', error:'有异常', pending:'待开始'};
+  var colorMap = {completed:'green', in_progress:'blue', error:'red', pending:'gray'};
+  var toolsHtml = step.tools && step.tools.length ? (function() {
+    var t = '';
+    for (var i = 0; i < step.tools.length; i++) t += '<span class="tool-tag">' + esc(step.tools[i]) + '</span>';
+    return t;
+  })() : '暂无记录';
+  var errorsHtml = step.error_details && step.error_details.length ? (function() {
+    var e = '';
+    for (var i = 0; i < step.error_details.length; i++) {
+      var ed = step.error_details[i];
+      e += '<div class="error-item ' + ed.severity + '"><div class="ei-type">[' + ed.severity.toUpperCase() + '] ' + esc(ed.type) + '</div><div class="ei-detail">' + esc(ed.detail) + '</div></div>';
+    }
+    return e;
+  })() : '无异常记录';
+  var dotColor = colorMap[step.status] || 'gray';
+  dc.innerHTML = '<div class="detail-header"><div class="dh-left"><div class="dh-name">' + esc(step.name) + '</div><div class="dh-assignee">' + esc(step.assignee) + '</div></div><div style="font-size:13px"><span class="status-dot ' + dotColor + '"></span>' + (statusMap[step.status] || '待开始') + '</div></div><div class="detail-grid"><div class="detail-card"><div class="dc-label">使用工具</div><div class="dc-val">' + toolsHtml + '</div></div><div class="detail-card"><div class="dc-label">汇报上级</div><div class="dc-val">' + esc(step.reported_to) + '</div></div><div class="detail-card"><div class="dc-label">通知下一环节</div><div class="dc-val">' + (step.reported_next ? '已通知' : '未通知') + '</div></div><div class="detail-card"><div class="dc-label">报错/卡点次数</div><div class="dc-val" style="color:' + (step.errors > 0 ? 'var(--red)' : 'var(--green)') + '">' + step.errors + ' 次</div></div><div class="detail-card full"><div class="dc-label">工作内容</div><div class="dc-val">' + (step.content ? esc(step.content) : '暂无记录') + '</div></div><div class="detail-card full"><div class="dc-label">异常与卡点详情</div><div class="dc-val">' + errorsHtml + '</div></div></div>';
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+loadData();
+setInterval(loadData, 30000);
+</script>
+</body>
+</html>
