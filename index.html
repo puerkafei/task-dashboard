@@ -162,13 +162,26 @@ function loadData() {
     document.getElementById('statusTag').className = 'tag online';
     document.getElementById('updateTime').textContent = '更新于: ' + (data.last_updated || '--');
     render();
+    selectFirstStep();
   }).catch(function() {
     data = FALLBACK_DATA;
     document.getElementById('statusTag').textContent = '● 离线模式';
     document.getElementById('statusTag').className = 'tag';
     document.getElementById('updateTime').textContent = '更新于: ' + (data.last_updated || '--');
     render();
+    selectFirstStep();
   });
+}
+
+function selectFirstStep() {
+  if (!data || !data.steps) return;
+  for (var i = 0; i < data.steps.length; i++) {
+    if (data.steps[i].status === 'completed' || data.steps[i].status === 'error') {
+      selectStep(data.steps[i].id);
+      return;
+    }
+  }
+  if (data.steps.length > 0) selectStep(data.steps[0].id);
 }
 
 function render() {
