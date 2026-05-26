@@ -37,7 +37,7 @@ body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-ser
 .status-dot.gray{background:var(--gray)}
 .status-dot.red{background:var(--red)}
 .status-dot.blue{background:var(--blue)}
-.flow-section{background:var(--card);border-radius:var(--rad);padding:20px;box-shadow:var(--shadow);overflow-y:auto;max-height:calc(100vh - 220px)}
+.flow-section{background:var(--card);border-radius:var(--rad);padding:20px;box-shadow:var(--shadow);overflow-y:auto;max-height:400px}
 .flow-section::-webkit-scrollbar{width:4px}
 .flow-section::-webkit-scrollbar-thumb{background:var(--card2);border-radius:2px}
 .flow-title{font-size:14px;font-weight:600;color:var(--text2);margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
@@ -137,7 +137,7 @@ var FALLBACK_DATA = {
   },
   "steps": [
     {"id":1,"name":"曹操分派","assignee":"曹操","status":"completed","tools":["sessions_spawn","sessions_send"],"content":"分派貂蝉编码、司马懿审核、曹植润色","reported_to":"已完成","reported_next":true,"errors":1,"error_details":[{"type":"分派失败","detail":"分派曹植时使用错误 Agent ID，sessions_send 失败","severity":"warning"}]},
-    {"id":2,"name":"貂蝉编码","assignee":"貂蝉（OpenCode）","status":"completed","tools":["WebFetch","Bash","npm","Read","Write","Edit","Node.js"],"content":"创建周易八字分析单页应用，2304组批量测试验证","reported_to":"已完成","reported_next":true,"errors":4,"error_details":[
+    {"id":2,"name":"貂蝉编码","assignee":"貂蝉（OpenCode）","status":"completed","tools":["WebFetch","Bash","npm","Read","Write","Edit","Node.js"],"content":"创建周易八字分析单页应用，2304组批量测试验证","reported_to":"未通知上级","reported_next":false,"errors":4,"error_details":[
       {"type":"数据错误","detail":"农历数据表不准确，通过 lunar-javascript 库重新生成","severity":"error"},
       {"type":"逻辑错误","detail":"节气顺序错误，月柱计算节气数组顺序有误","severity":"error"},
       {"type":"逻辑错误","detail":"日柱偏移计算，基准日期偏移量需验证修正","severity":"error"},
