@@ -86,6 +86,7 @@ body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-ser
 .error-item.warning{background:var(--amber-bg);border-color:var(--amber);color:var(--amber)}
 .error-item .ei-type{font-weight:600;margin-bottom:2px}
 .error-item .ei-detail{color:var(--text2);font-size:12px}
+.error-item .resolved-badge{display:inline-block;background:var(--green);color:#fff;font-size:9px;padding:1px 6px;border-radius:8px;margin-left:6px;vertical-align:middle;letter-spacing:0.5px}
 .no-task{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;color:var(--text3)}
 .no-task .big-icon{font-size:64px;margin-bottom:16px;opacity:.3}
 .no-task p{font-size:16px}
@@ -136,12 +137,12 @@ var FALLBACK_DATA = {
     "assign_time": "2026-05-26 16:54"
   },
   "steps": [
-    {"id":1,"name":"曹操分派","assignee":"曹操","status":"completed","tools":["sessions_spawn","sessions_send"],"content":"分派貂蝉编码、司马懿审核、曹植润色","reported_to":"已完成","reported_next":true,"errors":1,"error_details":[{"type":"分派失败","detail":"分派曹植时使用错误 Agent ID，sessions_send 失败","severity":"warning"}]},
+    {"id":1,"name":"曹操分派","assignee":"曹操","status":"completed","tools":["sessions_spawn","sessions_send"],"content":"分派貂蝉编码、司马懿审核、曹植润色","reported_to":"已完成","reported_next":true,"errors":1,"error_details":[{"type":"分派失败","detail":"分派曹植时使用错误 Agent ID，sessions_send 失败","severity":"warning","resolved":true}]},
     {"id":2,"name":"貂蝉编码","assignee":"貂蝉（OpenCode）","status":"completed","tools":["WebFetch","Bash","npm","Read","Write","Edit","Node.js"],"content":"创建周易八字分析单页应用，2304组批量测试验证","reported_to":"未通知上级","reported_next":false,"errors":4,"error_details":[
-      {"type":"数据错误","detail":"农历数据表不准确，通过 lunar-javascript 库重新生成","severity":"error"},
-      {"type":"逻辑错误","detail":"节气顺序错误，月柱计算节气数组顺序有误","severity":"error"},
-      {"type":"逻辑错误","detail":"日柱偏移计算，基准日期偏移量需验证修正","severity":"error"},
-      {"type":"逻辑差异","detail":"时柱差异，lunar-javascript 的时柱有早晚子时特殊规则","severity":"warning"}
+      {"type":"数据错误","detail":"农历数据表不准确，通过 lunar-javascript 库重新生成","severity":"error","resolved":true},
+      {"type":"逻辑错误","detail":"节气顺序错误，月柱计算节气数组顺序有误","severity":"error","resolved":true},
+      {"type":"逻辑错误","detail":"日柱偏移计算，基准日期偏移量需验证修正","severity":"error","resolved":true},
+      {"type":"逻辑差异","detail":"时柱差异，lunar-javascript 的时柱有早晚子时特殊规则","severity":"warning","resolved":true}
     ]},
     {"id":3,"name":"司马懿审貂蝉","assignee":"司马懿","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
     {"id":4,"name":"曹植润色","assignee":"曹植","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
@@ -259,7 +260,7 @@ function renderDetail(step) {
     var e = '';
     for (var i = 0; i < step.error_details.length; i++) {
       var ed = step.error_details[i];
-      e += '<div class="error-item ' + ed.severity + '"><div class="ei-type">[' + ed.severity.toUpperCase() + '] ' + esc(ed.type) + '</div><div class="ei-detail">' + esc(ed.detail) + '</div></div>';
+      e += '<div class="error-item ' + ed.severity + '"><div class="ei-type">[' + ed.severity.toUpperCase() + '] ' + esc(ed.type) + (ed.resolved ? '<span class="resolved-badge">已修复</span>' : '') + '</div><div class="ei-detail">' + esc(ed.detail) + '</div></div>';
     }
     return e;
   })() : '无异常记录';
