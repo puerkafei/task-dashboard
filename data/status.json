@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 11:20",
+  "last_updated": "2026-05-27 11:25",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v4",
     "name": "八字工具V4更新（三方AI四柱说法比对+典籍来源核实+必要修正）",
     "type": "更新任务",
     "upload": true,
     "polish": true,
-    "progress": 5,
+    "progress": 10,
     "assign_time": "2026-05-27 11:20",
     "parent": "TASK-20260527-bazi-v3"
   },
@@ -16,13 +16,13 @@
       "id": 1,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "executing",
+      "status": "completed",
       "tools": [
         "sessions_send"
       ],
       "content": "分派诸葛亮调研三方AI说法真伪+貂蝉编码备勤",
-      "reported_to": "执行中",
-      "reported_next": false,
+      "reported_to": "已分派诸葛亮+司马懿+曹植",
+      "reported_next": true,
       "errors": 0,
       "error_details": []
     },
@@ -30,7 +30,7 @@
       "id": 2,
       "name": "诸葛亮调研（三方AI说法核实+与V3比对）",
       "assignee": "诸葛亮",
-      "status": "待分配",
+      "status": "执行中",
       "tools": [
         "web_search",
         "web_fetch",
@@ -46,7 +46,7 @@
       "id": 3,
       "name": "司马懿审诸葛亮",
       "assignee": "司马懿",
-      "status": "待分配",
+      "status": "执行中",
       "tools": [
         "sessions_send"
       ],
