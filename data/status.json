@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 10:15",
+  "last_updated": "2026-05-27 10:20",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v3",
     "name": "八字工具V3更新（排盘基准核实+宜忌重做+姓名匹配更换+城市数据补全+真太阳时论证）",
     "type": "更新任务",
     "upload": true,
     "polish": true,
-    "progress": 85,
+    "progress": 100,
     "assign_time": "2026-05-27 09:00",
     "parent": "TASK-20260526-bazi-v2"
   },
@@ -16,7 +16,7 @@
       "id": 1,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "executing",
+      "status": "completed",
       "tools": [
         "sessions_send",
         "sessions_spawn"
@@ -134,13 +134,13 @@
       "id": 9,
       "name": "上传GitHub v3",
       "assignee": "貂蝉（OpenCode）",
-      "status": "执行中",
+      "status": "completed",
       "tools": [
         "git",
         "curl"
       ],
-      "content": "准备上传GitHub v3",
-      "reported_to": "未完成",
+      "content": "GitHub上传+Release创建完成 v2026.05.27",
+      "reported_to": "已完成GitHub上传",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -149,12 +149,12 @@
       "id": 10,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "待分配",
+      "status": "completed",
       "tools": [
         "sessions_send"
       ],
-      "content": "全流程完成，通知甄宓",
-      "reported_to": "未完成",
+      "content": "线下可访问：https://puerkafei.github.io/bazi-analyzer/",
+      "reported_to": "已通知甄宓",
       "reported_next": false,
       "errors": 0,
       "error_details": []
