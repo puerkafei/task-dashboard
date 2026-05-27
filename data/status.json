@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 12:40",
+  "last_updated": "2026-05-27 12:50",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v4",
     "name": "八字工具V4升级（节气天文算法+阴历输入+均时差修正+跨日联动）",
     "type": "更新任务",
     "upload": true,
     "polish": true,
-    "progress": 55,
+    "progress": 100,
     "assign_time": "2026-05-27 12:30",
     "parent": "TASK-20260527-bazi-v3"
   },
@@ -60,13 +60,13 @@
       "id": 4,
       "name": "曹植润色README",
       "assignee": "曹植",
-      "status": "执行中",
+      "status": "completed",
       "tools": [
         "Write",
         "Edit"
       ],
       "content": "润色英文README-v4",
-      "reported_to": "等待接收貂蝉交付物润色README",
+      "reported_to": "README润色完成，司马懿通过",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -75,12 +75,12 @@
       "id": 5,
       "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "待分配",
+      "status": "completed",
       "tools": [
         "sessions_send"
       ],
-      "content": "审核曹植润色",
-      "reported_to": "未完成",
+      "content": "曹植润色README-v4通过",
+      "reported_to": "已交付曹操",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -89,13 +89,13 @@
       "id": 6,
       "name": "上传GitHub v4",
       "assignee": "貂蝉（OpenCode）",
-      "status": "待分配",
+      "status": "completed",
       "tools": [
         "git",
         "curl"
       ],
       "content": "代码推送+Git Tag v2026.05.28+Release",
-      "reported_to": "未完成",
+      "reported_to": "已上传GitHub+Release v2026.05.28",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -104,14 +104,14 @@
       "id": 7,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "待分配",
+      "status": "completed",
       "tools": [
         "sessions_send"
       ],
       "content": "全流程完成，通知甄宓",
-      "reported_to": "未完成",
+      "reported_to": "已汇总等待呈报",
       "notified_main_at": null,
-      "reported_next": false,
+      "reported_next": true,
       "errors": 0,
       "error_details": []
     }
