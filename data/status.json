@@ -22,7 +22,7 @@
         "sessions_spawn"
       ],
       "content": "分派：诸葛亮(排盘基准+真太阳时论证) + 貂蝉(宜忌重做+姓名匹配更换+城市补全) + 司马懿 + 曹植",
-      "reported_to": "已完成，全员已分派",
+      "reported_to": "已汇报",
       "reported_next": true,
       "errors": 0,
       "error_details": []
@@ -37,7 +37,7 @@
         "web_fetch"
       ],
       "content": "1)核实八字排盘以阳历节气为基准的典籍来源 2)查证真太阳时修正的经典论据",
-      "reported_to": "已通过司马懿审核",
+      "reported_to": "已汇报",
       "reported_next": true,
       "errors": 0,
       "error_details": []
@@ -53,7 +53,7 @@
         "Node.js"
       ],
       "content": "1)重做宜忌模块：基于《协纪辨方书》神煞体系 2)替换五格剖象法为传统字源学 3)补全省份地级市数据",
-      "reported_to": "貂蝉编码完成，已提交司马懿审核",
+      "reported_to": "已汇报",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -67,7 +67,7 @@
         "sessions_send"
       ],
       "content": "审核通过，无退回项。五个经典出处完整，真太阳时段层清晰",
-      "reported_to": "已通过",
+      "reported_to": "已汇报",
       "reported_next": true,
       "errors": 0,
       "error_details": []
@@ -81,7 +81,7 @@
         "sessions_send"
       ],
       "content": "三大任务全部通过：宜忌重做✅ 姓名匹配更换✅ 城市补全(350城)✅",
-      "reported_to": "已告知貂蝉交付曹植润色README",
+      "reported_to": "已汇报",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -96,7 +96,7 @@
         "Edit"
       ],
       "content": "润色诸葛亮的调研报告",
-      "reported_to": "润色完成，已提交司马懿",
+      "reported_to": "已汇报",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -111,7 +111,7 @@
         "Edit"
       ],
       "content": "润色英文README（含新功能说明）",
-      "reported_to": "README润色完成，已通过司马懿审核",
+      "reported_to": "已汇报",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -125,7 +125,7 @@
         "sessions_send"
       ],
       "content": "曹植README润色审核通过。全线完成：调研+编码+润色+审核",
-      "reported_to": "已交付曹操",
+      "reported_to": "已汇报",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -140,7 +140,7 @@
         "curl"
       ],
       "content": "GitHub上传+Release创建完成 v2026.05.27",
-      "reported_to": "已完成GitHub上传",
+      "reported_to": "已汇报",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -154,7 +154,7 @@
         "sessions_send"
       ],
       "content": "线下可访问：https://puerkafei.github.io/bazi-analyzer/",
-      "reported_to": "已通知甄宓",
+      "reported_to": "未汇报",
       "reported_next": false,
       "errors": 0,
       "error_details": []
