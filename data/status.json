@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 11:25",
+  "last_updated": "2026-05-27 11:30",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v4",
     "name": "八字工具V4更新（三方AI四柱说法比对+典籍来源核实+必要修正）",
     "type": "更新任务",
     "upload": true,
     "polish": true,
-    "progress": 10,
+    "progress": 40,
     "assign_time": "2026-05-27 11:20",
     "parent": "TASK-20260527-bazi-v3"
   },
@@ -30,14 +30,14 @@
       "id": 2,
       "name": "诸葛亮调研（三方AI说法核实+与V3比对）",
       "assignee": "诸葛亮",
-      "status": "执行中",
+      "status": "completed",
       "tools": [
         "web_search",
         "web_fetch",
         "read"
       ],
       "content": "1)搜索核实三方AI引用的典籍来源是否正统 2)与V3代码逐条比对 3)给出是否需要升级V4的结论",
-      "reported_to": "未完成",
+      "reported_to": "调研完成，结论：三方AI说法正统，V3一致，无需V4",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -51,7 +51,7 @@
         "sessions_send"
       ],
       "content": "审核诸葛亮调研结论",
-      "reported_to": "未完成",
+      "reported_to": "等待司马懿审核",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -118,13 +118,13 @@
     {
       "id": 8,
       "name": "上传GitHub v4",
-      "assignee": "曹操",
+      "assignee": "貂蝉（OpenCode）",
       "status": "待分配",
       "tools": [
         "git",
         "curl"
       ],
-      "content": "代码推送+Git Tag+Release",
+      "content": "代码推送+Git Tag+Release（专属职责：貂蝉执行，曹操不得替补）",
       "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
