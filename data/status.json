@@ -1,14 +1,14 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 12:27",
+  "last_updated": "2026-05-27 12:30",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v4",
-    "name": "八字工具V4更新（三方AI四柱说法比对+典籍来源核实+必要修正）",
+    "name": "八字工具V4升级（节气天文算法+阴历输入+均时差修正+跨日联动）",
     "type": "更新任务",
-    "upload": false,
+    "upload": true,
     "polish": true,
-    "progress": 100,
-    "assign_time": "2026-05-27 11:20",
+    "progress": 10,
+    "assign_time": "2026-05-27 12:30",
     "parent": "TASK-20260527-bazi-v3"
   },
   "steps": [
@@ -16,122 +16,101 @@
       "id": 1,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "completed",
+      "status": "executing",
       "tools": [
-        "sessions_send"
+        "sessions_spawn"
       ],
-      "content": "分派诸葛亮调研三方AI说法真伪+貂蝉编码备勤",
-      "reported_to": "已分派诸葛亮+司马懿+曹植",
-      "reported_next": true,
+      "content": "分派貂蝉编码V4",
+      "reported_to": "执行中",
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 2,
-      "name": "诸葛亮调研（三方AI说法核实+与V3比对）",
-      "assignee": "诸葛亮",
-      "status": "completed",
+      "name": "貂蝉编码V4",
+      "assignee": "貂蝉（OpenCode）",
+      "status": "待分配",
       "tools": [
-        "web_search",
-        "web_fetch",
-        "read"
+        "Write",
+        "Edit",
+        "Node.js"
       ],
-      "content": "1)搜索核实三方AI引用的典籍来源是否正统 2)与V3代码逐条比对 3)给出是否需要升级V4的结论",
-      "reported_to": "调研完成，结论：三方AI说法正统，V3一致，无需V4",
+      "content": "4项修复：节气天文算法+阴历输入+均时差公式修正+真太阳时跨日联动；版本号v2026.05.28",
+      "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 3,
-      "name": "司马懿审诸葛亮",
+      "name": "司马懿审貂蝉",
       "assignee": "司马懿",
-      "status": "completed",
+      "status": "待分配",
       "tools": [
         "sessions_send"
       ],
-      "content": "审核诸葛亮调研结论",
-      "reported_to": "审核通过，结论：V3与三方AI一致，无需V4",
-      "reported_next": true,
+      "content": "审核貂蝉编码V4",
+      "reported_to": "未完成",
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 4,
-      "name": "貂蝉编码V4",
-      "assignee": "貂蝉（OpenCode）",
-      "status": "已取消",
-      "tools": [],
-      "content": "已取消——诸葛亮调研结论：V3与三方AI一致，无需V4，编码无必要",
-      "reported_to": "已取消",
+      "name": "曹植润色README",
+      "assignee": "曹植",
+      "status": "待分配",
+      "tools": [
+        "Write",
+        "Edit"
+      ],
+      "content": "润色英文README-v4",
+      "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 5,
-      "name": "司马懿审貂蝉",
+      "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "已取消",
-      "tools": [],
-      "content": "已取消——上游编码已取消",
-      "reported_to": "已取消",
+      "status": "待分配",
+      "tools": [
+        "sessions_send"
+      ],
+      "content": "审核曹植润色",
+      "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 6,
-      "name": "曹植润色调研报告",
-      "assignee": "曹植",
-      "status": "completed",
+      "name": "上传GitHub v4",
+      "assignee": "貂蝉（OpenCode）",
+      "status": "待分配",
       "tools": [
-        "Write",
-        "Edit"
+        "git",
+        "curl"
       ],
-      "content": "润色诸葛亮调研报告（三方AI说法比对+典籍来源核实结论）呈报主公",
-      "reported_to": "润色完成",
+      "content": "代码推送+Git Tag v2026.05.28+Release",
+      "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 7,
-      "name": "司马懿审曹植",
-      "assignee": "司马懿",
-      "status": "completed",
-      "tools": [
-        "sessions_send"
-      ],
-      "content": "曹植润色通过",
-      "reported_to": "已交付曹操",
-      "reported_next": false,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 8,
-      "name": "上传GitHub v4",
-      "assignee": "貂蝉（OpenCode）",
-      "status": "已取消",
-      "tools": [],
-      "content": "已取消——调研结论无需V4，无新代码可上传",
-      "reported_to": "已取消",
-      "reported_next": false,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 9,
-      "name": "曹操汇总呈报",
+      "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "completed",
+      "status": "待分配",
       "tools": [
         "sessions_send"
       ],
-      "content": "汇总润色后的调研报告，sessions_send 通知甄宓呈报主公",
-      "reported_to": "已汇报",
-      "notified_main_at": "2026-05-27 12:27",
+      "content": "全流程完成，通知甄宓",
+      "reported_to": "未完成",
+      "notified_main_at": null,
       "reported_next": false,
       "errors": 0,
       "error_details": []
