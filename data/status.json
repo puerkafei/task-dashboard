@@ -133,13 +133,13 @@
     {
       "id": 9,
       "name": "上传GitHub v3",
-      "assignee": "曹操",
+      "assignee": "貂蝉（OpenCode）",
       "status": "待分配",
       "tools": [
         "git",
         "curl"
       ],
-      "content": "代码推送 + Git Tag v2026.05.27",
+      "content": "代码推送 + Git Tag + Release（由貂蝉执行）",
       "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
