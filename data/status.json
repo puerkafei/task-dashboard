@@ -109,8 +109,8 @@
         "sessions_send"
       ],
       "content": "全流程完成，通知甄宓",
-      "reported_to": "已汇总等待呈报",
-      "notified_main_at": null,
+      "reported_to": "已汇报",
+      "notified_main_at": "2026-05-27 12:50",
       "reported_next": true,
       "errors": 0,
       "error_details": []
