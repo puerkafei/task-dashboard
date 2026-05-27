@@ -130,7 +130,7 @@
         "sessions_send"
       ],
       "content": "汇总润色后的调研报告，sessions_send 通知甄宓呈报主公",
-      "reported_to": "未完成",
+      "reported_to": "已汇报",
       "notified_main_at": "2026-05-27 12:27",
       "reported_next": false,
       "errors": 0,
