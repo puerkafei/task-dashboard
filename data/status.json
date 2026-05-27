@@ -1,6 +1,6 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27",
+  "last_updated": "2026-05-27 13:12",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v4-jc",
     "name": "八字工具日柱时柱排查（主公反馈排盘错误）",
@@ -66,8 +66,8 @@
         "sessions_send"
       ],
       "content": "汇总结论呈报主公",
-      "reported_to": "未完成",
-      "notified_main_at": null,
+      "reported_to": "已汇报",
+      "notified_main_at": "2026-05-27 13:12",
       "reported_next": false,
       "errors": 0,
       "error_details": []
