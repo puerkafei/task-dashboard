@@ -1,117 +1,74 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 12:50",
+  "last_updated": "2026-05-27 13:00",
   "current_task": {
-    "work_id": "TASK-20260527-bazi-v4",
-    "name": "八字工具V4升级（节气天文算法+阴历输入+均时差修正+跨日联动）",
-    "type": "更新任务",
-    "upload": true,
-    "polish": true,
-    "progress": 100,
-    "assign_time": "2026-05-27 12:30",
-    "parent": "TASK-20260527-bazi-v3"
+    "work_id": "TASK-20260527-bazi-v4-jc",
+    "name": "八字工具日柱时柱排查（主公反馈排盘错误）",
+    "type": "非编程类",
+    "upload": false,
+    "polish": false,
+    "progress": 5,
+    "assign_time": "2026-05-27 13:00",
+    "parent": "TASK-20260527-bazi-v4"
   },
   "steps": [
     {
       "id": 1,
-      "name": "曹操分派",
+      "name": "曹操快速预检+分派",
       "assignee": "曹操",
-      "status": "completed",
+      "status": "executing",
       "tools": [
-        "sessions_spawn"
+        "read",
+        "node"
       ],
-      "content": "分派貂蝉编码V4",
-      "reported_to": "已分派貂蝉编码V4",
-      "reported_next": true,
+      "content": "预检日柱时柱逻辑+分派诸葛亮",
+      "reported_to": "执行中",
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 2,
-      "name": "貂蝉编码V4",
-      "assignee": "貂蝉（OpenCode）",
-      "status": "completed",
+      "name": "诸葛亮全面排查+交叉验证",
+      "assignee": "诸葛亮",
+      "status": "待分配",
       "tools": [
-        "Write",
-        "Edit",
-        "Node.js"
+        "web_search",
+        "web_fetch",
+        "node"
       ],
-      "content": "4项修复：节气天文算法+阴历输入+均时差公式修正+真太阳时跨日联动；版本号v2026.05.28",
-      "reported_to": "4项修复全部通过司马懿审核",
+      "content": "排查日柱/时柱/子时换日/节气影响",
+      "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 3,
-      "name": "司马懿审貂蝉",
+      "name": "司马懿审诸葛亮",
       "assignee": "司马懿",
-      "status": "completed",
+      "status": "待分配",
       "tools": [
         "sessions_send"
       ],
-      "content": "审核貂蝉编码V4",
-      "reported_to": "审核通过，交付曹植润色README",
-      "reported_next": true,
+      "content": "审核排查结论",
+      "reported_to": "未完成",
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 4,
-      "name": "曹植润色README",
-      "assignee": "曹植",
-      "status": "completed",
-      "tools": [
-        "Write",
-        "Edit"
-      ],
-      "content": "润色英文README-v4",
-      "reported_to": "README润色完成，司马懿通过",
-      "reported_next": false,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 5,
-      "name": "司马懿审曹植",
-      "assignee": "司马懿",
-      "status": "completed",
-      "tools": [
-        "sessions_send"
-      ],
-      "content": "曹植润色README-v4通过",
-      "reported_to": "已交付曹操",
-      "reported_next": false,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 6,
-      "name": "上传GitHub v4",
-      "assignee": "貂蝉（OpenCode）",
-      "status": "completed",
-      "tools": [
-        "git",
-        "curl"
-      ],
-      "content": "代码推送+Git Tag v2026.05.28+Release",
-      "reported_to": "已上传GitHub+Release v2026.05.28",
-      "reported_next": false,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 7,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "completed",
+      "status": "待分配",
       "tools": [
         "sessions_send"
       ],
-      "content": "全流程完成，通知甄宓",
-      "reported_to": "已汇报",
-      "notified_main_at": "2026-05-27 12:50",
-      "reported_next": true,
+      "content": "汇总结论呈报主公",
+      "reported_to": "未完成",
+      "notified_main_at": null,
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     }
