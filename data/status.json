@@ -1,105 +1,74 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 13:25",
+  "last_updated": "2026-05-28",
   "current_task": {
-    "work_id": "TASK-20260527-bazi-v4-jc",
-    "name": "八字工具日柱时柱排查（主公反馈排盘错误）",
-    "type": "非编程类",
-    "upload": false,
-    "polish": false,
-    "progress": 95,
-    "assign_time": "2026-05-27 13:00",
+    "work_id": "TASK-20260527-bazi-v5",
+    "name": "八字工具V5修复与验证",
+    "type": "混合",
+    "progress": 90,
+    "assign_time": "2026-05-28",
     "parent": "TASK-20260527-bazi-v4"
   },
   "steps": [
     {
       "id": 1,
-      "name": "曹操快速预检+分派",
+      "name": "曹操接收任务+预检",
       "assignee": "曹操",
       "status": "completed",
       "tools": [
-        "read",
-        "node"
+        "read"
       ],
-      "content": "预检日柱时柱逻辑+分派诸葛亮",
-      "reported_to": "已完成预检，分派诸葛亮",
+      "content": "V5代码已修复2个Bug",
+      "reported_to": "已完成",
       "reported_next": true,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 2,
-      "name": "诸葛亮全面排查+交叉验证",
-      "assignee": "诸葛亮",
+      "name": "三方八字验证（曾国藩/毛泽东/周恩来）",
+      "assignee": "曹操",
       "status": "completed",
       "tools": [
-        "web_search",
-        "web_fetch",
-        "node"
+        "node",
+        "python3"
       ],
-      "content": "排查日柱/时柱/子时换日/节气影响",
-      "reported_to": "排查通过，确认2个Bug",
+      "content": "三方全部通过",
+      "reported_to": "已完成",
       "reported_next": true,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 3,
-      "name": "司马懿审诸葛亮",
-      "assignee": "司马懿",
+      "name": "推送到GitHub Pages+Release",
+      "assignee": "曹操",
       "status": "completed",
       "tools": [
-        "sessions_send"
+        "git",
+        "curl"
       ],
-      "content": "审核排查结论",
-      "reported_to": "排查通过，确认2个Bug",
+      "content": "已推送，Release需手工操作",
+      "reported_to": "已推送",
       "reported_next": true,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 4,
-      "name": "曹植润色排查报告",
-      "assignee": "曹植",
-      "status": "completed",
-      "tools": [
-        "Write",
-        "Edit"
-      ],
-      "content": "润色诸葛亮排查报告呈报主公",
-      "reported_to": "润色完成，已提交司马懿审核",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 5,
-      "name": "司马懿审曹植",
-      "assignee": "司马懿",
-      "status": "completed",
-      "tools": [
-        "sessions_send"
-      ],
-      "content": "审核曹植润色版排查报告",
-      "reported_to": "审核通过，曹植润色通过",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 6,
-      "name": "曹操汇总呈报",
+      "name": "提交工作报告+呈报主公",
       "assignee": "曹操",
       "status": "completed",
       "tools": [
-        "sessions_send"
+        "write"
       ],
-      "content": "全线完成，已呈报主公，等待修复决策",
+      "content": "报告已完成",
       "reported_to": "已汇报",
-      "notified_main_at": "2026-05-27 13:12",
-      "reported_next": false,
+      "notified_main_at": "2026-05-28",
+      "reported_next": true,
       "errors": 0,
-      "error_details": []
+      "error_details": [],
+      "zheng_file": "TASK-20260527-bazi-v4-jc/.sent_to_main"
     }
   ]
 }
