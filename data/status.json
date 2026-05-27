@@ -95,6 +95,7 @@
       ],
       "content": "汇总对比结论+整改方案呈报主公",
       "reported_to": "已呈报主公",
+      "notified_main_at": null,
       "reported_next": false,
       "errors": 0,
       "error_details": []
