@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 10:00",
+  "last_updated": "2026-05-27 10:15",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v3",
     "name": "八字工具V3更新（排盘基准核实+宜忌重做+姓名匹配更换+城市数据补全+真太阳时论证）",
     "type": "更新任务",
     "upload": true,
     "polish": true,
-    "progress": 60,
+    "progress": 85,
     "assign_time": "2026-05-27 09:00",
     "parent": "TASK-20260526-bazi-v2"
   },
@@ -105,13 +105,13 @@
       "id": 7,
       "name": "曹植润色（README）",
       "assignee": "曹植",
-      "status": "执行中",
+      "status": "completed",
       "tools": [
         "Write",
         "Edit"
       ],
       "content": "润色英文README（含新功能说明）",
-      "reported_to": "等待貂蝉交付",
+      "reported_to": "README润色完成，已通过司马懿审核",
       "reported_next": false,
       "errors": 0,
       "error_details": []
@@ -124,7 +124,7 @@
       "tools": [
         "sessions_send"
       ],
-      "content": "审核曹植润色通过，无退回项",
+      "content": "曹植README润色审核通过。全线完成：调研+编码+润色+审核",
       "reported_to": "已交付曹操",
       "reported_next": false,
       "errors": 0,
@@ -134,12 +134,12 @@
       "id": 9,
       "name": "上传GitHub v3",
       "assignee": "貂蝉（OpenCode）",
-      "status": "待分配",
+      "status": "执行中",
       "tools": [
         "git",
         "curl"
       ],
-      "content": "代码推送 + Git Tag + Release（由貂蝉执行）",
+      "content": "准备上传GitHub v3",
       "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
