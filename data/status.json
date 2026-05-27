@@ -3,72 +3,145 @@
   "last_updated": "2026-05-28",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v5",
-    "name": "八字工具V5修复与验证",
+    "name": "八字工具V5修复+自动化验真体系",
     "type": "编程类",
-    "progress": 90,
+    "progress": 60,
     "assign_time": "2026-05-28",
     "parent": "TASK-20260527-bazi-v4"
   },
   "steps": [
     {
       "id": 1,
-      "name": "曹操接收任务+预检",
-      "assignee": "曹操",
+      "name": "甄宓定工作流+初始化status.json",
+      "assignee": "甄宓",
       "status": "completed",
-      "tools": [
-        "read"
-      ],
-      "content": "V5代码已修复2个Bug",
-      "reported_to": "已完成",
+      "tools": ["read", "write", "exec"],
+      "content": "已确认团队架构，制定两阶段方案。阶段一（Bug修复+曾国藩验证）已由曹操自行完成并通过验证。阶段二（自动化验真体系）为本任务核心。",
+      "reported_to": "已汇报",
+      "notified_main_at": "2026-05-28",
       "reported_next": true,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 2,
-      "name": "三方八字验证（曾国藩/毛泽东/周恩来）",
+      "name": "曹操分派任务（验真体系方案设计）",
       "assignee": "曹操",
-      "status": "completed",
-      "tools": [
-        "node",
-        "python3"
-      ],
-      "content": "三方全部通过",
-      "reported_to": "已完成",
-      "reported_next": true,
+      "status": "待分配",
+      "tools": ["sessions_send"],
+      "content": "由曹操按工作流分派诸葛亮做方案设计",
+      "reported_to": "未完成",
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 3,
-      "name": "推送到GitHub Pages+Release",
-      "assignee": "曹操",
-      "status": "completed",
-      "tools": [
-        "git",
-        "curl"
-      ],
-      "content": "已推送，Release需手工操作",
-      "reported_to": "已推送",
-      "reported_next": true,
+      "name": "诸葛亮调研：建立权威八字验证库+验真脚本设计",
+      "assignee": "诸葛亮",
+      "status": "待分配",
+      "tools": ["web_search", "web_fetch", "read", "write"],
+      "content": "整理5-10个权威八字来源（问真/元亨利贞等），输出验证库JSON+验真脚本设计方案",
+      "reported_to": "未完成",
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 4,
-      "name": "提交工作报告+呈报主公",
-      "assignee": "曹操",
-      "status": "completed",
-      "tools": [
-        "write"
-      ],
-      "content": "报告已完成",
-      "reported_to": "已汇报",
-      "notified_main_at": "2026-05-28",
-      "reported_next": true,
+      "name": "司马懿审诸葛亮",
+      "assignee": "司马懿",
+      "status": "待分配",
+      "tools": ["read", "exec"],
+      "content": "审核调研方案和八字库的准确性",
+      "reported_to": "未完成",
+      "reported_next": false,
       "errors": 0,
-      "error_details": [],
-      "zheng_file": "TASK-20260527-bazi-v4-jc/.sent_to_main"
+      "error_details": []
+    },
+    {
+      "id": 5,
+      "name": "貂蝉编码：实现验真脚本",
+      "assignee": "貂蝉（OpenCode）",
+      "status": "待分配",
+      "tools": ["node", "python3", "git"],
+      "content": "按诸葛亮方案实现自动验真脚本（Node.js），包含八字库+边界测试+一键运行",
+      "reported_to": "未完成",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 6,
+      "name": "司马懿审貂蝉代码",
+      "assignee": "司马懿",
+      "status": "待分配",
+      "tools": ["read", "exec"],
+      "content": "审核验真脚本代码质量",
+      "reported_to": "未完成",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 7,
+      "name": "曹植润色README",
+      "assignee": "曹植",
+      "status": "待分配",
+      "tools": ["read", "write"],
+      "content": "润色验真体系的README和V5工作日志",
+      "reported_to": "未完成",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 8,
+      "name": "司马懿审曹植",
+      "assignee": "司马懿",
+      "status": "待分配",
+      "tools": ["read"],
+      "content": "审核曹植润色内容",
+      "reported_to": "未完成",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 9,
+      "name": "全员验真：跑一遍验真脚本确认排盘100%正确",
+      "assignee": "曹操",
+      "status": "待分配",
+      "tools": ["node", "python3"],
+      "content": "运行验真脚本，所有用例全绿才可上传",
+      "reported_to": "未完成",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 10,
+      "name": "上传GitHub Pages（V5）+ Release",
+      "assignee": "曹操",
+      "status": "待分配",
+      "tools": ["git", "curl"],
+      "content": "推送代码，打tag v2026.05.28-v5，创建Release",
+      "reported_to": "未完成",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 11,
+      "name": "曹操汇总交付物+提交甄宓",
+      "assignee": "曹操",
+      "status": "待分配",
+      "tools": ["write", "sessions_send"],
+      "content": "收集全部交付物+工作日志，交付甄宓呈报主公",
+      "reported_to": "未完成",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
     }
   ]
 }
