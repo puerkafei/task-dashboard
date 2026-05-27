@@ -1,160 +1,100 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 10:20",
+  "last_updated": "2026-05-27 10:30",
   "current_task": {
-    "work_id": "TASK-20260527-bazi-v3",
-    "name": "八字工具V3更新（排盘基准核实+宜忌重做+姓名匹配更换+城市数据补全+真太阳时论证）",
-    "type": "更新任务",
-    "upload": true,
+    "work_id": "TASK-20260527-bazi-v3-duibi",
+    "name": "八字排盘标准对比核验（与外部AI方案对比）",
+    "type": "非编程类",
+    "upload": false,
     "polish": true,
-    "progress": 100,
-    "assign_time": "2026-05-27 09:00",
-    "parent": "TASK-20260526-bazi-v2"
+    "progress": 0,
+    "assign_time": "2026-05-27 10:30",
+    "parent": "TASK-20260527-bazi-v3"
   },
   "steps": [
     {
       "id": 1,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "completed",
+      "status": "executing",
       "tools": [
-        "sessions_send",
-        "sessions_spawn"
+        "sessions_send"
       ],
-      "content": "分派：诸葛亮(排盘基准+真太阳时论证) + 貂蝉(宜忌重做+姓名匹配更换+城市补全) + 司马懿 + 曹植",
-      "reported_to": "已汇报",
-      "reported_next": true,
+      "content": "分派诸葛亮调研对比",
+      "reported_to": "执行中",
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 2,
-      "name": "诸葛亮调研（排盘基准+真太阳时）",
+      "name": "诸葛亮对比核验",
       "assignee": "诸葛亮",
-      "status": "completed",
+      "status": "待分配",
       "tools": [
         "web_search",
-        "web_fetch"
+        "web_fetch",
+        "read"
       ],
-      "content": "1)核实八字排盘以阳历节气为基准的典籍来源 2)查证真太阳时修正的经典论据",
-      "reported_to": "已汇报",
-      "reported_next": true,
+      "content": "对比V3 vs 外部AI的八字排盘标准，给出整改方案",
+      "reported_to": "未完成",
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 3,
-      "name": "貂蝉编码（宜忌重做+姓名匹配+城市补全）",
-      "assignee": "貂蝉（OpenCode）",
-      "status": "completed",
+      "name": "司马懿审诸葛亮",
+      "assignee": "司马懿",
+      "status": "待分配",
       "tools": [
-        "Write",
-        "Edit",
-        "Node.js"
+        "sessions_send"
       ],
-      "content": "1)重做宜忌模块：基于《协纪辨方书》神煞体系 2)替换五格剖象法为传统字源学 3)补全省份地级市数据",
-      "reported_to": "已汇报",
+      "content": "审核对比结论+整改方案",
+      "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 4,
-      "name": "司马懿审诸葛亮",
-      "assignee": "司马懿",
-      "status": "completed",
+      "name": "曹植润色",
+      "assignee": "曹植",
+      "status": "待分配",
       "tools": [
-        "sessions_send"
+        "Write",
+        "Edit"
       ],
-      "content": "审核通过，无退回项。五个经典出处完整，真太阳时段层清晰",
-      "reported_to": "已汇报",
-      "reported_next": true,
+      "content": "润色对比报告",
+      "reported_to": "未完成",
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 5,
-      "name": "司马懿审貂蝉",
+      "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "completed",
+      "status": "待分配",
       "tools": [
         "sessions_send"
       ],
-      "content": "三大任务全部通过：宜忌重做✅ 姓名匹配更换✅ 城市补全(350城)✅",
-      "reported_to": "已汇报",
+      "content": "审核曹植润色",
+      "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 6,
-      "name": "曹植润色（调研报告）",
-      "assignee": "曹植",
-      "status": "completed",
-      "tools": [
-        "Write",
-        "Edit"
-      ],
-      "content": "润色诸葛亮的调研报告",
-      "reported_to": "已汇报",
-      "reported_next": false,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 7,
-      "name": "曹植润色（README）",
-      "assignee": "曹植",
-      "status": "completed",
-      "tools": [
-        "Write",
-        "Edit"
-      ],
-      "content": "润色英文README（含新功能说明）",
-      "reported_to": "已汇报",
-      "reported_next": false,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 8,
-      "name": "司马懿审曹植",
-      "assignee": "司马懿",
-      "status": "completed",
-      "tools": [
-        "sessions_send"
-      ],
-      "content": "曹植README润色审核通过。全线完成：调研+编码+润色+审核",
-      "reported_to": "已汇报",
-      "reported_next": false,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 9,
-      "name": "上传GitHub v3",
-      "assignee": "貂蝉（OpenCode）",
-      "status": "completed",
-      "tools": [
-        "git",
-        "curl"
-      ],
-      "content": "GitHub上传+Release创建完成 v2026.05.27",
-      "reported_to": "已汇报",
-      "reported_next": false,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 10,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "completed",
+      "status": "待分配",
       "tools": [
         "sessions_send"
       ],
-      "content": "线下可访问：https://puerkafei.github.io/bazi-analyzer/",
-      "reported_to": "未汇报",
+      "content": "汇总对比结论+整改方案呈报主公",
+      "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
       "error_details": []
