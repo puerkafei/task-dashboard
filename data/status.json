@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 13:05",
+  "last_updated": "2026-05-27",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v4-jc",
     "name": "八字工具日柱时柱排查（主公反馈排盘错误）",
     "type": "非编程类",
     "upload": false,
     "polish": false,
-    "progress": 15,
+    "progress": 75,
     "assign_time": "2026-05-27 13:00",
     "parent": "TASK-20260527-bazi-v4"
   },
@@ -31,15 +31,15 @@
       "id": 2,
       "name": "诸葛亮全面排查+交叉验证",
       "assignee": "诸葛亮",
-      "status": "执行中",
+      "status": "completed",
       "tools": [
         "web_search",
         "web_fetch",
         "node"
       ],
       "content": "排查日柱/时柱/子时换日/节气影响",
-      "reported_to": "未完成",
-      "reported_next": false,
+      "reported_to": "排查通过，确认2个Bug",
+      "reported_next": true,
       "errors": 0,
       "error_details": []
     },
@@ -47,13 +47,13 @@
       "id": 3,
       "name": "司马懿审诸葛亮",
       "assignee": "司马懿",
-      "status": "执行中",
+      "status": "completed",
       "tools": [
         "sessions_send"
       ],
       "content": "审核排查结论",
-      "reported_to": "未完成",
-      "reported_next": false,
+      "reported_to": "排查通过，确认2个Bug",
+      "reported_next": true,
       "errors": 0,
       "error_details": []
     },
@@ -61,7 +61,7 @@
       "id": 4,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "待分配",
+      "status": "执行中",
       "tools": [
         "sessions_send"
       ],
