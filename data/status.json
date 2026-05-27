@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 13:12",
+  "last_updated": "2026-05-27 13:15",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v4-jc",
     "name": "八字工具日柱时柱排查（主公反馈排盘错误）",
     "type": "非编程类",
     "upload": false,
     "polish": false,
-    "progress": 75,
+    "progress": 60,
     "assign_time": "2026-05-27 13:00",
     "parent": "TASK-20260527-bazi-v4"
   },
@@ -17,10 +17,7 @@
       "name": "曹操快速预检+分派",
       "assignee": "曹操",
       "status": "completed",
-      "tools": [
-        "read",
-        "node"
-      ],
+      "tools": ["read", "node"],
       "content": "预检日柱时柱逻辑+分派诸葛亮",
       "reported_to": "已完成预检，分派诸葛亮",
       "reported_next": true,
@@ -32,11 +29,7 @@
       "name": "诸葛亮全面排查+交叉验证",
       "assignee": "诸葛亮",
       "status": "completed",
-      "tools": [
-        "web_search",
-        "web_fetch",
-        "node"
-      ],
+      "tools": ["web_search", "web_fetch", "node"],
       "content": "排查日柱/时柱/子时换日/节气影响",
       "reported_to": "排查通过，确认2个Bug",
       "reported_next": true,
@@ -48,9 +41,7 @@
       "name": "司马懿审诸葛亮",
       "assignee": "司马懿",
       "status": "completed",
-      "tools": [
-        "sessions_send"
-      ],
+      "tools": ["sessions_send"],
       "content": "审核排查结论",
       "reported_to": "排查通过，确认2个Bug",
       "reported_next": true,
@@ -59,15 +50,37 @@
     },
     {
       "id": 4,
+      "name": "曹植润色排查报告",
+      "assignee": "曹植",
+      "status": "执行中",
+      "tools": ["Write", "Edit"],
+      "content": "润色诸葛亮排查报告呈报主公",
+      "reported_to": "未完成",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 5,
+      "name": "司马懿审曹植",
+      "assignee": "司马懿",
+      "status": "待分配",
+      "tools": ["sessions_send"],
+      "content": "审核曹植润色版排查报告",
+      "reported_to": "未完成",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 6,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "执行中",
-      "tools": [
-        "sessions_send"
-      ],
-      "content": "汇总结论呈报主公",
-      "reported_to": "已汇报",
-      "notified_main_at": "2026-05-27 13:12",
+      "status": "待分配",
+      "tools": ["sessions_send"],
+      "content": "全流程完成，通知甄宓",
+      "reported_to": "未完成",
+      "notified_main_at": null,
       "reported_next": false,
       "errors": 0,
       "error_details": []
