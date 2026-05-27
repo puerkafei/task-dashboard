@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 13:18",
+  "last_updated": "2026-05-27 13:25",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v4-jc",
     "name": "八字工具日柱时柱排查（主公反馈排盘错误）",
     "type": "非编程类",
     "upload": false,
     "polish": false,
-    "progress": 85,
+    "progress": 95,
     "assign_time": "2026-05-27 13:00",
     "parent": "TASK-20260527-bazi-v4"
   },
@@ -76,28 +76,28 @@
       "id": 5,
       "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "执行中",
+      "status": "completed",
       "tools": [
         "sessions_send"
       ],
       "content": "审核曹植润色版排查报告",
-      "reported_to": "未完成",
-      "reported_next": false,
+      "reported_to": "审核通过，曹植润色通过",
+      "reported_next": true,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 6,
-      "name": "曹操汇总",
+      "name": "曹操汇总呈报",
       "assignee": "曹操",
       "status": "completed",
       "tools": [
         "sessions_send"
       ],
-      "content": "排查结果已呈报主公，等待决策",
+      "content": "全线完成，已呈报主公，等待修复决策",
       "reported_to": "已汇报",
       "notified_main_at": "2026-05-27 13:12",
-      "reported_next": true,
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     }
