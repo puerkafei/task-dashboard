@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-27 12:30",
+  "last_updated": "2026-05-27 12:32",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v4",
     "name": "八字工具V4升级（节气天文算法+阴历输入+均时差修正+跨日联动）",
     "type": "更新任务",
     "upload": true,
     "polish": true,
-    "progress": 10,
+    "progress": 20,
     "assign_time": "2026-05-27 12:30",
     "parent": "TASK-20260527-bazi-v3"
   },
@@ -16,13 +16,13 @@
       "id": 1,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "executing",
+      "status": "completed",
       "tools": [
         "sessions_spawn"
       ],
       "content": "分派貂蝉编码V4",
-      "reported_to": "执行中",
-      "reported_next": false,
+      "reported_to": "已分派貂蝉编码V4",
+      "reported_next": true,
       "errors": 0,
       "error_details": []
     },
@@ -30,7 +30,7 @@
       "id": 2,
       "name": "貂蝉编码V4",
       "assignee": "貂蝉（OpenCode）",
-      "status": "待分配",
+      "status": "执行中",
       "tools": [
         "Write",
         "Edit",
@@ -46,12 +46,12 @@
       "id": 3,
       "name": "司马懿审貂蝉",
       "assignee": "司马懿",
-      "status": "待分配",
+      "status": "执行中",
       "tools": [
         "sessions_send"
       ],
       "content": "审核貂蝉编码V4",
-      "reported_to": "未完成",
+      "reported_to": "等待貂蝉编码提交",
       "reported_next": false,
       "errors": 0,
       "error_details": []
