@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>曹操团队 · 任务监控</title>
+<title>团队任务监控 · 甄宓总指挥</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0f172a;--card:#1e293b;--card2:#334155;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
@@ -13,9 +13,11 @@
 body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
 .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
 .header h1{font-size:22px;font-weight:600;color:var(--gold);letter-spacing:1px}
-.header .meta{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--text2)}
+.header .subtitle{font-size:12px;color:var(--text3);margin-top:2px}
+.header .meta{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--text2);flex-wrap:wrap}
 .header .meta .tag{padding:2px 10px;border-radius:20px;font-size:12px;background:var(--card2);color:var(--text2)}
 .header .meta .tag.online{background:var(--green-bg);color:var(--green)}
+.header .meta .tag.stale{background:var(--red-bg);color:var(--red)}
 .refresh-btn{padding:6px 16px;border-radius:6px;border:1px solid var(--text3);background:var(--card);color:var(--text2);cursor:pointer;font-size:13px;transition:.2s}
 .refresh-btn:hover{background:var(--card2);color:var(--text)}
 .main{display:grid;grid-template-columns:320px 1fr;gap:20px}
@@ -82,7 +84,6 @@ body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-ser
 .detail-card.full{grid-column:1/-1}
 .error-item{padding:10px 12px;border-radius:6px;margin-top:6px;font-size:13px;line-height:1.5;border-left:3px solid}
 .error-item.critical{background:var(--red-bg);border-color:var(--red);color:var(--red)}
-.error-item.error{background:var(--red-bg);border-color:var(--red);color:var(--text)}
 .error-item.warning{background:var(--amber-bg);border-color:var(--amber);color:var(--amber)}
 .error-item .ei-type{font-weight:600;margin-bottom:2px}
 .error-item .ei-detail{color:var(--text2);font-size:12px}
@@ -90,15 +91,21 @@ body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-ser
 .no-task{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;color:var(--text3)}
 .no-task .big-icon{font-size:64px;margin-bottom:16px;opacity:.3}
 .no-task p{font-size:16px}
+.freshness-banner{grid-column:1/-1;padding:8px 16px;border-radius:6px;font-size:13px;display:flex;align-items:center;gap:8px}
+.freshness-banner.fresh{background:var(--green-bg);color:var(--green)}
+.freshness-banner.stale{background:var(--red-bg);color:var(--red);animation:pulse-banner 2s infinite}
+.freshness-banner.stale-critical{background:var(--red-bg);color:var(--red);border:1px solid var(--red);font-weight:600}
+@keyframes pulse-banner{0%,100%{opacity:1}50%{opacity:.7}}
 </style>
 </head>
 <body>
 
 <div class="header">
   <div>
-    <h1>曹操团队 · 任务监控</h1>
+    <h1>🪭 团队任务监控</h1>
+    <div class="subtitle">总指挥：甄宓 · 执行经理：曹操 · 数据源：status.json（唯一）</div>
     <div class="meta" style="margin-top:4px">
-      <span class="tag online" id="statusTag">● 运行中</span>
+      <span class="tag online" id="statusTag">● 在线</span>
       <span id="updateTime">更新于: --</span>
     </div>
   </div>
@@ -106,9 +113,10 @@ body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-ser
 </div>
 
 <div class="main" id="app">
+  <div id="freshnessBanner" style="display:none"></div>
   <div class="progress-section" id="progressSection"></div>
   <div class="flow-section" id="flowSection">
-    <div class="flow-title">任务流程</div>
+    <div class="flow-title">工作流</div>
     <div id="flowList"></div>
   </div>
   <div class="detail-section" id="detailSection">
@@ -121,63 +129,82 @@ body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-ser
 </div>
 
 <script>
-var DATA_URL = './data/status.json';
+// 从 GitHub Raw 直接读取 status.json（绕过 Pages 部署延迟）
+var RAW_URL = 'https://raw.githubusercontent.com/puerkafei/task-dashboard/main/data/status.json';
+var POLL_INTERVAL = 5000;
+// 数据新鲜度阈值（超过此时间亮红告警）
+var STALE_THRESHOLD_MS = 2 * 60 * 1000;
+
 var data = null;
 var selectedStep = null;
-
-var FALLBACK_DATA = {
-  "no_task": false,
-  "last_updated": "2026-05-26 19:57",
-  "current_task": {
-    "work_id": "TASK-20260526-bazi",
-    "name": "周易八字分析页面",
-    "type": "编程类（新任务）",
-    "upload": true, "polish": true,
-    "progress": 25,
-    "assign_time": "2026-05-26 16:54"
-  },
-  "steps": [
-    {"id":1,"name":"曹操分派","assignee":"曹操","status":"completed","tools":["sessions_spawn","sessions_send"],"content":"分派貂蝉编码、司马懿审核、曹植润色","reported_to":"已完成","reported_next":true,"errors":1,"error_details":[{"type":"分派失败","detail":"分派曹植时使用错误 Agent ID，sessions_send 失败","severity":"warning","resolved":true}]},
-    {"id":2,"name":"貂蝉编码","assignee":"貂蝉（OpenCode）","status":"completed","tools":["WebFetch","Bash","npm","Read","Write","Edit","Node.js"],"content":"创建周易八字分析单页应用，2304组批量测试验证","reported_to":"未通知上级","reported_next":false,"errors":4,"error_details":[
-      {"type":"数据错误","detail":"农历数据表不准确，通过 lunar-javascript 库重新生成","severity":"error","resolved":true},
-      {"type":"逻辑错误","detail":"节气顺序错误，月柱计算节气数组顺序有误","severity":"error","resolved":true},
-      {"type":"逻辑错误","detail":"日柱偏移计算，基准日期偏移量需验证修正","severity":"error","resolved":true},
-      {"type":"逻辑差异","detail":"时柱差异，lunar-javascript 的时柱有早晚子时特殊规则","severity":"warning","resolved":true}
-    ]},
-    {"id":3,"name":"司马懿审貂蝉","assignee":"司马懿","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
-    {"id":4,"name":"曹植润色","assignee":"曹植","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
-    {"id":5,"name":"司马懿审曹植","assignee":"司马懿","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
-    {"id":6,"name":"曹操下令上传","assignee":"曹操","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
-    {"id":7,"name":"貂蝉上传GitHub","assignee":"貂蝉（OpenCode）","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]},
-    {"id":8,"name":"曹操汇总","assignee":"曹操","status":"pending","tools":[],"content":"","reported_to":"未开始","reported_next":false,"errors":0,"error_details":[]}
-  ]
-};
+var lastFetchTime = null;
 
 function loadData() {
-  fetch(DATA_URL + '?t=' + Date.now()).then(function(resp) {
+  fetch(RAW_URL + '?t=' + Date.now(), { cache: 'no-store' }).then(function(resp) {
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     return resp.json();
   }).then(function(d) {
     data = d;
-    document.getElementById('statusTag').textContent = '● 运行中';
+    lastFetchTime = Date.now();
+    updateFreshness();
+    document.getElementById('statusTag').textContent = '● 在线';
     document.getElementById('statusTag').className = 'tag online';
     document.getElementById('updateTime').textContent = '更新于: ' + (data.last_updated || '--');
     render();
     selectFirstStep();
-  }).catch(function() {
-    data = FALLBACK_DATA;
-    document.getElementById('statusTag').textContent = '● 离线模式';
-    document.getElementById('statusTag').className = 'tag';
-    document.getElementById('updateTime').textContent = '更新于: ' + (data.last_updated || '--');
+  }).catch(function(err) {
+    console.warn('Fetch failed:', err);
+    if (!data) {
+      // 数据加载失败，显示空状态
+      document.getElementById('statusTag').textContent = '● 数据加载中';
+      document.getElementById('statusTag').className = 'tag';
+    }
+    updateFreshnessFallback();
     render();
-    selectFirstStep();
+    if (!selectedStep) selectFirstStep();
   });
+}
+
+function updateFreshness() {
+  var banner = document.getElementById('freshnessBanner');
+  if (!data || !data.last_updated) {
+    banner.style.display = 'none';
+    return;
+  }
+  var updated = new Date(data.last_updated).getTime();
+  var now = Date.now();
+  var age = now - updated;
+
+  banner.style.display = 'flex';
+  if (age < STALE_THRESHOLD_MS) {
+    var sec = Math.round(age / 1000);
+    banner.className = 'freshness-banner fresh';
+    banner.innerHTML = '✓ 数据 ' + sec + ' 秒前更新 · 实时监控中';
+  } else {
+    var min = Math.round(age / 60000);
+    banner.className = 'freshness-banner stale-critical';
+    banner.innerHTML = '⚠ 数据已 ' + min + ' 分钟未更新 · 甄宓可能漏更，请关注！';
+  }
+}
+
+function updateFreshnessFallback() {
+  var banner = document.getElementById('freshnessBanner');
+  if (!data || !data.last_updated || data.no_task) {
+    banner.style.display = 'none';
+    return;
+  }
+  var updated = new Date(data.last_updated).getTime();
+  var now = Date.now();
+  var age = now - updated;
+  banner.style.display = 'flex';
+  banner.className = 'freshness-banner stale';
+  banner.innerHTML = '⚠ 离线模式 · ' + Math.round(age / 60000) + ' 分钟未刷新';
 }
 
 function selectFirstStep() {
   if (!data || !data.steps) return;
   for (var i = 0; i < data.steps.length; i++) {
-    if (data.steps[i].status === 'completed' || data.steps[i].status === 'error') {
+    if (data.steps[i].status === 'completed' || data.steps[i].status === 'in_progress' || data.steps[i].status === 'error') {
       selectStep(data.steps[i].id);
       return;
     }
@@ -187,7 +214,7 @@ function selectFirstStep() {
 
 function render() {
   if (!data || data.no_task) {
-    document.getElementById('progressSection').innerHTML = '<div class="no-task" style="width:100%;padding:40px"><div class="big-icon">🛌</div><p>暂无任务 · 团队待命中</p></div>';
+    document.getElementById('progressSection').innerHTML = '<div class="no-task" style="width:100%;padding:40px"><div class="big-icon">&#x1F634;</div><p>暂无任务 · 团队待命中</p></div>';
     document.getElementById('flowList').innerHTML = '';
     document.getElementById('detailPlaceholder').style.display = 'flex';
     document.getElementById('detailContent').style.display = 'none';
@@ -208,7 +235,9 @@ function renderProgress(task) {
   var pct = task.progress || 0;
   var r = 42, circ = 2 * Math.PI * r, offset = circ * (1 - pct / 100);
   var sec = document.getElementById('progressSection');
-  sec.innerHTML = '<div class="ring-wrap"><svg viewBox="0 0 100 100"><circle class="ring-bg" cx="50" cy="50" r="' + r + '"/><circle class="ring-fg" cx="50" cy="50" r="' + r + '" stroke-dasharray="' + circ + '" stroke-dashoffset="' + offset + '"/></svg><div class="ring-center"><div class="pct">' + pct + '%</div><div class="label">进度</div></div></div><div class="task-info"><div class="name">' + esc(task.name) + '</div><div class="meta-row"><span>' + task.work_id + '</span><span>' + task.type + '</span><span>' + task.assign_time + '</span>' + (task.upload ? '<span>上传 GitHub</span>' : '') + (task.polish ? '<span>需润色</span>' : '') + '</div></div>';
+  var metaHtml = '<span>' + task.work_id + '</span><span>' + task.type + '</span><span>' + task.assign_time + '</span>';
+  if (task.parent) metaHtml += '<span>父任务: ' + task.parent + '</span>';
+  sec.innerHTML = '<div class="ring-wrap"><svg viewBox="0 0 100 100"><circle class="ring-bg" cx="50" cy="50" r="' + r + '"/><circle class="ring-fg" cx="50" cy="50" r="' + r + '" stroke-dasharray="' + circ + '" stroke-dashoffset="' + offset + '"/></svg><div class="ring-center"><div class="pct">' + pct + '%</div><div class="label">进度</div></div></div><div class="task-info"><div class="name">' + esc(task.name) + '</div><div class="meta-row">' + metaHtml + '</div></div>';
 }
 
 function renderFlow(steps) {
@@ -217,15 +246,46 @@ function renderFlow(steps) {
   for (var i = 0; i < steps.length; i++) {
     var s = steps[i];
     var dot = s.status === 'completed' ? '&#10003;' : '';
-    var cls = s.status;
-    var badgeMap = {completed:'已完成', in_progress:'进行中', error:'有异常', pending:'待开始'};
-    var badgeColor = {completed:'green', in_progress:'blue', error:'red', pending:'gray'};
-    var badge = '<span class="badge ' + (badgeColor[s.status] || 'gray') + '">' + (badgeMap[s.status] || '待开始') + '</span>';
+    var cls = mapStatusClass(s.status);
+    var statusText = mapStatusText(s.status);
+    var badgeClr = mapStatusBadgeColor(s.status);
+    var badge = '<span class="badge ' + badgeClr + '">' + statusText + '</span>';
     var errBadge = s.errors > 0 ? '<span class="badge ' + (s.status === 'error' ? 'red' : 'amber') + '">' + s.errors + '个问题</span>' : '';
     var activeCls = selectedStep && selectedStep.id === s.id ? 'active' : '';
     html += '<div class="flow-step ' + cls + ' ' + activeCls + '" onclick="selectStep(' + s.id + ')"><div class="connector"><div class="dot">' + dot + '</div><div class="line"></div></div><div class="step-body"><div class="step-name">' + s.id + '. ' + esc(s.name) + '</div><div class="step-meta"><span>' + esc(s.assignee) + '</span>' + badge + errBadge + '</div></div></div>';
   }
   list.innerHTML = html;
+}
+
+function mapStatusClass(st) {
+  switch(st) {
+    case 'completed': return 'completed';
+    case 'in_progress': case '执行中': case '已分配': return 'in_progress';
+    case 'error': case '退回修改': return 'error';
+    case '审核中': return 'in_progress';
+    default: return 'pending';
+  }
+}
+
+function mapStatusText(st) {
+  switch(st) {
+    case 'completed': return '已完成';
+    case 'in_progress': case '执行中': return '执行中';
+    case '已分配': return '已分配';
+    case '待分配': return '待分配';
+    case '审核中': return '审核中';
+    case '退回修改': return '退回修改';
+    default: return st || '待开始';
+  }
+}
+
+function mapStatusBadgeColor(st) {
+  switch(st) {
+    case 'completed': return 'green';
+    case 'in_progress': case '执行中': case '已分配': case '审核中': return 'blue';
+    case 'error': case '退回修改': return 'red';
+    default: return 'gray';
+  }
 }
 
 function selectStep(id) {
@@ -249,23 +309,27 @@ function renderDetail(step) {
   if (ph) ph.style.display = 'none';
   if (dc) dc.style.display = 'block';
   if (!dc) return;
-  var statusMap = {completed:'已完成', in_progress:'进行中', error:'有异常', pending:'待开始'};
-  var colorMap = {completed:'green', in_progress:'blue', error:'red', pending:'gray'};
+  var dotColor = mapStatusBadgeColor(step.status);
+  var statusText = mapStatusText(step.status);
+
+  // 工具列表
   var toolsHtml = step.tools && step.tools.length ? (function() {
     var t = '';
     for (var i = 0; i < step.tools.length; i++) t += '<span class="tool-tag">' + esc(step.tools[i]) + '</span>';
     return t;
   })() : '暂无记录';
+
+  // 错误详情
   var errorsHtml = step.error_details && step.error_details.length ? (function() {
     var e = '';
     for (var i = 0; i < step.error_details.length; i++) {
       var ed = step.error_details[i];
-      e += '<div class="error-item ' + ed.severity + '"><div class="ei-type">[' + ed.severity.toUpperCase() + '] ' + esc(ed.type) + (ed.resolved ? '<span class="resolved-badge">已修复</span>' : '') + '</div><div class="ei-detail">' + esc(ed.detail) + '</div></div>';
+      e += '<div class="error-item ' + (ed.severity || 'warning') + '"><div class="ei-type">' + esc(ed.type) + (ed.resolved ? '<span class="resolved-badge">已修复</span>' : '') + '</div><div class="ei-detail">' + esc(ed.detail) + '</div></div>';
     }
     return e;
   })() : '无异常记录';
-  var dotColor = colorMap[step.status] || 'gray';
-  dc.innerHTML = '<div class="detail-header"><div class="dh-left"><div class="dh-name">' + esc(step.name) + '</div><div class="dh-assignee">' + esc(step.assignee) + '</div></div><div style="font-size:13px"><span class="status-dot ' + dotColor + '"></span>' + (statusMap[step.status] || '待开始') + '</div></div><div class="detail-grid"><div class="detail-card"><div class="dc-label">使用工具</div><div class="dc-val">' + toolsHtml + '</div></div><div class="detail-card"><div class="dc-label">汇报上级</div><div class="dc-val">' + esc(step.reported_to) + '</div></div><div class="detail-card"><div class="dc-label">通知下一环节</div><div class="dc-val">' + (step.reported_next ? '已通知' : '未通知') + '</div></div><div class="detail-card"><div class="dc-label">报错/卡点次数</div><div class="dc-val" style="color:' + (step.errors > 0 ? 'var(--red)' : 'var(--green)') + '">' + step.errors + ' 次</div></div><div class="detail-card full"><div class="dc-label">工作内容</div><div class="dc-val">' + (step.content ? esc(step.content) : '暂无记录') + '</div></div><div class="detail-card full"><div class="dc-label">异常与卡点详情</div><div class="dc-val">' + errorsHtml + '</div></div></div>';
+
+  dc.innerHTML = '<div class="detail-header"><div class="dh-left"><div class="dh-name">' + esc(step.name) + '</div><div class="dh-assignee">' + esc(step.assignee) + '</div></div><div style="font-size:13px"><span class="status-dot ' + dotColor + '"></span>' + statusText + '</div></div><div class="detail-grid"><div class="detail-card"><div class="dc-label">使用工具</div><div class="dc-val">' + toolsHtml + '</div></div><div class="detail-card"><div class="dc-label">汇报上级</div><div class="dc-val">' + esc(step.reported_to) + '</div></div><div class="detail-card"><div class="dc-label">通知下一环节</div><div class="dc-val">' + (step.reported_next ? '已通知' : '未通知') + '</div></div><div class="detail-card"><div class="dc-label">报错/卡点次数</div><div class="dc-val" style="color:' + (step.errors > 0 ? 'var(--red)' : 'var(--green)') + '">' + step.errors + ' 次</div></div><div class="detail-card full"><div class="dc-label">工作内容</div><div class="dc-val">' + (step.content ? esc(step.content) : '暂无记录') + '</div></div><div class="detail-card full"><div class="dc-label">异常与卡点详情</div><div class="dc-val">' + errorsHtml + '</div></div></div>';
 }
 
 function esc(s) {
@@ -274,7 +338,7 @@ function esc(s) {
 }
 
 loadData();
-setInterval(loadData, 30000);
+setInterval(loadData, POLL_INTERVAL);
 </script>
 </body>
 </html>
