@@ -31,7 +31,7 @@
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
       "status": "审核中",
-      "content": "✅ 编码完成（20:00）。7项全部修复：validate-status.sh 语义检测重写、team-workflow 棒数统一、上传标准明确、曹植 AGENTS.md 格式修复、技能清单补充、relay.conf 清理、archived_tasks 规范。已提交司马懿审核。"
+      "content": "✅ 编码完成（20:00）。7项 + 追加1项：coordinator.conf STATUS_DIR 路径修正 + scripts/coordinator.conf 软链接。relay check/watch 已验证通过，半自动化调度系统正式连接正确数据源。已提交司马懿审核。"
     },
     {
       "id": 4,
