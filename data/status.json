@@ -1,6 +1,6 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-28 16:32",
+  "last_updated": "2026-05-28 16:40",
   "current_task": {
     "work_id": "TASK-20260528-auto-relay",
     "name": "自动接力引擎 — coordinator.sh relay模块升级",
@@ -64,8 +64,8 @@
       "name": "貂蝉编码（新增relay模块）",
       "assignee": "貂蝉",
       "tools": [],
-      "status": "执行中",
-      "content": "ACP spawn重试中。曹操16:11的spawn创建了session但未写入磁盘。甄宓已通知曹操重试。",
+      "status": "卡点",
+      "content": "ACP bridge连续失败：曹操+甄宓共4次spawn，session记录创建但文件不写盘。貂蝉(OpenCode)无法通过ACP启动。",
       "error_details": [],
       "errors": 0,
       "reported_to": "曹操",
