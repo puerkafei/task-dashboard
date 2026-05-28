@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-05-28 20:32",
+  "last_updated": "2026-05-28 20:35",
   "current_task": {
-    "work_id": "TASK-20260528-audit-fix",
-    "title": "全盘审计修复：11个问题统一修复（validate-status.sh重写、文档统一、路径修正）",
+    "work_id": "TASK-20260528-detail-page",
+    "title": "Dashboard详情页改造：删除形同虚设字段，新增时间/耗时/交付物/卡点告警",
     "type": "编程类",
-    "progress": 71,
-    "assign_time": "2026-05-28 19:55",
-    "parent": null
+    "progress": 42,
+    "assign_time": "2026-05-28 20:35",
+    "note": "审计修复完成，恢复执行。貂蝉此前已完成编码（19:34），需司马懿审核。"
   },
   "steps": [
     {
@@ -15,7 +15,7 @@
       "name": "甄宓规划",
       "assignee": "甄宓",
       "status": "completed",
-      "content": "规划完成：编程类、不需润色、需上传。7棒路径。第一轮手动修复完成（软链接、workspace合并、MEMORY.md路径修正、佐证文件命名统一）。第二轮需要貂蝉编码修复7项：validate-status.sh重写、team-workflow棒数统一、上传标准明确、曹植AGENTS.md格式修复、技能清单补充、relay.conf清理、archived_tasks规范文档化。"
+      "content": "在审计修复完成基础上，恢复详情页改造。貂蝉此前已完成编码（改造后392行），待司马懿审核后继续推进。"
     },
     {
       "id": 2,
@@ -23,7 +23,7 @@
       "name": "曹操分派",
       "assignee": "曹操",
       "status": "completed",
-      "content": "已分派貂蝉编码。曹操收到指令，正在协调。"
+      "content": "之前已分派完成。"
     },
     {
       "id": 3,
@@ -31,23 +31,22 @@
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
       "status": "completed",
-      "content": "✅ 编码完成（20:00）。7项 + 追加1项：coordinator.conf STATUS_DIR 路径修正 + scripts/coordinator.conf 软链接。relay check/watch 已验证通过，半自动化调度系统正式连接正确数据源。已提交司马懿审核。"
+      "content": "✅ 编码已完成（19:34）。改造后392行：删4字段、增强工作内容多行+链接、新增时间/耗时/交付物/卡点告警、布局改为垂直行+图标。"
     },
     {
       "id": 4,
       "step": 4,
       "name": "司马懿审代码",
       "assignee": "司马懿",
-      "status": "completed",
-      "content": "✅ 审核通过（20:20）。7项审计修复全部通过，无退回项。已通知甄宓(main)，抄送曹操。"
-      "content": "审核全部修改：逻辑正确性、格式完整性、文档一致性。"
+      "status": "待分配",
+      "content": "审核详情页改造代码：逻辑正确性、UI布局、条件渲染、数据绑定。需先加载 simayi-review/SKILL.md。"
     },
     {
       "id": 5,
       "step": 5,
       "name": "曹操下令上传",
       "assignee": "曹操",
-      "status": "执行中",
+      "status": "待分配",
       "content": "审核通过后，曹操下令使用 coordinator.sh upload 推送。"
     },
     {
@@ -56,7 +55,7 @@
       "name": "上传GitHub",
       "assignee": "貂蝉（OpenCode）",
       "status": "待分配",
-      "content": "使用 coordinator.sh upload 上传。"
+      "content": "使用 coordinator.sh upload auto 上传 task-dashboard。"
     },
     {
       "id": 7,
@@ -69,18 +68,19 @@
   ],
   "archived_tasks": [
     {
+      "work_id": "TASK-20260528-audit-fix",
+      "title": "全盘审计修复：11问题修复 + coordinator半自动化落地",
+      "progress": 100,
+      "status": "✅ 已完成",
+      "release": "v2026.05.28-audit-fix",
+      "note": "7项文档修复 + 3项配置修正。coordinator relay/watch 验证通过。Release: github.com/puerkafei/task-dashboard/releases/tag/v2026.05.28-audit-fix"
+    },
+    {
       "work_id": "TASK-20260528-upload-module",
       "title": "coordinator.sh上传模块",
       "progress": 95,
       "status": "等待汇总",
       "note": "曹操汇总进行中"
-    },
-    {
-      "work_id": "TASK-20260528-detail-page",
-      "title": "Dashboard详情页改造",
-      "progress": 28,
-      "status": "暂停（主公优先级调整）",
-      "note": "貂蝉编码中，等待审计修复完成后继续"
     }
   ]
 }
