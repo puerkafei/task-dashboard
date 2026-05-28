@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-05-28 22:05",
+  "last_updated": "2026-05-28 22:12",
   "current_task": {
     "work_id": "TASK-20260528-audit-round2",
     "title": "第二轮全盘审计：relay落地后全量对齐 — 7 AGENTS.md + 6 MEMORY.md + 11 Skill + coordinator配置",
     "type": "文档审查类",
-    "progress": 0,
+    "progress": 14,
     "assign_time": "2026-05-28 22:05",
-    "note": "上一轮审计(19:35)后又有3个release变更，需重新全面对齐。重点：通知链路一致性、relay自动化落地后的Skill冗余、跨文档冲突。"
+    "note": "审计报告已完成：2 P0 + 3 P1 + 2 P2。通知链路3个Skill未更新是最严重问题。"
   },
   "steps": [
     {
@@ -14,8 +14,8 @@
       "step": 1,
       "name": "全盘通读审计",
       "assignee": "甄宓",
-      "status": "执行中",
-      "content": "逐文件审查：7 AGENTS.md（含opencode）+ 6 MEMORY.md + 11 Skill SKILL.md + coordinator配置。维度：通知链路一致性、relay落地后的冗余/冲突、路径引用正确性、跨文档逻辑统一性。生成审计报告。"
+      "status": "completed",
+      "content": "审计完成（22:10）。7项发现：\n🔴 P0: ① simayi-review/caozhi-polish/diascan-code 未更新 relay auto；② openclaw-repair 引用损坏路径(~/workspace/skills/→~/team-share/skills/)。\n🟡 P1: ③ caocao-status step结构缺少started/completed/deliverable_url；④ team-workflow 上传环节未指定coordinator.sh upload auto；⑤ relay.conf 全角括号与status.json不完全对齐。\n🔵 P2: ⑥ MEMORY.md 数量不对齐(5+1)；⑦ caocao-dispatcher/delivery 仍有sessions_send残留。\n\n审计报告已生成。建议先修P0+P1，P2可延后。"
     },
     {
       "id": 2,
@@ -23,7 +23,7 @@
       "name": "曹操分派修复",
       "assignee": "曹操",
       "status": "待分配",
-      "content": "根据审计报告，协调貂蝉编码修复。"
+      "content": "P0+P1 共5项修复：① 更新 simayi-review SKILL.md 通知链；② 更新 caozhi-polish SKILL.md 通知链；③ 更新 diascan-code SKILL.md 通知链；④ 修复 openclaw-repair SKILL.md 路径引用；⑤ caocao-status SKILL.md 补充 started/completed/deliverable_url 字段；⑥ team-workflow SKILL.md 上传环节注明coordinator.sh；⑦ relay.conf 统一 assignee 格式。P2可延后。"
     },
     {
       "id": 3,
@@ -31,7 +31,7 @@
       "name": "貂蝉编码修复",
       "assignee": "貂蝉（OpenCode）",
       "status": "待分配",
-      "content": "根据审计报告修复所有问题。"
+      "content": "7项修复（P0+P1）：simayi-review/caozhi-polish/diascan-code 通知链路更新 + openclaw-repair 路径修正 + caocao-status step字段补充 + team-workflow 上传说明 + relay.conf assignee 统一。不涉及 HTML/CSS/JS 代码。"
     },
     {
       "id": 4,
@@ -39,7 +39,7 @@
       "name": "司马懿审核",
       "assignee": "司马懿",
       "status": "待分配",
-      "content": "审核所有修复是否正确、是否全部覆盖。"
+      "content": "审核所有修复是否正确、通知链路是否一致、路径是否正确。"
     },
     {
       "id": 5,
@@ -47,7 +47,7 @@
       "name": "曹操下令上传",
       "assignee": "曹操",
       "status": "待分配",
-      "content": "审核通过后下令上传。"
+      "content": "审核通过后下令上传。使用 coordinator.sh upload auto。"
     },
     {
       "id": 6,
@@ -55,7 +55,7 @@
       "name": "上传GitHub",
       "assignee": "貂蝉（OpenCode）",
       "status": "待分配",
-      "content": "上传 task-dashboard。"
+      "content": "上传 task-dashboard 至 puerkafei/task-dashboard。"
     },
     {
       "id": 7,
@@ -63,7 +63,7 @@
       "name": "曹操汇总交付",
       "assignee": "曹操",
       "status": "待分配",
-      "content": "汇总交付物，通知甄宓呈报。"
+      "content": "汇总交付物，通知甄宓呈报主公。"
     }
   ],
   "archived_tasks": [
