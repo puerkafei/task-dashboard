@@ -1,13 +1,15 @@
 {
+  "no_task": false,
+  "last_updated": "2026-05-28 11:55",
   "current_task": {
     "work_id": "TASK-20260527-bazi-v5",
-    "name": "八字工具V5第二阶段：自动化验真体系",
+    "name": "八字工具V5第二阶段：自动化验真体系（恢复执行）",
     "type": "非编程类",
-    "progress": 0,
+    "progress": 10,
     "assign_time": "2026-05-28",
-    "parent": "TASK-20260527-bazi-v5"
+    "parent": "TASK-20260527-bazi-v5",
+    "note": "2026-05-28 11:55 全量审计修复后恢复执行，按新架构走标准工作流"
   },
-  "last_updated": "2026-05-28",
   "steps": [
     {
       "id": 1,
@@ -25,11 +27,18 @@
       "name": "诸葛亮调研（验真体系方案设计）",
       "assignee": "诸葛亮",
       "status": "已分配",
-      "content": "",
+      "content": "恢复执行。先加载 zhugeliang-research/SKILL.md，再开始调研。调研内容：核实八字排盘以阳历节气还是阴历农历为基准，查证《渊海子平》《三命通会》《滴天髓》等典籍。",
       "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
-      "error_details": []
+      "error_details": [
+        {
+          "type": "卡点恢复",
+          "detail": "上次诸葛亮调研 session aborted，现按新工作流恢复执行",
+          "severity": "warning",
+          "resolved": true
+        }
+      ]
     },
     {
       "id": 3,
