@@ -1,30 +1,85 @@
 {
-  "last_updated": "2026-05-28 20:55",
-  "current_task": null,
+  "last_updated": "2026-05-28 21:00",
+  "current_task": {
+    "work_id": "TASK-20260528-relay-fix",
+    "title": "relay根治：configparser中文→grep/awk + Skill通知机制去sessions_send + ACP进程清理",
+    "type": "编程类",
+    "progress": 14,
+    "assign_time": "2026-05-28 21:00",
+    "note": "coordinator.sh relay_lookup_agent 修复 + 批量Skill通知改造 + relay post-upload进程清理"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "step": 1,
+      "name": "甄宓规划",
+      "assignee": "甄宓",
+      "status": "completed",
+      "content": "规划完成：编程类、不需润色、需上传。7棒路径。修复3项：① coordinator.sh relay_lookup_agent configparser→grep/awk；② relay auto 成功后自动清理ACP僵尸进程；③ 所有Skill中的sessions_send通知改为「完成后更新status.json，由relay自动接力」。"
+    },
+    {
+      "id": 2,
+      "step": 2,
+      "name": "曹操分派",
+      "assignee": "曹操",
+      "status": "待分配",
+      "content": "等待分派貂蝉编码。"
+    },
+    {
+      "id": 3,
+      "step": 3,
+      "name": "貂蝉编码",
+      "assignee": "貂蝉（OpenCode）",
+      "status": "待分配",
+      "content": "修复3项：\n① coordinator.sh relay_lookup_agent函数：将configparser解析替换为grep+awk纯bash解析relay.conf（配置有中文section名，configparser不兼容）。\n② relay auto完成后自动清理ACP僵尸进程（upload完成后pkill对应opencode acp进程）。\n③ 批量修改所有Skill：将「sessions_send通知甄宓+抄送曹操」改为「完成后更新status.json，由coordinator relay auto自动接力」。影响文件：diascan-code、simayi-review、caozhi-polish、zhugeliang-research、caocao-dispatcher、zhenfu-monitor、team-workflow、caocao-status SKILL.md 共8个文件。"
+    },
+    {
+      "id": 4,
+      "step": 4,
+      "name": "司马懿审代码",
+      "assignee": "司马懿",
+      "status": "待分配",
+      "content": "审核：relay_lookup_agent grep解析逻辑、进程清理安全性、Skill通知改造完整性。"
+    },
+    {
+      "id": 5,
+      "step": 5,
+      "name": "曹操下令上传",
+      "assignee": "曹操",
+      "status": "待分配",
+      "content": "审核通过后，下令使用 coordinator.sh upload 推送。"
+    },
+    {
+      "id": 6,
+      "step": 6,
+      "name": "上传GitHub",
+      "assignee": "貂蝉（OpenCode）",
+      "status": "待分配",
+      "content": "使用 coordinator.sh upload 上传 task-dashboard。"
+    },
+    {
+      "id": 7,
+      "step": 7,
+      "name": "曹操汇总交付",
+      "assignee": "曹操",
+      "status": "待分配",
+      "content": "汇总交付物，通知甄宓呈报主公。"
+    }
+  ],
   "archived_tasks": [
     {
       "work_id": "TASK-20260528-detail-page",
-      "title": "Dashboard详情页改造：删除形同虚设字段，新增时间/耗时/交付物/卡点告警",
-      "type": "编程类",
+      "title": "Dashboard详情页改造",
       "progress": 100,
       "status": "✅ 已完成",
-      "release": "v2026.05.28-detail-page",
-      "note": "audit-fix对齐后恢复执行。index.html 392行。审核通过+上传完成。Dashboard 5秒内可见新详情页。Release: github.com/puerkafei/task-dashboard/releases/tag/v2026.05.28-detail-page"
+      "release": "v2026.05.28-detail-page"
     },
     {
       "work_id": "TASK-20260528-audit-fix",
-      "title": "全盘审计修复：11问题修复 + coordinator半自动化落地",
+      "title": "全盘审计修复",
       "progress": 100,
       "status": "✅ 已完成",
-      "release": "v2026.05.28-audit-fix",
-      "note": "7项文档修复 + 3项配置修正。coordinator relay/watch 验证通过。"
-    },
-    {
-      "work_id": "TASK-20260528-upload-module",
-      "title": "coordinator.sh上传模块",
-      "progress": 95,
-      "status": "等待汇总",
-      "note": "曹操汇总进行中"
+      "release": "v2026.05.28-audit-fix"
     }
   ]
 }
