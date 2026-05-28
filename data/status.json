@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-05-28 18:03",
+  "last_updated": "2026-05-28 18:14",
   "current_task": {
     "work_id": "TASK-20260528-upload-module",
     "title": "coordinator.sh上传模块：将GitHub上传从貂蝉改为内置子命令",
     "type": "编程类",
-    "progress": 10,
+    "progress": 95,
     "assign_time": "2026-05-28 17:51",
     "parent": "TASK-20260528-auto-coordinator"
   },
@@ -14,56 +14,56 @@
       "name": "甄宓规划",
       "assignee": "甄宓",
       "status": "completed",
-      "content": "已规划：编程类、不上传（上传本身就是此任务产出）、需润色。走精简路径→貂蝉编码→司马懿审→曹植润色→司马懿审曹植→汇总"
+      "content": "规划完成：编程类、需润色、需上传。8棒路径。"
     },
     {
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "执行中",
-      "content": "待分派貂蝉编码 coordinator.sh upload 子命令"
+      "status": "completed",
+      "content": "曹操分派貂蝉编码。"
     },
     {
       "step": 3,
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
-      "status": "待分配",
-      "content": "在coordinator.sh中新增upload子命令"
+      "status": "completed",
+      "content": "coordinator.sh upload子命令完成（prepare/push/release/auto）。"
     },
     {
       "step": 4,
       "name": "司马懿审代码",
       "assignee": "司马懿",
-      "status": "待分配",
-      "content": "审核upload子命令代码"
+      "status": "completed",
+      "content": "司马懿审核通过。"
     },
     {
       "step": 5,
       "name": "曹植润色README",
       "assignee": "曹植",
-      "status": "待分配",
-      "content": "更新README中upload子命令文档"
+      "status": "completed",
+      "content": "曹植润色README完成。"
     },
     {
       "step": 6,
       "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "待分配",
-      "content": "审核曹植润色版本"
+      "status": "completed",
+      "content": "司马懿审曹植通过。"
     },
     {
       "step": 7,
       "name": "上传GitHub",
       "assignee": "貂蝉（OpenCode）",
-      "status": "待分配",
-      "content": "上传包含upload子命令的更新版本"
+      "status": "completed",
+      "content": "v2026.05.28已发布。upload子命令自动化上传测试通过。"
     },
     {
       "step": 8,
       "name": "曹操汇总交付",
       "assignee": "曹操",
-      "status": "待分配",
-      "content": "收集交付物→汇总→提交甄宓"
+      "status": "执行中",
+      "content": "等待曹操汇总交付。"
     }
   ]
 }
