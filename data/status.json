@@ -1,26 +1,89 @@
 {
-  "last_updated": "2026-05-28 21:48",
-  "current_task": null,
+  "last_updated": "2026-05-28 22:05",
+  "current_task": {
+    "work_id": "TASK-20260528-audit-round2",
+    "title": "第二轮全盘审计：relay落地后全量对齐 — 7 AGENTS.md + 6 MEMORY.md + 11 Skill + coordinator配置",
+    "type": "文档审查类",
+    "progress": 0,
+    "assign_time": "2026-05-28 22:05",
+    "note": "上一轮审计(19:35)后又有3个release变更，需重新全面对齐。重点：通知链路一致性、relay自动化落地后的Skill冗余、跨文档冲突。"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "step": 1,
+      "name": "全盘通读审计",
+      "assignee": "甄宓",
+      "status": "执行中",
+      "content": "逐文件审查：7 AGENTS.md（含opencode）+ 6 MEMORY.md + 11 Skill SKILL.md + coordinator配置。维度：通知链路一致性、relay落地后的冗余/冲突、路径引用正确性、跨文档逻辑统一性。生成审计报告。"
+    },
+    {
+      "id": 2,
+      "step": 2,
+      "name": "曹操分派修复",
+      "assignee": "曹操",
+      "status": "待分配",
+      "content": "根据审计报告，协调貂蝉编码修复。"
+    },
+    {
+      "id": 3,
+      "step": 3,
+      "name": "貂蝉编码修复",
+      "assignee": "貂蝉（OpenCode）",
+      "status": "待分配",
+      "content": "根据审计报告修复所有问题。"
+    },
+    {
+      "id": 4,
+      "step": 4,
+      "name": "司马懿审核",
+      "assignee": "司马懿",
+      "status": "待分配",
+      "content": "审核所有修复是否正确、是否全部覆盖。"
+    },
+    {
+      "id": 5,
+      "step": 5,
+      "name": "曹操下令上传",
+      "assignee": "曹操",
+      "status": "待分配",
+      "content": "审核通过后下令上传。"
+    },
+    {
+      "id": 6,
+      "step": 6,
+      "name": "上传GitHub",
+      "assignee": "貂蝉（OpenCode）",
+      "status": "待分配",
+      "content": "上传 task-dashboard。"
+    },
+    {
+      "id": 7,
+      "step": 7,
+      "name": "曹操汇总交付",
+      "assignee": "曹操",
+      "status": "待分配",
+      "content": "汇总交付物，通知甄宓呈报。"
+    }
+  ],
   "archived_tasks": [
     {
       "work_id": "TASK-20260528-relay-fix",
-      "title": "relay根治：configparser→awk + 僵尸进程清理 + Skill通知链路更新",
-      "type": "编程类",
+      "title": "relay根治",
       "progress": 100,
       "status": "✅ 已完成",
-      "release": "v2026.05.28.3",
-      "note": "Release: github.com/puerkafei/auto-coordinator/releases/tag/v2026.05.28.3。relay auto已实际工作——21:22自动通知司马懿成功。"
+      "release": "v2026.05.28.3"
     },
     {
       "work_id": "TASK-20260528-detail-page",
-      "title": "Dashboard详情页改造",
+      "title": "详情页改造",
       "progress": 100,
       "status": "✅ 已完成",
       "release": "v2026.05.28-detail-page"
     },
     {
       "work_id": "TASK-20260528-audit-fix",
-      "title": "全盘审计修复 + coordinator半自动化落地",
+      "title": "第一轮审计修复",
       "progress": 100,
       "status": "✅ 已完成",
       "release": "v2026.05.28-audit-fix"
