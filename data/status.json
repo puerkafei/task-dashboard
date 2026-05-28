@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-05-28 19:57",
+  "last_updated": "2026-05-28 20:15",
   "current_task": {
     "work_id": "TASK-20260528-audit-fix",
     "title": "全盘审计修复：11个问题统一修复（validate-status.sh重写、文档统一、路径修正）",
     "type": "编程类",
-    "progress": 14,
+    "progress": 42,
     "assign_time": "2026-05-28 19:55",
     "parent": null
   },
@@ -30,15 +30,15 @@
       "step": 3,
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
-      "status": "待分配",
-      "content": "全盘审计修复第二部分（共7项）：\n1. 重写 validate-status.sh：从按编号检测改为按 name/assignee 关键词语义检测，「编码」步骤→貂蝉（OpenCode），「上传」步骤→貂蝉（OpenCode），「汇总」步骤→曹操。\n2. 统一 team-workflow/SKILL.md 各路径棒数标注。\n3. 明确上传执行者标准：默认 coordinator.sh upload，特殊情况（新建仓库/自定义Release）走貂蝉。更新 team-workflow 和 diascan-code SKILL.md。\n4. 修复曹植 AGENTS.md 格式破损（重复段落、断句）。\n5. 技能清单.md：补充貂蝉 workspace 说明（ACP Agent，无本地 workspace）。\n6. relay.conf：删除甄宓角色映射（不影响 relay 功能）。\n7. caocao-status/SKILL.md：补充 archived_tasks 字段结构说明和维护规则。"
+      "status": "审核中",
+      "content": "✅ 编码完成（20:00）。7项全部修复：validate-status.sh 语义检测重写、team-workflow 棒数统一、上传标准明确、曹植 AGENTS.md 格式修复、技能清单补充、relay.conf 清理、archived_tasks 规范。已提交司马懿审核。"
     },
     {
       "id": 4,
       "step": 4,
       "name": "司马懿审代码",
       "assignee": "司马懿",
-      "status": "待分配",
+      "status": "审核中",
       "content": "审核全部修改：逻辑正确性、格式完整性、文档一致性。"
     },
     {
