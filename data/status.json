@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-28 16:50",
+  "last_updated": "2026-05-28 16:56",
   "current_task": {
     "work_id": "TASK-20260528-auto-relay",
     "name": "自动接力引擎 — coordinator.sh relay模块升级",
     "type": "编程类",
     "parent": "TASK-20260528-auto-coordinator",
     "assign_time": "2026-05-28 16:05",
-    "progress": 60,
+    "progress": 65,
     "status": "执行中"
   },
   "steps": [
@@ -76,8 +76,8 @@
       "name": "司马懿审核貂蝉代码",
       "assignee": "司马懿",
       "tools": [],
-      "status": "执行中",
-      "content": "貂蝉编码完成通知已通过曹操转交司马懿。司马懿正在审核代码。",
+      "status": "completed",
+      "content": "审核通过。建议加 relay.conf 开关控制是否写入 status.json steps（遵循读不写原则）。",
       "error_details": [],
       "errors": 0,
       "reported_to": "曹操",
@@ -88,8 +88,8 @@
       "name": "曹植润色README+工作日志",
       "assignee": "曹植",
       "tools": [],
-      "status": "待分配",
-      "content": "",
+      "status": "执行中",
+      "content": "曹植已收到润色任务，正在更新 README relay 文档。",
       "error_details": [],
       "errors": 0,
       "reported_to": "曹操",
