@@ -153,6 +153,10 @@ function loadData() {
     document.getElementById('updateTime').textContent = '更新于: ' + (data.last_updated || '--');
     render();
     if (firstLoad) { selectFirstStep(); firstLoad = false; }
+    document.getElementById('flowList').addEventListener('click', function(e) {
+      var el = e.target.closest('[data-step-id]');
+      if (el) selectStep(parseInt(el.getAttribute('data-step-id')));
+    });
   }).catch(function(err) {
     console.warn('Fetch failed:', err);
     if (!data) {
@@ -163,6 +167,10 @@ function loadData() {
     updateFreshnessFallback();
     render();
     if (firstLoad) { selectFirstStep(); firstLoad = false; }
+    document.getElementById('flowList').addEventListener('click', function(e) {
+      var el = e.target.closest('[data-step-id]');
+      if (el) selectStep(parseInt(el.getAttribute('data-step-id')));
+    });
   });
 }
 
@@ -253,7 +261,7 @@ function renderFlow(steps) {
     var badge = '<span class="badge ' + badgeClr + '">' + statusText + '</span>';
     var errBadge = s.errors > 0 ? '<span class="badge ' + (s.status === 'error' ? 'red' : 'amber') + '">' + s.errors + '个问题</span>' : '';
     var activeCls = selectedStep && selectedStep.id === s.id ? 'active' : '';
-    html += '<div class="flow-step ' + cls + ' ' + activeCls + '" onclick="selectStep(' + s.id + ')"><div class="connector"><div class="dot">' + dot + '</div><div class="line"></div></div><div class="step-body"><div class="step-name">' + s.id + '. ' + esc(s.name) + '</div><div class="step-meta"><span>' + esc(s.assignee) + '</span>' + badge + errBadge + '</div></div></div>';
+    html += '<div class="flow-step ' + cls + ' ' + activeCls + '" data-step-id="' + s.id + '" style="cursor:pointer"><div class="connector"><div class="dot">' + dot + '</div><div class="line"></div></div><div class="step-body"><div class="step-name">' + s.id + '. ' + esc(s.name) + '</div><div class="step-meta"><span>' + esc(s.assignee) + '</span>' + badge + errBadge + '</div></div></div>';
   }
   list.innerHTML = html;
 }
