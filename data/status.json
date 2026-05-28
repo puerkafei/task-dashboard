@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-28 18:24",
+  "last_updated": "2026-05-28 18:30",
   "current_task": {
     "work_id": "TASK-20260528-upload-module",
     "title": "coordinator.sh上传模块：将GitHub上传从貂蝉改为内置子命令",
@@ -14,56 +14,64 @@
       "name": "甄宓规划",
       "assignee": "甄宓",
       "status": "completed",
-      "content": "规划完成：编程类、需润色、需上传。8棒路径。"
+      "content": "规划完成：编程类、需润色、需上传。8棒路径。",
+      "id": 1
     },
     {
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
       "status": "completed",
-      "content": "曹操分派貂蝉编码。"
+      "content": "曹操分派貂蝉编码。",
+      "id": 2
     },
     {
       "step": 3,
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
       "status": "completed",
-      "content": "coordinator.sh upload子命令完成（prepare/push/release/auto）。"
+      "content": "coordinator.sh upload子命令完成（prepare/push/release/auto）。",
+      "id": 3
     },
     {
       "step": 4,
       "name": "司马懿审代码",
       "assignee": "司马懿",
       "status": "completed",
-      "content": "司马懿审核通过。"
+      "content": "司马懿审核通过。",
+      "id": 4
     },
     {
       "step": 5,
       "name": "曹植润色README",
       "assignee": "曹植",
       "status": "completed",
-      "content": "曹植润色README完成。"
+      "content": "曹植润色README完成。",
+      "id": 5
     },
     {
       "step": 6,
       "name": "司马懿审曹植",
       "assignee": "司马懿",
       "status": "completed",
-      "content": "司马懿审曹植通过。"
+      "content": "司马懿审曹植通过。",
+      "id": 6
     },
     {
       "step": 7,
       "name": "上传GitHub",
       "assignee": "貂蝉（OpenCode）",
       "status": "completed",
-      "content": "v2026.05.28已发布。upload子命令自动化上传测试通过。"
+      "content": "v2026.05.28已发布。upload子命令自动化上传测试通过。",
+      "id": 7
     },
     {
       "step": 8,
       "name": "曹操汇总交付",
       "assignee": "曹操",
       "status": "执行中",
-      "content": "等待曹操汇总交付。"
+      "content": "等待曹操汇总交付。",
+      "id": 8
     }
   ]
 }
