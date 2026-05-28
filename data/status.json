@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-05-28 20:35",
+  "last_updated": "2026-05-28 20:45",
   "current_task": {
     "work_id": "TASK-20260528-detail-page",
     "title": "Dashboard详情页改造：删除形同虚设字段，新增时间/耗时/交付物/卡点告警",
     "type": "编程类",
-    "progress": 42,
+    "progress": 71,
     "assign_time": "2026-05-28 20:35",
     "note": "审计修复完成，恢复执行。貂蝉此前已完成编码（19:34），需司马懿审核。"
   },
@@ -38,15 +38,15 @@
       "step": 4,
       "name": "司马懿审代码",
       "assignee": "司马懿",
-      "status": "待分配",
-      "content": "审核详情页改造代码：逻辑正确性、UI布局、条件渲染、数据绑定。需先加载 simayi-review/SKILL.md。"
+      "status": "completed",
+      "content": "✅ 审核通过（20:37）。index.html（392行）全部通过。已通知甄宓，抄送曹操。可直接上传。"
     },
     {
       "id": 5,
       "step": 5,
       "name": "曹操下令上传",
       "assignee": "曹操",
-      "status": "待分配",
+      "status": "执行中",
       "content": "审核通过后，曹操下令使用 coordinator.sh upload 推送。"
     },
     {
