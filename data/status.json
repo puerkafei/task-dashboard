@@ -3,7 +3,7 @@
   "current_task": {
     "work_id": "TASK-20260528-audit-round2",
     "title": "第二轮全盘审计：relay落地后全量对齐 — 7 AGENTS.md + 6 MEMORY.md + 11 Skill + coordinator配置",
-    "type": "文档审查类",
+    "type": "非编程类",
     "progress": 14,
     "assign_time": "2026-05-28 22:05",
     "note": "审计报告已完成：2 P0 + 3 P1 + 2 P2。通知链路3个Skill未更新是最严重问题。"
@@ -43,6 +43,17 @@
     },
     {
       "id": 5,
+      "name": "曹植润色",
+      "assignee": "曹植",
+      "status": "待分配",
+      "content": "",
+      "reported_to": "未完成",
+      "reported_next": false,
+      "errors": 0,
+      "error_details": []
+    },
+    {
+      "id": 6,
       "step": 5,
       "name": "曹操下令上传",
       "assignee": "曹操",
@@ -50,7 +61,7 @@
       "content": "审核通过后下令上传。使用 coordinator.sh upload auto。"
     },
     {
-      "id": 6,
+      "id": 7,
       "step": 6,
       "name": "上传GitHub",
       "assignee": "貂蝉（OpenCode）",
@@ -58,7 +69,7 @@
       "content": "上传 task-dashboard 至 puerkafei/task-dashboard。"
     },
     {
-      "id": 7,
+      "id": 8,
       "step": 7,
       "name": "曹操汇总交付",
       "assignee": "曹操",
