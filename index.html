@@ -137,6 +137,7 @@ var STALE_THRESHOLD_MS = 2 * 60 * 1000;
 
 var data = null;
 var selectedStep = null;
+var firstLoad = true;
 var lastFetchTime = null;
 
 function loadData() {
@@ -151,7 +152,7 @@ function loadData() {
     document.getElementById('statusTag').className = 'tag online';
     document.getElementById('updateTime').textContent = '更新于: ' + (data.last_updated || '--');
     render();
-    selectFirstStep();
+    if (firstLoad) { selectFirstStep(); firstLoad = false; }
   }).catch(function(err) {
     console.warn('Fetch failed:', err);
     if (!data) {
@@ -161,7 +162,7 @@ function loadData() {
     }
     updateFreshnessFallback();
     render();
-    if (!selectedStep) selectFirstStep();
+    if (firstLoad) { selectFirstStep(); firstLoad = false; }
   });
 }
 
