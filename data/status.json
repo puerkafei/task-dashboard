@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-05-28 19:33",
+  "last_updated": "2026-05-28 19:55",
   "current_task": {
-    "work_id": "TASK-20260528-detail-page",
-    "title": "Dashboard详情页改造：删除形同虚设字段，新增时间/耗时/交付物/卡点告警",
+    "work_id": "TASK-20260528-audit-fix",
+    "title": "全盘审计修复：11个问题统一修复（validate-status.sh重写、文档统一、路径修正）",
     "type": "编程类",
-    "progress": 14,
-    "assign_time": "2026-05-28 19:30",
+    "progress": 10,
+    "assign_time": "2026-05-28 19:55",
     "parent": null
   },
   "steps": [
@@ -15,15 +15,15 @@
       "name": "甄宓规划",
       "assignee": "甄宓",
       "status": "completed",
-      "content": "规划完成：编程类、不需润色、需上传。7棒路径。改造方案已获主公批准：删4字段（使用工具/汇报上级/通知下一环节/异常详情），保留增强2字段（工作内容+状态时间），新增4字段（开始时间/完成时间/耗时/交付物链接/卡点告警条件显示）。"
+      "content": "规划完成：编程类、不需润色、需上传。7棒路径。第一轮手动修复完成（软链接、workspace合并、MEMORY.md路径修正、佐证文件命名统一）。第二轮需要貂蝉编码修复7项：validate-status.sh重写、team-workflow棒数统一、上传标准明确、曹植AGENTS.md格式修复、技能清单补充、relay.conf清理、archived_tasks规范文档化。"
     },
     {
       "id": 2,
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "completed",
-      "content": "已分派貂蝉编码。曹操收到指令，正在协调。"
+      "status": "待分配",
+      "content": "等待分派貂蝉编码。"
     },
     {
       "id": 3,
@@ -31,7 +31,7 @@
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
       "status": "待分配",
-      "content": "Dashboard详情页前端改造：1.删除「使用工具」「汇报上级」「通知下一环节」「异常与卡点详情」4个字段；2.保留+增强「工作内容」支持多行+链接；3.状态增加开始/完成时间；4.新增「开始时间」「完成时间」「耗时」「交付物链接」「卡点告警（超时条件显示）」；5.改造后布局：环节名+状态徽章 → 执行人+开始-完成+耗时 → 工作内容(多行) → 交付物链接(条件) → 卡点告警(仅超时)。"
+      "content": "全盘审计修复第二部分（共7项）：\n1. 重写 validate-status.sh：从按编号检测改为按 name/assignee 关键词语义检测，「编码」步骤→貂蝉（OpenCode），「上传」步骤→貂蝉（OpenCode），「汇总」步骤→曹操。\n2. 统一 team-workflow/SKILL.md 各路径棒数标注。\n3. 明确上传执行者标准：默认 coordinator.sh upload，特殊情况（新建仓库/自定义Release）走貂蝉。更新 team-workflow 和 diascan-code SKILL.md。\n4. 修复曹植 AGENTS.md 格式破损（重复段落、断句）。\n5. 技能清单.md：补充貂蝉 workspace 说明（ACP Agent，无本地 workspace）。\n6. relay.conf：删除甄宓角色映射（不影响 relay 功能）。\n7. caocao-status/SKILL.md：补充 archived_tasks 字段结构说明和维护规则。"
     },
     {
       "id": 4,
@@ -39,7 +39,7 @@
       "name": "司马懿审代码",
       "assignee": "司马懿",
       "status": "待分配",
-      "content": "审核代码：逻辑正确性、UI布局、条件渲染、数据绑定。"
+      "content": "审核全部修改：逻辑正确性、格式完整性、文档一致性。"
     },
     {
       "id": 5,
@@ -47,7 +47,7 @@
       "name": "曹操下令上传",
       "assignee": "曹操",
       "status": "待分配",
-      "content": "审核通过后，曹操下令使用 coordinator.sh upload 推送GitHub Pages。"
+      "content": "审核通过后，曹操下令使用 coordinator.sh upload 推送。"
     },
     {
       "id": 6,
@@ -55,7 +55,7 @@
       "name": "上传GitHub",
       "assignee": "貂蝉（OpenCode）",
       "status": "待分配",
-      "content": "使用 coordinator.sh upload 上传，Dashboard 5秒内刷新。"
+      "content": "使用 coordinator.sh upload 上传。"
     },
     {
       "id": 7,
@@ -69,10 +69,17 @@
   "archived_tasks": [
     {
       "work_id": "TASK-20260528-upload-module",
-      "title": "coordinator.sh上传模块：将GitHub上传从貂蝉改为内置子命令",
+      "title": "coordinator.sh上传模块",
       "progress": 95,
       "status": "等待汇总",
-      "note": "曹操汇总交付进行中"
+      "note": "曹操汇总进行中"
+    },
+    {
+      "work_id": "TASK-20260528-detail-page",
+      "title": "Dashboard详情页改造",
+      "progress": 28,
+      "status": "暂停（主公优先级调整）",
+      "note": "貂蝉编码中，等待审计修复完成后继续"
     }
   ]
 }
