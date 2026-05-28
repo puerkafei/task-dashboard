@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-28 21:00",
+  "last_updated": "2026-05-28 21:15",
   "current_task": {
     "work_id": "TASK-20260528-relay-fix",
     "title": "relay根治：configparser中文→grep/awk + Skill通知机制去sessions_send + ACP进程清理",
@@ -22,16 +22,16 @@
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "待分配",
-      "content": "等待分派貂蝉编码。"
+      "status": "completed",
+      "content": "分派完成。12棒含前置调研路径。诸葛亮已分派（调研3项）。"
     },
     {
       "id": 3,
       "step": 3,
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
-      "status": "待分配",
-      "content": "修复3项：\n① coordinator.sh relay_lookup_agent函数：将configparser解析替换为grep+awk纯bash解析relay.conf（配置有中文section名，configparser不兼容）。\n② relay auto完成后自动清理ACP僵尸进程（upload完成后pkill对应opencode acp进程）。\n③ 批量修改所有Skill：将「sessions_send通知甄宓+抄送曹操」改为「完成后更新status.json，由coordinator relay auto自动接力」。影响文件：diascan-code、simayi-review、caozhi-polish、zhugeliang-research、caocao-dispatcher、zhenfu-monitor、team-workflow、caocao-status SKILL.md 共8个文件。"
+      "status": "completed",
+      "content": "调研完成（13:12）。报告：workspace-zhugeliang/reports/TASK-20260528-relay-fix-调研报告.md。结论：① grep/awk纯bash方案可行；② relay_cleanup安全方案；③ 通知链路保留双通道（Agent→甄宓更新status.json + relay auto自动接力，去掉抄送曹操催办）。"
     },
     {
       "id": 4,
