@@ -1,13 +1,13 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-28 17:28",
+  "last_updated": "2026-05-28 17:32",
   "current_task": {
     "work_id": "TASK-20260528-auto-relay",
     "name": "自动接力引擎 — coordinator.sh relay模块升级",
     "type": "编程类",
     "parent": "TASK-20260528-auto-coordinator",
     "assign_time": "2026-05-28 16:05",
-    "progress": 85,
+    "progress": 95,
     "status": "执行中"
   },
   "steps": [
@@ -112,8 +112,8 @@
       "name": "曹操下令上传",
       "assignee": "貂蝉（OpenCode）",
       "tools": [],
-      "status": "执行中",
-      "content": "曹操已重新spawn貂蝉上传。上轮ACP超时，重试中。",
+      "status": "completed",
+      "content": "GitHub上传完成。git push + Release body更新，工作日志已推送。",
       "error_details": [],
       "errors": 0,
       "reported_to": "曹操",
@@ -124,8 +124,8 @@
       "name": "貂蝉上传GitHub",
       "assignee": "貂蝉",
       "tools": [],
-      "status": "待分配",
-      "content": "",
+      "status": "执行中",
+      "content": "上传已完成，等待曹操汇总交付。",
       "error_details": [],
       "errors": 0,
       "reported_to": "曹操",
