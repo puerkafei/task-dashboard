@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-05-28 21:15",
+  "last_updated": "2026-05-28 21:33",
   "current_task": {
     "work_id": "TASK-20260528-relay-fix",
     "title": "relay根治：configparser中文→grep/awk + Skill通知机制去sessions_send + ACP进程清理",
     "type": "编程类",
-    "progress": 14,
+    "progress": 57,
     "assign_time": "2026-05-28 21:00",
     "note": "coordinator.sh relay_lookup_agent 修复 + 批量Skill通知改造 + relay post-upload进程清理"
   },
@@ -31,23 +31,23 @@
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
       "status": "completed",
-      "content": "调研完成（13:12）。报告：workspace-zhugeliang/reports/TASK-20260528-relay-fix-调研报告.md。结论：① grep/awk纯bash方案可行；② relay_cleanup安全方案；③ 通知链路保留双通道（Agent→甄宓更新status.json + relay auto自动接力，去掉抄送曹操催办）。"
+      "content": "貂蝉编码完成（21:31 commit 8246f3f）。coordinator.sh: ① relay_lookup_agent awk重写 ② relay_cleanup新增 ③ relay_auto_handler末尾调用cleanup。SKILL.md: zhugeliang-research 4处 + team-workflow 1处通知链路更新。"
     },
     {
       "id": 4,
       "step": 4,
       "name": "司马懿审代码",
       "assignee": "司马懿",
-      "status": "待分配",
-      "content": "审核：relay_lookup_agent grep解析逻辑、进程清理安全性、Skill通知改造完整性。"
+      "status": "completed",
+      "content": "✅ 审核通过（13:27）。三项修改全部通过。coordinator.sh v2026.05.28.3。无需曹植润色。三连：① relay_lookup_agent awk纯bash重写；② relay_cleanup安全僵尸清理；③ 通知链SKILL.md更新。"
     },
     {
       "id": 5,
       "step": 5,
       "name": "曹操下令上传",
       "assignee": "曹操",
-      "status": "待分配",
-      "content": "审核通过后，下令使用 coordinator.sh upload 推送。"
+      "status": "执行中",
+      "content": "催曹操下令上传。"
     },
     {
       "id": 6,
