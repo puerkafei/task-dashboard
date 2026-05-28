@@ -1,147 +1,124 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-28 17:32",
+  "last_updated": "2026-05-28T15:00:00+08:00",
   "current_task": {
     "work_id": "TASK-20260528-auto-relay",
-    "name": "自动接力引擎 — coordinator.sh relay模块升级",
-    "type": "编程类",
-    "parent": "TASK-20260528-auto-coordinator",
-    "assign_time": "2026-05-28 16:05",
-    "progress": 95,
-    "status": "执行中"
+    "name": "Auto-Relay 自动接力系统（coordinator.sh relay子命令）",
+    "type": "编程类（前置调研）",
+    "progress": 100,
+    "assign_time": "2026-05-28",
+    "parent": "TASK-20260528-auto-coordinator"
   },
   "steps": [
     {
       "id": 1,
       "name": "曹操预检+分派",
       "assignee": "曹操",
-      "tools": [],
       "status": "completed",
-      "content": "曹操已预检 relay 需求并分派诸葛亮调研。",
-      "error_details": [],
+      "content": "预检完成：coordinator.sh现有435行6模块，无relay模块，作为子命令添加最合理。",
+      "reported_to": "已完成",
+      "reported_next": true,
       "errors": 0,
-      "reported_to": "甄宓",
-      "reported_next": false
+      "error_details": []
     },
     {
       "id": 2,
-      "name": "诸葛亮调研（relay模块技术方案）",
+      "name": "诸葛亮调研",
       "assignee": "诸葛亮",
-      "tools": [],
       "status": "completed",
-      "content": "调研完成：relay模块技术方案、relay.conf 配置格式、steps[] 互补说明。",
-      "error_details": [],
+      "content": "调研完成。推荐sessions_list轮询→status.json step驱动→relay.conf角色路由，作为coordinator.sh relay子命令集成。编码预估8-9小时。关键决策：status.json只读不写。",
+      "reported_to": "已完成",
+      "reported_next": true,
       "errors": 0,
-      "reported_to": "曹操",
-      "reported_next": false
+      "error_details": []
     },
     {
       "id": 3,
-      "name": "司马懿审核诸葛亮调研",
+      "name": "司马懿审核诸葛亮",
       "assignee": "司马懿",
-      "tools": [],
       "status": "completed",
-      "content": "审核通过，补充 relay.conf + steps[] 互补建议。",
-      "error_details": [],
+      "content": "审核通过。接力触发论证充分，路由设计合理，native/ACP区分清晰，风险识别全面。",
+      "reported_to": "已完成",
+      "reported_next": true,
       "errors": 0,
-      "reported_to": "曹操",
-      "reported_next": false
+      "error_details": []
     },
     {
       "id": 4,
-      "name": "诸葛亮→貂蝉交付调研",
-      "assignee": "貂蝉（OpenCode）",
-      "tools": [],
+      "name": "诸葛亮→貂蝉交付",
+      "assignee": "诸葛亮",
       "status": "completed",
-      "content": "调研摘要已通过曹操分派时带入貂蝉ACP task。",
-      "error_details": [],
+      "content": "调研结论通过task message带入貂蝉。",
+      "reported_to": "已完成",
+      "reported_next": true,
       "errors": 0,
-      "reported_to": "曹操",
-      "reported_next": false
+      "error_details": []
     },
     {
       "id": 5,
-      "name": "貂蝉编码（新增relay模块）",
-      "assignee": "貂蝉",
-      "tools": [],
+      "name": "貂蝉编码",
+      "assignee": "貂蝉（OpenCode）",
       "status": "completed",
-      "content": "relay模块完成。新增check/notify/auto/check-session子命令，relay.conf驱动角色路由。v2026.05.28.2已发布。",
-      "error_details": [],
+      "content": "编码完成：coordinator.sh 662行，relay子命令完整实现，bash -n通过。",
+      "reported_to": "已完成",
+      "reported_next": true,
       "errors": 0,
-      "reported_to": "曹操",
-      "reported_next": false
+      "error_details": []
     },
     {
       "id": 6,
-      "name": "司马懿审核貂蝉代码",
+      "name": "司马懿审核貂蝉",
       "assignee": "司马懿",
-      "tools": [],
       "status": "completed",
-      "content": "审核通过。建议加 relay.conf 开关控制是否写入 status.json steps（遵循读不写原则）。",
-      "error_details": [],
+      "content": "审核通过。relay闭环完整，防跳步校验合理，ACP兜底机制完善，工程质量高。",
+      "reported_to": "已完成",
+      "reported_next": true,
       "errors": 0,
-      "reported_to": "曹操",
-      "reported_next": false
+      "error_details": []
     },
     {
       "id": 7,
-      "name": "曹植润色README+工作日志",
+      "name": "曹植润色README",
       "assignee": "曹植",
-      "tools": [],
       "status": "completed",
-      "content": "README relay文档润色完成，润色版已交付。",
-      "error_details": [],
+      "content": "润色完成v2026.05.28.2。relay子命令技术内容保留，Agent routing改为表格展示，架构图更新。",
+      "reported_to": "已完成",
+      "reported_next": true,
       "errors": 0,
-      "reported_to": "曹操",
-      "reported_next": false
+      "error_details": []
     },
     {
       "id": 8,
       "name": "司马懿审核曹植",
       "assignee": "司马懿",
-      "tools": [],
       "status": "completed",
-      "content": "曹植润色版本审核通过。",
-      "error_details": [],
+      "content": "审核通过。全部技术内容保留，relay新增内容表格展示，英文表达流畅。",
+      "reported_to": "已完成",
+      "reported_next": true,
       "errors": 0,
-      "reported_to": "曹操",
-      "reported_next": false
+      "error_details": []
     },
     {
       "id": 9,
-      "name": "曹操下令上传",
+      "name": "貂蝉上传GitHub",
       "assignee": "貂蝉（OpenCode）",
-      "tools": [],
       "status": "completed",
-      "content": "GitHub上传完成。git push + Release body更新，工作日志已推送。",
-      "error_details": [],
+      "content": "已下令貂蝉上传v2026.05.28.2",
+      "reported_to": "已完成",
+      "reported_next": true,
       "errors": 0,
-      "reported_to": "曹操",
-      "reported_next": false
+      "error_details": []
     },
     {
       "id": 10,
-      "name": "貂蝉上传GitHub",
-      "assignee": "貂蝉",
-      "tools": [],
-      "status": "执行中",
-      "content": "上传已完成，等待曹操汇总交付。",
-      "error_details": [],
-      "errors": 0,
-      "reported_to": "曹操",
-      "reported_next": false
-    },
-    {
-      "id": 11,
       "name": "曹操汇总交付",
       "assignee": "曹操",
-      "tools": [],
-      "status": "待分配",
-      "content": "",
-      "error_details": [],
+      "status": "completed",
+      "content": "上传完成。仓库 puerkafei/auto-coordinator，Release v2026.05.28.2",
+      "reported_to": "已完成",
+      "reported_next": true,
       "errors": 0,
-      "reported_to": "甄宓",
-      "reported_next": false
+      "error_details": []
     }
   ]
 }
