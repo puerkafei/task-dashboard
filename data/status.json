@@ -1,72 +1,16 @@
 {
-  "last_updated": "2026-05-28 21:33",
-  "current_task": {
-    "work_id": "TASK-20260528-relay-fix",
-    "title": "relay根治：configparser中文→grep/awk + Skill通知机制去sessions_send + ACP进程清理",
-    "type": "编程类",
-    "progress": 57,
-    "assign_time": "2026-05-28 21:00",
-    "note": "coordinator.sh relay_lookup_agent 修复 + 批量Skill通知改造 + relay post-upload进程清理"
-  },
-  "steps": [
-    {
-      "id": 1,
-      "step": 1,
-      "name": "甄宓规划",
-      "assignee": "甄宓",
-      "status": "completed",
-      "content": "规划完成：编程类、不需润色、需上传。7棒路径。修复3项：① coordinator.sh relay_lookup_agent configparser→grep/awk；② relay auto 成功后自动清理ACP僵尸进程；③ 所有Skill中的sessions_send通知改为「完成后更新status.json，由relay自动接力」。"
-    },
-    {
-      "id": 2,
-      "step": 2,
-      "name": "曹操分派",
-      "assignee": "曹操",
-      "status": "completed",
-      "content": "分派完成。12棒含前置调研路径。诸葛亮已分派（调研3项）。"
-    },
-    {
-      "id": 3,
-      "step": 3,
-      "name": "貂蝉编码",
-      "assignee": "貂蝉（OpenCode）",
-      "status": "completed",
-      "content": "貂蝉编码完成（21:31 commit 8246f3f）。coordinator.sh: ① relay_lookup_agent awk重写 ② relay_cleanup新增 ③ relay_auto_handler末尾调用cleanup。SKILL.md: zhugeliang-research 4处 + team-workflow 1处通知链路更新。"
-    },
-    {
-      "id": 4,
-      "step": 4,
-      "name": "司马懿审代码",
-      "assignee": "司马懿",
-      "status": "completed",
-      "content": "✅ 审核通过（13:27）。三项修改全部通过。coordinator.sh v2026.05.28.3。无需曹植润色。三连：① relay_lookup_agent awk纯bash重写；② relay_cleanup安全僵尸清理；③ 通知链SKILL.md更新。"
-    },
-    {
-      "id": 5,
-      "step": 5,
-      "name": "曹操下令上传",
-      "assignee": "曹操",
-      "status": "执行中",
-      "content": "催曹操下令上传。"
-    },
-    {
-      "id": 6,
-      "step": 6,
-      "name": "上传GitHub",
-      "assignee": "貂蝉（OpenCode）",
-      "status": "待分配",
-      "content": "使用 coordinator.sh upload 上传 task-dashboard。"
-    },
-    {
-      "id": 7,
-      "step": 7,
-      "name": "曹操汇总交付",
-      "assignee": "曹操",
-      "status": "待分配",
-      "content": "汇总交付物，通知甄宓呈报主公。"
-    }
-  ],
+  "last_updated": "2026-05-28 21:48",
+  "current_task": null,
   "archived_tasks": [
+    {
+      "work_id": "TASK-20260528-relay-fix",
+      "title": "relay根治：configparser→awk + 僵尸进程清理 + Skill通知链路更新",
+      "type": "编程类",
+      "progress": 100,
+      "status": "✅ 已完成",
+      "release": "v2026.05.28.3",
+      "note": "Release: github.com/puerkafei/auto-coordinator/releases/tag/v2026.05.28.3。relay auto已实际工作——21:22自动通知司马懿成功。"
+    },
     {
       "work_id": "TASK-20260528-detail-page",
       "title": "Dashboard详情页改造",
@@ -76,7 +20,7 @@
     },
     {
       "work_id": "TASK-20260528-audit-fix",
-      "title": "全盘审计修复",
+      "title": "全盘审计修复 + coordinator半自动化落地",
       "progress": 100,
       "status": "✅ 已完成",
       "release": "v2026.05.28-audit-fix"
