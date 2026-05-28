@@ -1,51 +1,43 @@
 {
   "no_task": false,
-  "last_updated": "2026-05-28 12:35",
+  "last_updated": "2026-05-28 13:05",
   "current_task": {
-    "work_id": "TASK-20260527-bazi-v5",
-    "name": "八字工具V5第二阶段：自动化验真体系（恢复执行）",
-    "type": "非编程类",
-    "progress": 30,
-    "assign_time": "2026-05-28",
-    "parent": "TASK-20260527-bazi-v5",
-    "note": "2026-05-28 11:55 全量审计修复后恢复执行，按新架构走标准工作流"
+    "work_id": "TASK-20260528-auto-coordinator",
+    "name": "自动化协调脚本 + validate-status.sh 整合优化",
+    "type": "编程类",
+    "progress": 0,
+    "assign_time": "2026-05-28 13:05",
+    "parent": ""
   },
   "steps": [
     {
       "id": 1,
       "name": "曹操预检+分派",
       "assignee": "曹操",
-      "status": "completed",
-      "content": "已阅读主公指令，确认V5阶段二工作流。分派诸葛亮调研",
-      "reported_to": "分派诸葛亮",
-      "reported_next": true,
+      "status": "待分配",
+      "content": "按甄宓指令分派诸葛亮调研技术方案",
+      "reported_to": "未完成",
+      "reported_next": false,
       "errors": 0,
       "error_details": []
     },
     {
       "id": 2,
-      "name": "诸葛亮调研（验真体系方案设计）",
+      "name": "诸葛亮调研（自动化协调方案技术调研）",
       "assignee": "诸葛亮",
-      "status": "completed",
-      "content": "调研完成。结论：八字排盘以阳历节气（十二节）为基准，年柱以立春为界，月柱以十二节为界。查证《三命通会》《渊海子平》《滴天髓》三部典籍。报告已提交司马懿审核。",
+      "status": "待分配",
+      "content": "调研内容：① 搜索网上自动化状态监控/协调方案 ② 查 OpenClaw 官方文档关于 inter-session、Agent 通信的 API ③ 评估方案 B 可行性 ④ 给出技术实现建议",
       "reported_to": "未完成",
-      "reported_next": true,
+      "reported_next": false,
       "errors": 0,
-      "error_details": [
-        {
-          "type": "卡点恢复",
-          "detail": "上次诸葛亮调研 session aborted，现按新工作流恢复执行",
-          "severity": "warning",
-          "resolved": true
-        }
-      ]
+      "error_details": []
     },
     {
       "id": 3,
       "name": "司马懿审核诸葛亮调研",
       "assignee": "司马懿",
-      "status": "completed",
-      "content": "审核通过。报告扎实，典籍引用清晰。等待曹操协调曹植润色。",
+      "status": "待分配",
+      "content": "",
       "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
@@ -53,10 +45,10 @@
     },
     {
       "id": 4,
-      "name": "貂蝉编码（验真脚本实现）",
-      "assignee": "貂蝉",
+      "name": "貂蝉编码（自动化协调脚本+validate整合）",
+      "assignee": "貂蝉（OpenCode）",
       "status": "待分配",
-      "content": "",
+      "content": "基于诸葛亮调研结论编码实现：① 轮询 Agent 状态 → 自动更新 status.json → push ② 卡点/超时 → 自动通知主公 ③ 未处理定时提醒 ④ 整合 validate-status.sh 校验逻辑",
       "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
@@ -97,7 +89,7 @@
     },
     {
       "id": 8,
-      "name": "曹操全体验真",
+      "name": "曹操下令上传",
       "assignee": "曹操",
       "status": "待分配",
       "content": "",
@@ -122,7 +114,7 @@
       "name": "曹操汇总交付",
       "assignee": "曹操",
       "status": "待分配",
-      "content": "",
+      "content": "汇总内容：代码 + README + 更新的 6 个 AGENTS.md + 6 个 MEMORY.md + 11 个 Skill",
       "reported_to": "未完成",
       "reported_next": false,
       "errors": 0,
