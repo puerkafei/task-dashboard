@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-05-28 20:15",
+  "last_updated": "2026-05-28 20:32",
   "current_task": {
     "work_id": "TASK-20260528-audit-fix",
     "title": "全盘审计修复：11个问题统一修复（validate-status.sh重写、文档统一、路径修正）",
     "type": "编程类",
-    "progress": 42,
+    "progress": 71,
     "assign_time": "2026-05-28 19:55",
     "parent": null
   },
@@ -30,7 +30,7 @@
       "step": 3,
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
-      "status": "审核中",
+      "status": "completed",
       "content": "✅ 编码完成（20:00）。7项 + 追加1项：coordinator.conf STATUS_DIR 路径修正 + scripts/coordinator.conf 软链接。relay check/watch 已验证通过，半自动化调度系统正式连接正确数据源。已提交司马懿审核。"
     },
     {
@@ -38,7 +38,8 @@
       "step": 4,
       "name": "司马懿审代码",
       "assignee": "司马懿",
-      "status": "审核中",
+      "status": "completed",
+      "content": "✅ 审核通过（20:20）。7项审计修复全部通过，无退回项。已通知甄宓(main)，抄送曹操。"
       "content": "审核全部修改：逻辑正确性、格式完整性、文档一致性。"
     },
     {
@@ -46,7 +47,7 @@
       "step": 5,
       "name": "曹操下令上传",
       "assignee": "曹操",
-      "status": "待分配",
+      "status": "执行中",
       "content": "审核通过后，曹操下令使用 coordinator.sh upload 推送。"
     },
     {
