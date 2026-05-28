@@ -1,77 +1,78 @@
 {
-  "last_updated": "2026-05-28 18:30",
+  "last_updated": "2026-05-28 19:30",
   "current_task": {
-    "work_id": "TASK-20260528-upload-module",
-    "title": "coordinator.sh上传模块：将GitHub上传从貂蝉改为内置子命令",
+    "work_id": "TASK-20260528-detail-page",
+    "title": "Dashboard详情页改造：删除形同虚设字段，新增时间/耗时/交付物/卡点告警",
     "type": "编程类",
-    "progress": 95,
-    "assign_time": "2026-05-28 17:51",
-    "parent": "TASK-20260528-auto-coordinator"
+    "progress": 0,
+    "assign_time": "2026-05-28 19:30",
+    "parent": null
   },
   "steps": [
     {
+      "id": 1,
       "step": 1,
       "name": "甄宓规划",
       "assignee": "甄宓",
       "status": "completed",
-      "content": "规划完成：编程类、需润色、需上传。8棒路径。",
-      "id": 1
+      "content": "规划完成：编程类、不需润色、需上传。7棒路径。改造方案已获主公批准：删4字段（使用工具/汇报上级/通知下一环节/异常详情），保留增强2字段（工作内容+状态时间），新增4字段（开始时间/完成时间/耗时/交付物链接/卡点告警条件显示）。"
     },
     {
+      "id": 2,
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "completed",
-      "content": "曹操分派貂蝉编码。",
-      "id": 2
+      "status": "待分配",
+      "content": "等待分派貂蝉编码。"
     },
     {
+      "id": 3,
       "step": 3,
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
-      "status": "completed",
-      "content": "coordinator.sh upload子命令完成（prepare/push/release/auto）。",
-      "id": 3
+      "status": "待分配",
+      "content": "Dashboard详情页前端改造：1.删除「使用工具」「汇报上级」「通知下一环节」「异常与卡点详情」4个字段；2.保留+增强「工作内容」支持多行+链接；3.状态增加开始/完成时间；4.新增「开始时间」「完成时间」「耗时」「交付物链接」「卡点告警（超时条件显示）」；5.改造后布局：环节名+状态徽章 → 执行人+开始-完成+耗时 → 工作内容(多行) → 交付物链接(条件) → 卡点告警(仅超时)。"
     },
     {
+      "id": 4,
       "step": 4,
       "name": "司马懿审代码",
       "assignee": "司马懿",
-      "status": "completed",
-      "content": "司马懿审核通过。",
-      "id": 4
+      "status": "待分配",
+      "content": "审核代码：逻辑正确性、UI布局、条件渲染、数据绑定。"
     },
     {
+      "id": 5,
       "step": 5,
-      "name": "曹植润色README",
-      "assignee": "曹植",
-      "status": "completed",
-      "content": "曹植润色README完成。",
-      "id": 5
+      "name": "曹操下令上传",
+      "assignee": "曹操",
+      "status": "待分配",
+      "content": "审核通过后，曹操下令使用 coordinator.sh upload 推送GitHub Pages。"
     },
     {
+      "id": 6,
       "step": 6,
-      "name": "司马懿审曹植",
-      "assignee": "司马懿",
-      "status": "completed",
-      "content": "司马懿审曹植通过。",
-      "id": 6
-    },
-    {
-      "step": 7,
       "name": "上传GitHub",
       "assignee": "貂蝉（OpenCode）",
-      "status": "completed",
-      "content": "v2026.05.28已发布。upload子命令自动化上传测试通过。",
-      "id": 7
+      "status": "待分配",
+      "content": "使用 coordinator.sh upload 上传，Dashboard 5秒内刷新。"
     },
     {
-      "step": 8,
+      "id": 7,
+      "step": 7,
       "name": "曹操汇总交付",
       "assignee": "曹操",
-      "status": "执行中",
-      "content": "等待曹操汇总交付。",
-      "id": 8
+      "status": "待分配",
+      "content": "汇总交付物，通知甄宓呈报主公。"
+    }
+  ],
+  "archived_tasks": [
+    {
+      "work_id": "TASK-20260528-upload-module",
+      "title": "coordinator.sh上传模块：将GitHub上传从貂蝉改为内置子命令",
+      "progress": 95,
+      "status": "等待汇总",
+      "note": "曹操汇总交付进行中"
     }
   ]
 }
