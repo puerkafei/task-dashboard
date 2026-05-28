@@ -75,19 +75,18 @@ body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-ser
 .detail-header .dh-left{display:flex;align-items:center;gap:10px}
 .detail-header .dh-left .dh-name{font-size:18px;font-weight:600}
 .detail-header .dh-left .dh-assignee{font-size:13px;color:var(--text2);background:var(--card2);padding:2px 10px;border-radius:20px}
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:600px){.detail-grid{grid-template-columns:1fr}}
-.detail-card{background:var(--card2);border-radius:8px;padding:14px}
-.detail-card .dc-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.detail-card .dc-val{font-size:14px;color:var(--text);line-height:1.5}
-.detail-card .dc-val .tool-tag{display:inline-block;background:var(--card);color:var(--text2);padding:2px 8px;border-radius:4px;font-size:12px;margin:2px}
-.detail-card.full{grid-column:1/-1}
-.error-item{padding:10px 12px;border-radius:6px;margin-top:6px;font-size:13px;line-height:1.5;border-left:3px solid}
-.error-item.critical{background:var(--red-bg);border-color:var(--red);color:var(--red)}
-.error-item.warning{background:var(--amber-bg);border-color:var(--amber);color:var(--amber)}
-.error-item .ei-type{font-weight:600;margin-bottom:2px}
-.error-item .ei-detail{color:var(--text2);font-size:12px}
-.error-item .resolved-badge{display:inline-block;background:var(--green-bg);color:var(--green);font-size:9px;padding:1px 6px;border-radius:8px;margin-left:6px;vertical-align:middle;letter-spacing:0.5px}
+.detail-body{padding:4px 0 0}
+.detail-row{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;background:var(--card2);margin-bottom:8px}
+.detail-row .dr-icon{flex-shrink:0;font-size:16px;width:24px;text-align:center;line-height:1.6}
+.detail-row .dr-label{flex-shrink:0;font-size:12px;color:var(--text3);min-width:56px;line-height:1.6;letter-spacing:.5px}
+.detail-row .dr-val{font-size:14px;color:var(--text);line-height:1.6;word-break:break-word}
+.detail-content{white-space:pre-wrap;word-break:break-word}
+.detail-content a{color:var(--blue);text-decoration:underline}
+.detail-content a:hover{opacity:.8}
+.detail-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px;padding:10px 14px;background:var(--card2);border-radius:8px;margin-bottom:8px;font-size:13px;color:var(--text2)}
+.detail-meta .dm-item{display:flex;align-items:center;gap:4px}
+.alert-banner{margin:0 0 8px;padding:10px 14px;border-radius:8px;font-size:13px;line-height:1.5;display:flex;align-items:center;gap:8px}
+.alert-banner.warning{background:var(--red-bg);color:var(--red);border-left:3px solid var(--red)}
 .no-task{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;color:var(--text3)}
 .no-task .big-icon{font-size:64px;margin-bottom:16px;opacity:.3}
 .no-task p{font-size:16px}
@@ -321,24 +320,64 @@ function renderDetail(step) {
   var dotColor = mapStatusBadgeColor(step.status);
   var statusText = mapStatusText(step.status);
 
-  // 工具列表
-  var toolsHtml = step.tools && step.tools.length ? (function() {
-    var t = '';
-    for (var i = 0; i < step.tools.length; i++) t += '<span class="tool-tag">' + esc(step.tools[i]) + '</span>';
-    return t;
-  })() : '暂无记录';
+  var started = step.started || '-';
+  var completed = step.completed || '-';
+  var duration = calcDuration(step.started, step.completed);
 
-  // 错误详情
-  var errorsHtml = step.error_details && step.error_details.length ? (function() {
-    var e = '';
-    for (var i = 0; i < step.error_details.length; i++) {
-      var ed = step.error_details[i];
-      e += '<div class="error-item ' + (ed.severity || 'warning') + '"><div class="ei-type">' + esc(ed.type) + (ed.resolved ? '<span class="resolved-badge">已修复</span>' : '') + '</div><div class="ei-detail">' + esc(ed.detail) + '</div></div>';
+  var contentHtml = step.content ? linkify(step.content) : '暂无记录';
+
+  var deliverableHtml = '';
+  if (step.deliverable_url) {
+    deliverableHtml = '<div class="detail-row"><span class="dr-icon">\uD83D\uDCCE</span><span class="dr-label">交付物</span><a class="dr-val" href="' + esc(step.deliverable_url) + '" target="_blank" rel="noopener">' + esc(step.deliverable_url) + '</a></div>';
+  }
+
+  var alertHtml = '';
+  if (isTimeout(step)) {
+    alertHtml = '<div class="alert-banner warning">\u26A0\uFE0F 卡点告警：当前环节执行已超过30分钟，请注意关注！</div>';
+  }
+
+  dc.innerHTML = '<div class="detail-header"><div class="dh-left"><div class="dh-name">' + esc(step.name) + '</div></div><div style="font-size:13px"><span class="status-dot ' + dotColor + '"></span>' + statusText + '</div></div>'
+    + '<div class="detail-body">'
+    + '<div class="detail-meta">'
+    + '<span class="dm-item">\uD83D\uDC64 ' + esc(step.assignee) + '</span>'
+    + '<span class="dm-item">\u23F1 ' + started + ' \u2014 ' + completed + '</span>'
+    + '<span class="dm-item">\u8017\u65F6 ' + duration + '</span>'
+    + '</div>'
+    + '<div class="detail-row"><span class="dr-icon">\uD83D\uDCDD</span><span class="dr-label">工作内容</span><div class="dr-val detail-content">' + contentHtml + '</div></div>'
+    + deliverableHtml
+    + alertHtml
+    + '</div>';
+}
+
+function linkify(text) {
+  var parts = text.split(/(https?:\/\/[^\s<]+)/g);
+  for (var i = 0; i < parts.length; i++) {
+    if (i % 2 === 1) {
+      var url = parts[i];
+      parts[i] = '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(url) + '</a>';
+    } else {
+      parts[i] = esc(parts[i]);
     }
-    return e;
-  })() : '无异常记录';
+  }
+  return parts.join('');
+}
 
-  dc.innerHTML = '<div class="detail-header"><div class="dh-left"><div class="dh-name">' + esc(step.name) + '</div><div class="dh-assignee">' + esc(step.assignee) + '</div></div><div style="font-size:13px"><span class="status-dot ' + dotColor + '"></span>' + statusText + '</div></div><div class="detail-grid"><div class="detail-card"><div class="dc-label">使用工具</div><div class="dc-val">' + toolsHtml + '</div></div><div class="detail-card"><div class="dc-label">汇报上级</div><div class="dc-val">' + esc(step.reported_to) + '</div></div><div class="detail-card"><div class="dc-label">通知下一环节</div><div class="dc-val">' + (step.reported_next ? '已通知' : '未通知') + '</div></div><div class="detail-card"><div class="dc-label">报错/卡点次数</div><div class="dc-val" style="color:' + (step.errors > 0 ? 'var(--red)' : 'var(--green)') + '">' + step.errors + ' 次</div></div><div class="detail-card full"><div class="dc-label">工作内容</div><div class="dc-val">' + (step.content ? esc(step.content) : '暂无记录') + '</div></div><div class="detail-card full"><div class="dc-label">异常与卡点详情</div><div class="dc-val">' + errorsHtml + '</div></div></div>';
+function calcDuration(started, completed) {
+  if (!started || started === '-' || !completed || completed === '-') return '-';
+  var s = new Date(started).getTime();
+  var c = new Date(completed).getTime();
+  if (isNaN(s) || isNaN(c)) return '-';
+  var min = Math.round((c - s) / 60000);
+  if (min < 1) return '<1 \u5206\u949F';
+  return min + ' \u5206\u949F';
+}
+
+function isTimeout(step) {
+  if (step.status !== 'in_progress' && step.status !== '\u6267\u884C\u4E2D') return false;
+  if (!step.started) return false;
+  var started = new Date(step.started).getTime();
+  if (isNaN(started)) return false;
+  return (Date.now() - started) > 30 * 60 * 1000;
 }
 
 function esc(s) {
