@@ -1,124 +1,69 @@
 {
-  "no_task": false,
-  "last_updated": "2026-05-28T15:00:00+08:00",
+  "last_updated": "2026-05-28 17:51",
   "current_task": {
-    "work_id": "TASK-20260528-auto-relay",
-    "name": "Auto-Relay 自动接力系统（coordinator.sh relay子命令）",
-    "type": "编程类（前置调研）",
-    "progress": 100,
-    "assign_time": "2026-05-28",
+    "work_id": "TASK-20260528-upload-module",
+    "title": "coordinator.sh上传模块：将GitHub上传从貂蝉改为内置子命令",
+    "type": "编程类",
+    "progress": 0,
+    "assign_time": "2026-05-28 17:51",
     "parent": "TASK-20260528-auto-coordinator"
   },
   "steps": [
     {
-      "id": 1,
-      "name": "曹操预检+分派",
+      "step": 1,
+      "name": "甄宓规划",
+      "assignee": "甄宓",
+      "status": "completed",
+      "content": "已规划：编程类、不上传（上传本身就是此任务产出）、需润色。走精简路径→貂蝉编码→司马懿审→曹植润色→司马懿审曹植→汇总"
+    },
+    {
+      "step": 2,
+      "name": "曹操分派",
       "assignee": "曹操",
-      "status": "completed",
-      "content": "预检完成：coordinator.sh现有435行6模块，无relay模块，作为子命令添加最合理。",
-      "reported_to": "已完成",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
+      "status": "执行中",
+      "content": "待分派貂蝉编码 coordinator.sh upload 子命令"
     },
     {
-      "id": 2,
-      "name": "诸葛亮调研",
-      "assignee": "诸葛亮",
-      "status": "completed",
-      "content": "调研完成。推荐sessions_list轮询→status.json step驱动→relay.conf角色路由，作为coordinator.sh relay子命令集成。编码预估8-9小时。关键决策：status.json只读不写。",
-      "reported_to": "已完成",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 3,
-      "name": "司马懿审核诸葛亮",
-      "assignee": "司马懿",
-      "status": "completed",
-      "content": "审核通过。接力触发论证充分，路由设计合理，native/ACP区分清晰，风险识别全面。",
-      "reported_to": "已完成",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 4,
-      "name": "诸葛亮→貂蝉交付",
-      "assignee": "诸葛亮",
-      "status": "completed",
-      "content": "调研结论通过task message带入貂蝉。",
-      "reported_to": "已完成",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
-    },
-    {
-      "id": 5,
+      "step": 3,
       "name": "貂蝉编码",
       "assignee": "貂蝉（OpenCode）",
-      "status": "completed",
-      "content": "编码完成：coordinator.sh 662行，relay子命令完整实现，bash -n通过。",
-      "reported_to": "已完成",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
+      "status": "待分配",
+      "content": "在coordinator.sh中新增upload子命令"
     },
     {
-      "id": 6,
-      "name": "司马懿审核貂蝉",
+      "step": 4,
+      "name": "司马懿审代码",
       "assignee": "司马懿",
-      "status": "completed",
-      "content": "审核通过。relay闭环完整，防跳步校验合理，ACP兜底机制完善，工程质量高。",
-      "reported_to": "已完成",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
+      "status": "待分配",
+      "content": "审核upload子命令代码"
     },
     {
-      "id": 7,
+      "step": 5,
       "name": "曹植润色README",
       "assignee": "曹植",
-      "status": "completed",
-      "content": "润色完成v2026.05.28.2。relay子命令技术内容保留，Agent routing改为表格展示，架构图更新。",
-      "reported_to": "已完成",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
+      "status": "待分配",
+      "content": "更新README中upload子命令文档"
     },
     {
-      "id": 8,
-      "name": "司马懿审核曹植",
+      "step": 6,
+      "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "completed",
-      "content": "审核通过。全部技术内容保留，relay新增内容表格展示，英文表达流畅。",
-      "reported_to": "已完成",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
+      "status": "待分配",
+      "content": "审核曹植润色版本"
     },
     {
-      "id": 9,
-      "name": "貂蝉上传GitHub",
+      "step": 7,
+      "name": "上传GitHub",
       "assignee": "貂蝉（OpenCode）",
-      "status": "completed",
-      "content": "已下令貂蝉上传v2026.05.28.2",
-      "reported_to": "已完成",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
+      "status": "待分配",
+      "content": "上传包含upload子命令的更新版本"
     },
     {
-      "id": 10,
+      "step": 8,
       "name": "曹操汇总交付",
       "assignee": "曹操",
-      "status": "completed",
-      "content": "上传完成。仓库 puerkafei/auto-coordinator，Release v2026.05.28.2",
-      "reported_to": "已完成",
-      "reported_next": true,
-      "errors": 0,
-      "error_details": []
+      "status": "待分配",
+      "content": "收集交付物→汇总→提交甄宓"
     }
   ]
 }
