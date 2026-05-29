@@ -29,12 +29,12 @@
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "执行中",
-      "content": "分派完成(测试)",
+      "status": "completed",
+      "content": "completed_by_test",
       "assign_time": "2026-05-29T09:12:53Z",
-      "completed_at": "2026-05-29T09:08:00Z",
+      "completed_at": "2026-05-29T09:02:00Z",
       "reported_next": true,
-      "reported_at": "2026-05-29T09:12:31Z"
+      "reported_at": "2026-05-29T09:12:55Z"
     },
     {
       "id": 3,
@@ -43,7 +43,7 @@
       "assignee": "诸葛亮",
       "status": "执行中",
       "content": "收到调研任务后加载SKILL，执行调研",
-      "assign_time": "2026-05-29T09:12:31Z"
+      "assign_time": "2026-05-29T09:12:55Z"
     },
     {
       "id": 4,
@@ -87,6 +87,6 @@
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T09:12:53Z",
+  "last_updated": "2026-05-29T09:12:55Z",
   "no_task": false
 }
