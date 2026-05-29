@@ -1,9 +1,99 @@
 {
-  "work_id": null,
-  "title": null,
-  "type": null,
-  "current_task": null,
-  "steps": [],
+  "work_id": "TASK-20260529-daily-report",
+  "title": "晨报体系改版调研",
+  "type": "非编程类",
+  "progress": 57,
+  "status": "第4棒完成 — 司马懿审核诸葛亮通过，推进第5棒曹植润色",
+  "current_task": {
+    "work_id": "TASK-20260529-daily-report",
+    "title": "晨报体系改版调研",
+    "type": "非编程类",
+    "assign_time": "2026-05-29 12:00",
+    "progress": 57,
+    "status": "进行中",
+    "source": "诸葛亮自主启动（基于今早晨报信息不对称问题）",
+    "workflow_path": "非编程类7棒",
+    "content": "调研7种行业最佳晨报实践模式，分析当前晨报根因链，设计新融合模板方案。曹植润色时需补充'方案风险与应对'一节（司马懿保留意见）"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "step": 1,
+      "name": "甄宓规划",
+      "assignee": "甄宓",
+      "status": "completed",
+      "content": "确认调研方向：晨报体系改版，7种模式调研 + 根因分析 + 融合模板",
+      "deliverable_url": "",
+      "started": "2026-05-29 11:30",
+      "completed": "2026-05-29 11:35"
+    },
+    {
+      "id": 2,
+      "step": 2,
+      "name": "曹操分派",
+      "assignee": "曹操",
+      "status": "completed",
+      "content": "分派诸葛亮执行调研，非编程类工作流路径",
+      "deliverable_url": "",
+      "started": "2026-05-29 11:35",
+      "completed": "2026-05-29 11:40"
+    },
+    {
+      "id": 3,
+      "step": 3,
+      "name": "诸葛亮调研",
+      "assignee": "诸葛亮",
+      "status": "completed",
+      "content": "完成7种模式调研 + 优缺点对比 + 四层根因链 + 融合模板初稿 + 7维度对比表",
+      "deliverable_url": "workspace-zhugeliang/deliverables/TASK-20260529-daily-report/01-research-report.md",
+      "started": "2026-05-29 11:40",
+      "completed": "2026-05-29 12:03"
+    },
+    {
+      "id": 4,
+      "step": 4,
+      "name": "司马懿审诸葛亮",
+      "assignee": "司马懿",
+      "status": "completed",
+      "content": "审核通过（附保留意见：需补充方案风险与应对一节）",
+      "deliverable_url": "",
+      "started": "2026-05-29 12:03",
+      "completed": "2026-05-29 12:25"
+    },
+    {
+      "id": 5,
+      "step": 5,
+      "name": "曹植润色报告",
+      "assignee": "曹植",
+      "status": "已分配",
+      "content": "润色调研报告，补充'方案风险与应对'一节（司马懿保留意见）。润色后交付至曹植交付目录",
+      "deliverable_url": "",
+      "started": "",
+      "completed": ""
+    },
+    {
+      "id": 6,
+      "step": 6,
+      "name": "司马懿审曹植",
+      "assignee": "司马懿",
+      "status": "待分配",
+      "content": "审核曹植润色成果，重点核查'方案风险与应对'是否补充完整",
+      "deliverable_url": "",
+      "started": "",
+      "completed": ""
+    },
+    {
+      "id": 7,
+      "step": 7,
+      "name": "曹操汇总交付",
+      "assignee": "曹操",
+      "status": "待分配",
+      "content": "收集最终交付物，汇总后通知甄宓呈报主公",
+      "deliverable_url": "",
+      "started": "",
+      "completed": ""
+    }
+  ],
   "archived_tasks": [
     {
       "work_id": "TASK-20260528-audit-round2",
@@ -35,5 +125,5 @@
       "release": "v2026.05.28-audit-fix"
     }
   ],
-  "last_updated": "2026-05-29 12:07"
+  "last_updated": "2026-05-29 12:30"
 }
