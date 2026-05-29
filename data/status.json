@@ -33,15 +33,17 @@
       "content": "分派完成(测试)",
       "assign_time": "2026-05-29T09:07:22Z",
       "completed_at": "2026-05-29T09:08:00Z",
-      "reported_next": false
+      "reported_next": true,
+      "reported_at": "2026-05-29T09:12:31Z"
     },
     {
       "id": 3,
       "step": 3,
       "name": "诸葛亮调研",
       "assignee": "诸葛亮",
-      "status": "待分配",
-      "content": "收到调研任务后加载SKILL，执行调研"
+      "status": "执行中",
+      "content": "收到调研任务后加载SKILL，执行调研",
+      "assign_time": "2026-05-29T09:12:31Z"
     },
     {
       "id": 4,
@@ -85,6 +87,6 @@
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T09:07:22Z",
+  "last_updated": "2026-05-29T09:12:31Z",
   "no_task": false
 }
