@@ -41,19 +41,21 @@
       "step": 3,
       "name": "貂蝉编码",
       "assignee": "貂蝉",
-      "status": "执行中",
-      "content": "重构 coordinator.sh（移除notify、relay瘦身、relay advance强化、添加watch_status变化检测）、修复 validate-status.sh 和 pre-assign-check.sh 路径、清理 relay.conf 副本",
-      "assign_time": "2026-05-29T09:43:36Z",
-      "reported_next": false
+      "status": "completed",
+      "content": "编码完成：coordinator.sh V6重构 + relay watch + relay_find_next修复",
+      "assign_time": "2026-05-29T09:50:00Z",
+      "reported_next": true,
+      "completed_at": "2026-05-29T09:58:00Z",
+      "reported_at": "2026-05-29T09:59:07Z"
     },
     {
       "id": 4,
       "step": 4,
       "name": "司马懿审貂蝉",
       "assignee": "司马懿",
-      "status": "待分配",
+      "status": "执行中",
       "content": "审核貂蝉的 relay 重构代码、路径修复、副本清理",
-      "assign_time": "",
+      "assign_time": "2026-05-29T09:59:07Z",
       "reported_next": false
     },
     {
@@ -97,6 +99,6 @@
       "note": "手动全链路模拟测试 PASS"
     }
   ],
-  "last_updated": "2026-05-29T09:43:36Z",
+  "last_updated": "2026-05-29T09:59:07Z",
   "no_task": false
 }
