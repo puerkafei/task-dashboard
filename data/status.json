@@ -6,10 +6,11 @@
     "work_id": "TASK-20260529-daily-report",
     "title": "每日团队晨报改革",
     "type": "非编程类",
-    "progress": 0,
+    "progress": 100,
     "assign_time": "2026-05-29 12:12",
     "parent": null,
-    "description": "调研行业最佳实践，修正曹操团队晨报工作流，让每日晨报变成真实可信、好用的一套工作内容总结报告"
+    "description": "调研行业最佳实践，修正曹操团队晨报工作流，让每日晨报变成真实可信、好用的一套工作内容总结报告",
+    "status": "✅ 已完成 — 待主公审阅"
   },
   "steps": [
     {
@@ -65,8 +66,9 @@
       "step": 7,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "待分配",
-      "content": "汇总交付物，交付甄宓呈报主公"
+      "status": "completed",
+      "content": "汇总交付物，交付甄宓呈报主公",
+      "completed_at": "2026-05-29 12:15"
     }
   ],
   "archived_tasks": [
@@ -100,5 +102,5 @@
       "release": "v2026.05.28-audit-fix"
     }
   ],
-  "last_updated": "2026-05-29 12:12"
+  "last_updated": "2026-05-29 12:15"
 }
