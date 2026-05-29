@@ -1,100 +1,86 @@
 {
+  "work_id": "TASK-20260529-flow-test2",
+  "title": "全自动接力流程实战测试",
+  "type": "非编程类",
   "current_task": {
-    "work_id": "TASK-20260529-flow-test",
-    "title": "全流程自动化接力测试",
-    "description": "验证 relay auto-advance 随完整的自动接力链式通知",
-    "assignee": "甄宓",
-    "priority": "测试",
-    "status": "✅ 初始化 — relay 自动接链测试",
+    "work_id": "TASK-20260529-flow-test2",
+    "title": "全自动接力流程实战测试",
+    "type": "非编程类",
     "progress": 0,
-    "created_at": "2026-05-29 15:45:00",
-    "last_updated": "2026-05-29 16:05:52",
-    "started_at": "2026-05-29 15:45:00",
-    "type": "非编程类"
+    "assign_time": "2026-05-29 17:04",
+    "parent": null,
+    "description": "端到端全自动接力流程测试：初始化→曹操分派→诸葛亮调研→司马懿审→曹植润色→司马懿审→曹操汇总→甄宓呈报主公",
+    "status": "⏳ 测试启动中"
   },
   "steps": [
     {
       "id": 1,
-      "name": "甄宓初始化任务",
+      "step": 1,
+      "name": "甄宓规划",
       "assignee": "甄宓",
       "status": "completed",
-      "completed_at": "2026-05-29 15:45:00",
-      "reported_next": true,
-      "reported_at": "2026-05-29T08:08:25Z",
-      "step": 1
+      "content": "初始化status.json并触发relay",
+      "completed_at": "2026-05-29T09:04:00Z",
+      "reported_next": false
     },
     {
       "id": 2,
-      "name": "曹操分派任务",
-      "assignee": "曹操",
-      "status": "completed",
-      "assign_time": "2026-05-29T08:08:25Z",
-      "completed_at": "2026-05-29T08:08:53Z",
       "step": 2,
-      "reported_next": true,
-      "reported_at": "2026-05-29T08:09:05Z"
+      "name": "曹操分派",
+      "assignee": "曹操",
+      "status": "待分配",
+      "content": "接收甄宓指令，分派诸葛亮调研"
     },
     {
       "id": 3,
-      "name": "诸葛亮调研测试",
-      "assignee": "诸葛亮",
-      "status": "completed",
-      "assign_time": "2026-05-29T08:09:05Z",
-      "completed_at": "2026-05-29T08:09:36Z",
       "step": 3,
-      "reported_next": true,
-      "reported_at": "2026-05-29T08:09:36Z"
+      "name": "诸葛亮调研",
+      "assignee": "诸葛亮",
+      "status": "待分配",
+      "content": "收到调研任务后加载SKILL，执行调研"
     },
     {
       "id": 4,
-      "name": "司马懿审核测试结果",
-      "assignee": "司马懿",
-      "status": "completed",
-      "assign_time": "2026-05-29T08:09:36Z",
-      "completed_at": "2026-05-29T08:10:19Z",
       "step": 4,
-      "reported_next": false
+      "name": "司马懿审诸葛亮",
+      "assignee": "司马懿",
+      "status": "待分配",
+      "content": "审核诸葛亮调研交付物"
     },
     {
       "id": 5,
+      "step": 5,
       "name": "曹植润色报告",
       "assignee": "曹植",
-      "status": "completed",
-      "assign_time": null,
-      "completed_at": "2026-05-29T08:10:19Z",
-      "step": 5,
-      "reported_next": false
+      "status": "待分配",
+      "content": "润色调研报告"
     },
     {
       "id": 6,
+      "step": 6,
       "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "completed",
-      "assign_time": null,
-      "completed_at": "2026-05-29T08:10:19Z",
-      "step": 6,
-      "reported_next": true,
-      "reported_at": "2026-05-29T08:10:27Z"
+      "status": "待分配",
+      "content": "审核曹植润色"
     },
     {
       "id": 7,
-      "name": "曹操汇总测试报告",
+      "step": 7,
+      "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "执行中",
-      "assign_time": "2026-05-29T08:10:27Z",
-      "completed_at": null,
-      "step": 7
+      "status": "待分配",
+      "content": "汇总交付物"
     },
     {
       "id": 8,
-      "name": "甄宓收到测试报告",
+      "step": 8,
+      "name": "甄宓呈报主公",
       "assignee": "甄宓",
-      "status": "待执行",
-      "assign_time": null,
-      "completed_at": null,
-      "step": 8
+      "status": "待分配",
+      "content": "收到交付后呈报主公"
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T08:10:27Z"
+  "last_updated": "2026-05-29T09:04:00Z",
+  "no_task": false
 }
