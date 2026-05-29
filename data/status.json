@@ -41,17 +41,21 @@
       "step": 3,
       "name": "诸葛亮调研",
       "assignee": "诸葛亮",
-      "status": "执行中",
-      "content": "收到调研任务后加载SKILL，执行调研",
-      "assign_time": "2026-05-29T09:12:55Z"
+      "status": "completed",
+      "content": "completed_by_test",
+      "assign_time": "2026-05-29T09:12:55Z",
+      "completed_at": "2026-05-29T09:03:00Z",
+      "reported_next": true,
+      "reported_at": "2026-05-29T09:12:57Z"
     },
     {
       "id": 4,
       "step": 4,
       "name": "司马懿审诸葛亮",
       "assignee": "司马懿",
-      "status": "待分配",
-      "content": "审核诸葛亮调研交付物"
+      "status": "执行中",
+      "content": "审核诸葛亮调研交付物",
+      "assign_time": "2026-05-29T09:12:57Z"
     },
     {
       "id": 5,
@@ -87,6 +91,6 @@
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T09:12:55Z",
+  "last_updated": "2026-05-29T09:12:57Z",
   "no_task": false
 }
