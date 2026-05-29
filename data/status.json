@@ -42,10 +42,10 @@
       "name": "貂蝉编码",
       "assignee": "貂蝉",
       "status": "completed",
-      "content": "编码完成：coordinator.sh V6重构 + relay watch + relay_find_next修复",
+      "content": "编码完成(V7): coordinator.sh移除openclaw agent CLI from relay notify, 增强relay_find_next初始状态(init_needed), relay_advance_handler初始化处理, validate-status.sh路径硬编码修复+旧字段迁移, pre-assign-check.sh路径修复, relay.conf副本清理, commit+push到task-dashboard",
       "assign_time": "2026-05-29T09:50:00Z",
       "reported_next": true,
-      "completed_at": "2026-05-29T09:58:00Z",
+      "completed_at": "2026-05-29T10:04:00Z",
       "reported_at": "2026-05-29T09:59:07Z"
     },
     {
@@ -99,6 +99,6 @@
       "note": "手动全链路模拟测试 PASS"
     }
   ],
-  "last_updated": "2026-05-29T09:59:07Z",
+  "last_updated": "2026-05-29T10:04:58Z",
   "no_task": false
 }
