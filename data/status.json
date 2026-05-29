@@ -27,10 +27,11 @@
       "id": 2,
       "name": "曹操分派任务",
       "assignee": "曹操",
-      "status": "执行中",
+      "status": "completed",
       "assign_time": "2026-05-29T08:08:25Z",
-      "completed_at": null,
-      "step": 2
+      "completed_at": "2026-05-29T08:08:53Z",
+      "step": 2,
+      "reported_next": false
     },
     {
       "id": 3,
