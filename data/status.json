@@ -8,8 +8,9 @@
     "status": "✅ 初始化 — relay 自动接链测试",
     "progress": 0,
     "created_at": "2026-05-29 15:45:00",
-    "last_updated": "2026-05-29 15:45:00",
-    "started_at": "2026-05-29 15:45:00"
+    "last_updated": "2026-05-29 16:05:52",
+    "started_at": "2026-05-29 15:45:00",
+    "type": "非编程类"
   },
   "steps": [
     {
@@ -19,7 +20,8 @@
       "status": "completed",
       "completed_at": "2026-05-29 15:45:00",
       "reported_next": false,
-      "reported_at": null
+      "reported_at": null,
+      "step": 1
     },
     {
       "id": 2,
@@ -27,7 +29,8 @@
       "assignee": "曹操",
       "status": "待执行",
       "assign_time": null,
-      "completed_at": null
+      "completed_at": null,
+      "step": 2
     },
     {
       "id": 3,
@@ -35,7 +38,8 @@
       "assignee": "诸葛亮",
       "status": "待执行",
       "assign_time": null,
-      "completed_at": null
+      "completed_at": null,
+      "step": 3
     },
     {
       "id": 4,
@@ -43,23 +47,44 @@
       "assignee": "司马懿",
       "status": "待执行",
       "assign_time": null,
-      "completed_at": null
+      "completed_at": null,
+      "step": 4
     },
     {
       "id": 5,
+      "name": "曹植润色报告",
+      "assignee": "曹植",
+      "status": "待执行",
+      "assign_time": null,
+      "completed_at": null,
+      "step": 5
+    },
+    {
+      "id": 6,
+      "name": "司马懿审曹植",
+      "assignee": "司马懿",
+      "status": "待执行",
+      "assign_time": null,
+      "completed_at": null,
+      "step": 6
+    },
+    {
+      "id": 7,
       "name": "曹操汇总测试报告",
       "assignee": "曹操",
       "status": "待执行",
       "assign_time": null,
-      "completed_at": null
+      "completed_at": null,
+      "step": 7
     },
     {
-      "id": 6,
+      "id": 8,
       "name": "甄宓收到测试报告",
       "assignee": "甄宓",
       "status": "待执行",
       "assign_time": null,
-      "completed_at": null
+      "completed_at": null,
+      "step": 8
     }
   ],
   "archived_tasks": [],
