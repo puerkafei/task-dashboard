@@ -98,7 +98,7 @@ TEMPLATE
 echo ""
 echo "[检查4] status.json 状态检查..."
 
-STATUS_FILE="${STATUS_FILE:-$HOME/.openclaw/workspace-mengde/projects/dashboard/data/status.json}"
+STATUS_FILE="${STATUS_FILE:-$(cd "$(dirname "$0")/../data" && pwd)/status.json}"
 if [ -f "$STATUS_FILE" ]; then
   # 检查 current_task 是否存在
   HAS_TASK=$(python3 -c "
