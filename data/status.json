@@ -21,16 +21,17 @@
       "status": "completed",
       "content": "全量审计完成 → 规划完成 → status.json初始化",
       "completed_at": "",
-      "reported_next": false
+      "reported_next": true,
+      "reported_at": "2026-05-29T09:39:37Z"
     },
     {
       "id": 2,
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "待分配",
+      "status": "执行中",
       "content": "接收甄宓规划，分派貂蝉执行 relay.sh 重构编码",
-      "assign_time": "",
+      "assign_time": "2026-05-29T09:39:37Z",
       "reported_next": false
     },
     {
@@ -94,6 +95,6 @@
       "note": "手动全链路模拟测试 PASS"
     }
   ],
-  "last_updated": "2026-05-29T09:35:00Z",
+  "last_updated": "2026-05-29T09:39:37Z",
   "no_task": false
 }
