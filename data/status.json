@@ -89,20 +89,24 @@
       "step": 7,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "执行中",
-      "content": "汇总交付物",
-      "assign_time": "2026-05-29T09:13:03Z"
+      "status": "completed",
+      "content": "completed_by_test",
+      "assign_time": "2026-05-29T09:13:03Z",
+      "completed_at": "2026-05-29T09:07:00Z",
+      "reported_next": true,
+      "reported_at": "2026-05-29T09:13:05Z"
     },
     {
       "id": 8,
       "step": 8,
       "name": "甄宓呈报主公",
       "assignee": "甄宓",
-      "status": "待分配",
-      "content": "收到交付后呈报主公"
+      "status": "执行中",
+      "content": "收到交付后呈报主公",
+      "assign_time": "2026-05-29T09:13:05Z"
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T09:13:03Z",
+  "last_updated": "2026-05-29T09:13:05Z",
   "no_task": false
 }
