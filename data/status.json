@@ -1,16 +1,16 @@
 {
-  "work_id": "TASK-20260529-flow-test2",
-  "title": "全自动接力流程实战测试",
-  "type": "非编程类",
+  "work_id": "TASK-20260529-relay-rebuild",
+  "title": "全自动接力流程重构 — 移除notify、重写relay逻辑",
+  "type": "编程类",
   "current_task": {
-    "work_id": "TASK-20260529-flow-test2",
-    "title": "全自动接力流程实战测试",
-    "type": "非编程类",
-    "progress": 100,
-    "assign_time": "2026-05-29 17:04",
+    "work_id": "TASK-20260529-relay-rebuild",
+    "title": "全自动接力流程重构 — 移除notify、重写relay逻辑",
+    "type": "编程类（需润色 + 不上传）",
+    "progress": 0,
+    "assign_time": "2026-05-29 17:35",
     "parent": null,
-    "description": "端到端全自动接力流程测试：全8棒模拟测试 PASS",
-    "status": "✅ 测试完成 — 全链路接力验证通过"
+    "description": "根因分析：当前 coordinator.sh 的 relay notify 使用 `openclaw agent --agent x --message --deliver` 拉起目标Agent的完整session，这是错误的架构——自动化不应该靠主动通知叫人，而应该靠各Agent自行检测status.json变化。重构要点：(1) 移除 relay auto/relay_notify_step 中所有 openclaw agent CLI 调用；(2) relay auto-advance 改名或拆分为只做 relay advance；(3) 为各Agent设计 status.json 变化检测机制（watch/poll）；(4) 修复 relay_find_next 初始状态判断逻辑；(5) 修复 validate-status.sh 路径硬编码；(6) 修复 pre-assign-check.sh 路径硬编码；(7) 清理多余的 relay.conf 副本。",
+    "status": "⏳ 规划中"
   },
   "steps": [
     {
@@ -19,92 +19,68 @@
       "name": "甄宓规划",
       "assignee": "甄宓",
       "status": "completed",
-      "content": "初始化status.json并触发relay（全链路测试PASS）",
-      "completed_at": "2026-05-29T09:01:00Z",
-      "reported_next": true,
-      "reported_at": "2026-05-29T09:12:53Z"
+      "content": "全量审计完成 → 规划完成 → status.json初始化",
+      "completed_at": "",
+      "reported_next": false
     },
     {
       "id": 2,
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "completed",
-      "content": "分派诸葛亮调研（全链路测试PASS）",
-      "assign_time": "2026-05-29T09:12:53Z",
-      "completed_at": "2026-05-29T09:02:00Z",
-      "reported_next": true,
-      "reported_at": "2026-05-29T09:12:55Z"
+      "status": "待分配",
+      "content": "接收甄宓规划，分派貂蝉执行 relay.sh 重构编码",
+      "assign_time": "",
+      "reported_next": false
     },
     {
       "id": 3,
       "step": 3,
-      "name": "诸葛亮调研",
-      "assignee": "诸葛亮",
-      "status": "completed",
-      "content": "调研完成（全链路测试PASS）",
-      "assign_time": "2026-05-29T09:12:55Z",
-      "completed_at": "2026-05-29T09:03:00Z",
-      "reported_next": true,
-      "reported_at": "2026-05-29T09:12:57Z"
+      "name": "貂蝉编码",
+      "assignee": "貂蝉",
+      "status": "待分配",
+      "content": "重构 coordinator.sh（移除notify、relay瘦身、relay advance强化、添加watch_status变化检测）、修复 validate-status.sh 和 pre-assign-check.sh 路径、清理 relay.conf 副本",
+      "assign_time": "",
+      "reported_next": false
     },
     {
       "id": 4,
       "step": 4,
-      "name": "司马懿审诸葛亮",
+      "name": "司马懿审貂蝉",
       "assignee": "司马懿",
-      "status": "completed",
-      "content": "审核通过（全链路测试PASS）",
-      "assign_time": "2026-05-29T09:12:57Z",
-      "completed_at": "2026-05-29T09:04:00Z",
-      "reported_next": true,
-      "reported_at": "2026-05-29T09:12:59Z"
+      "status": "待分配",
+      "content": "审核貂蝉的 relay 重构代码、路径修复、副本清理",
+      "assign_time": "",
+      "reported_next": false
     },
     {
       "id": 5,
       "step": 5,
-      "name": "曹植润色报告",
+      "name": "曹植润色README",
       "assignee": "曹植",
-      "status": "completed",
-      "content": "润色完成（全链路测试PASS）",
-      "assign_time": "2026-05-29T09:12:59Z",
-      "completed_at": "2026-05-29T09:05:00Z",
-      "reported_next": true,
-      "reported_at": "2026-05-29T09:13:01Z"
+      "status": "待分配",
+      "content": "润色 coordinator.sh README、更新 relay 使用说明",
+      "assign_time": "",
+      "reported_next": false
     },
     {
       "id": 6,
       "step": 6,
       "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "completed",
-      "content": "审核通过（全链路测试PASS）",
-      "assign_time": "2026-05-29T09:13:01Z",
-      "completed_at": "2026-05-29T09:06:00Z",
-      "reported_next": true,
-      "reported_at": "2026-05-29T09:13:03Z"
+      "status": "待分配",
+      "content": "审核曹植润色内容",
+      "assign_time": "",
+      "reported_next": false
     },
     {
       "id": 7,
       "step": 7,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "completed",
-      "content": "汇总完成（全链路测试PASS）",
-      "assign_time": "2026-05-29T09:13:03Z",
-      "completed_at": "2026-05-29T09:07:00Z",
-      "reported_next": true,
-      "reported_at": "2026-05-29T09:13:05Z"
-    },
-    {
-      "id": 8,
-      "step": 8,
-      "name": "甄宓呈报主公",
-      "assignee": "甄宓",
-      "status": "completed",
-      "content": "全链路接力测试完成，8/8棒全部通过",
-      "assign_time": "2026-05-29T09:13:05Z",
-      "completed_at": "2026-05-29T09:14:00Z",
+      "status": "待分配",
+      "content": "收集貂蝉代码、司马懿审核意见、曹植润色成果，汇总交付",
+      "assign_time": "",
       "reported_next": false
     }
   ],
@@ -118,6 +94,6 @@
       "note": "手动全链路模拟测试 PASS"
     }
   ],
-  "last_updated": "2026-05-29T09:13:05Z",
-  "no_task": true
+  "last_updated": "2026-05-29T09:35:00Z",
+  "no_task": false
 }
