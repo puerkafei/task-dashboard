@@ -29,19 +29,21 @@
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "执行中",
+      "status": "completed",
       "content": "接收甄宓规划，分派貂蝉执行 relay.sh 重构编码",
       "assign_time": "2026-05-29T09:39:37Z",
-      "reported_next": false
+      "reported_next": true,
+      "completed_at": "2026-05-29T09:43:22Z",
+      "reported_at": "2026-05-29T09:43:36Z"
     },
     {
       "id": 3,
       "step": 3,
       "name": "貂蝉编码",
       "assignee": "貂蝉",
-      "status": "待分配",
+      "status": "执行中",
       "content": "重构 coordinator.sh（移除notify、relay瘦身、relay advance强化、添加watch_status变化检测）、修复 validate-status.sh 和 pre-assign-check.sh 路径、清理 relay.conf 副本",
-      "assign_time": "",
+      "assign_time": "2026-05-29T09:43:36Z",
       "reported_next": false
     },
     {
@@ -95,6 +97,6 @@
       "note": "手动全链路模拟测试 PASS"
     }
   ],
-  "last_updated": "2026-05-29T09:39:37Z",
+  "last_updated": "2026-05-29T09:43:36Z",
   "no_task": false
 }
