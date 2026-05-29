@@ -29,9 +29,11 @@
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "执行中",
-      "content": "接收甄宓指令，分派诸葛亮调研",
-      "assign_time": "2026-05-29T09:07:22Z"
+      "status": "completed",
+      "content": "分派完成(测试)",
+      "assign_time": "2026-05-29T09:07:22Z",
+      "completed_at": "2026-05-29T09:08:00Z",
+      "reported_next": false
     },
     {
       "id": 3,
