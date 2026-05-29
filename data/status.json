@@ -31,14 +31,15 @@
       "assign_time": "2026-05-29T08:08:25Z",
       "completed_at": "2026-05-29T08:08:53Z",
       "step": 2,
-      "reported_next": false
+      "reported_next": true,
+      "reported_at": "2026-05-29T08:09:05Z"
     },
     {
       "id": 3,
       "name": "诸葛亮调研测试",
       "assignee": "诸葛亮",
-      "status": "待执行",
-      "assign_time": null,
+      "status": "执行中",
+      "assign_time": "2026-05-29T08:09:05Z",
       "completed_at": null,
       "step": 3
     },
@@ -89,5 +90,5 @@
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T08:08:25Z"
+  "last_updated": "2026-05-29T08:09:05Z"
 }
