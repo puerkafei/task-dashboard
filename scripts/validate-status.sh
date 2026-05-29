@@ -8,16 +8,24 @@
 # 环境变量: STATUS_FILE, DELIVERABLES_BASE, MAIN_SESSION_DIR
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+<<<<<<< Updated upstream
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 STATUS_FILE="${STATUS_FILE:-${REPO_ROOT}/data/status.json}"
+=======
+STATUS_FILE="${STATUS_FILE:-${SCRIPT_DIR}/../data/status.json}"
+>>>>>>> Stashed changes
 
 if [ ! -f "$STATUS_FILE" ]; then
   echo "❌ status.json 不存在: $STATUS_FILE"
   exit 1
 fi
 
+<<<<<<< Updated upstream
 DELIVERABLES_BASE="${DELIVERABLES_BASE:-$HOME/.openclaw/deliverables}"
+=======
+DELIVERABLES_BASE="${DELIVERABLES_BASE:-$HOME/.openclaw/workspace-mengde/deliverables}"
+>>>>>>> Stashed changes
 
 # =====================================================================
 # 强制Skill加载检查：验证当前主会话是否已加载工作流Skill
