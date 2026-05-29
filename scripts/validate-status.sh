@@ -2,16 +2,22 @@
 # validate-status.sh — 校验 status.json 状态一致性
 # 检测：矛盾状态（completed 但未汇报）、步骤不连续（跳步完成）
 # 甄宓每次更新 status.json 后必须运行此脚本
-# 使用: bash ~/.openclaw/workspace-mengde/scripts/validate-status.sh
+# <!-- V7 v2026.05.29.2 -->
+#
+# 使用: bash scripts/validate-status.sh
+# 环境变量: STATUS_FILE, DELIVERABLES_BASE, MAIN_SESSION_DIR
 
-STATUS_FILE="$HOME/.openclaw/workspace-mengde/projects/dashboard/data/status.json"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+STATUS_FILE="${STATUS_FILE:-${REPO_ROOT}/data/status.json}"
 
 if [ ! -f "$STATUS_FILE" ]; then
-  echo "❌ status.json 不存在"
+  echo "❌ status.json 不存在: $STATUS_FILE"
   exit 1
 fi
 
-DELIVERABLES_BASE="$HOME/.openclaw/workspace-mengde/deliverables"
+DELIVERABLES_BASE="${DELIVERABLES_BASE:-$HOME/.openclaw/deliverables}"
 
 # =====================================================================
 # 强制Skill加载检查：验证当前主会话是否已加载工作流Skill
@@ -124,29 +130,40 @@ work_id = data.get('current_task', {}).get('work_id', 'unknown')
 active_steps = [s for s in steps if s.get('status') not in ('已取消',)]
 active_ids = [s['id'] for s in active_steps]
 
-# 检查1: 矛盾检测 — completed 但 reported_to 不是已汇报（仅对汇总步骤强制）
+# 检查1: 矛盾检测 — 基于新架构字段（reported_next / reported_at）
 for s in steps:
     sid = s['id']
     status = s.get('status', '')
-    reported = s.get('reported_to', '')
-    notified = s.get('notified_main_at', None)
+    reported_next = s.get('reported_next', None)
+    reported_at = s.get('reported_at', None)
+    completed_at = s.get('completed_at', None)
     name = s.get('name', '')
 
-    # 条件1: notified_main_at 不为空但 reported_to 不是已汇报
-    if notified and notified != 'null' and notified != 'None' and reported != '已汇报':
-        errors.append(f'第{sid}步 \"{name}\": notified_main_at={notified} 但 reported_to=\"{reported}\" → 矛盾（有时间戳却未标记已汇报）')
+    if status == 'completed' and not completed_at:
+        errors.append(f'第{sid}步 \"{name}\": status=completed 但缺少 completed_at → 缺少完成时间戳')
 
-    # 条件2: status 为 completed 但 reported_to 是"未完成"（常规步骤的特殊情况）
-    if status == 'completed' and reported == '未完成':
-        errors.append(f'第{sid}步 \"{name}\": status=completed 但 reported_to=\"未完成\" → 矛盾（已完成却未汇报）')
+    if status == 'completed' and completed_at and reported_next == False:
+        warnings.append(f'第{sid}步 \"{name}\": status=completed 但 reported_next=False → 已完成但未 relay 接力')
 
-    # 条件3: status 不是 completed 但 reported_to 是"已汇报"（流程伪造：未完成却标记已汇报）
-    if status in ('待分配', '执行中', '审核中', '待开始', '') and reported == '已汇报':
-        errors.append(f'第{sid}步 \"{name}\": status=\"{status}\" 但 reported_to=\"已汇报\" → 矛盾（未完成却标记已汇报，可能是流程伪造）')
+    if status == 'completed' and reported_next == True and not reported_at:
+        errors.append(f'第{sid}步 \"{name}\": reported_next=True 但缺少 reported_at → 标记了已接力但没有时间戳')
 
-    # 条件4: status 不是 completed 但 notified_main_at 不为空（流程伪造：未完成却写时间戳）
-    if status in ('待分配', '执行中', '审核中', '待开始', '') and notified and notified != 'null' and notified != 'None':
-        errors.append(f'第{sid}步 \"{name}\": status=\"{status}\" 但 notified_main_at=\"{notified}\" → 矛盾（未完成却写时间戳，可能是流程伪造）')
+    if status != 'completed' and reported_next == True:
+        errors.append(f'第{sid}步 \"{name}\": status=\"{status}\" 但 reported_next=True → 矛盾（未完成却标记已接力）')
+
+    if reported_at and completed_at and reported_at < completed_at:
+        errors.append(f'第{sid}步 \"{name}\": reported_at({reported_at}) 早于 completed_at({completed_at}) → 时间矛盾')
+
+    old_reported = s.get('reported_to', '')
+    old_notified = s.get('notified_main_at', None)
+    if old_reported or old_notified:
+        warnings.append(f'第{sid}步 \"{name}\": 使用了旧字段 (reported_to/notified_main_at) → 建议迁移到新字段 (reported_next/reported_at)')
+
+    if reported_next is not None and not isinstance(reported_next, bool):
+        errors.append(f'第{sid}步 \"{name}\": reported_next=\"{reported_next}\" 类型错误 → 必须为 true/false')
+
+    if status != 'completed' and reported_next is None:
+        pass
 
 # 检查3: 非编程类任务必须包含曹植润色步骤
 task_type = data.get('current_task', {}).get('type', '')
@@ -177,23 +194,22 @@ if task_type == '编程类':
                         f' → 含关键词 {keywords} 的步骤必须由 {expected} 执行'
                     )
 
-# 检查4: 曹操汇总步骤的 sessions_send 佐证文件验证
+# 检查4: 汇总步骤的 relay 接力验证（新架构 — relay auto-advance 替代 sessions_send）
 for s in steps:
     sid = s['id']
     status = s.get('status', '')
-    notified = s.get('notified_main_at', None)
+    reported_next = s.get('reported_next', None)
+    reported_at = s.get('reported_at', None)
     name = s.get('name', '')
     is_summary = '汇总' in name or '呈报' in name
 
-    if is_summary and status == 'completed' and notified and notified != 'null' and notified != 'None':
-        sentinel_path = os.path.join(DELIVERABLES_BASE, work_id, '.sent_to_main')
-        if not os.path.exists(sentinel_path):
-            errors.append(f'第{sid}步 \"{name}\": status=completed, notified_main_at={notified} 但佐证文件 .sent_to_main 不存在 → 可能未实际调用 sessions_send')
+    if is_summary and status == 'completed' and reported_next == True and reported_at:
+        deliverable_dir = os.path.join(DELIVERABLES_BASE, work_id)
+        if not os.path.isdir(deliverable_dir):
+            warnings.append(f'第{sid}步 \"{name}\": status=completed, reported_at={reported_at} 但交付物目录 {deliverable_dir} 不存在 → 请核查是否有交付物')
         else:
-            with open(sentinel_path, 'r') as sf:
-                content = sf.read().strip()
-            if notified not in content:
-                warnings.append(f'第{sid}步 \"{name}\": 佐证文件内容 \"{content}\" 与 notified_main_at \"{notified}\" 不一致 → 请核查')
+            if not os.listdir(deliverable_dir):
+                warnings.append(f'第{sid}步 \"{name}\": 交付物目录 {deliverable_dir} 为空 → 可能未保存交付物')
 
 # 检查2: 步骤连续性检测 — 有效步骤必须按顺序推进
 for i in range(1, len(active_steps)):
