@@ -16,7 +16,7 @@
       "id": 1,
       "step": 1,
       "name": "甄宓规划",
-      "assignee": "甄宓(main)",
+      "assignee": "甄宓",
       "status": "completed",
       "content": "规划晨报改革任务，写status.json"
     },
@@ -24,7 +24,7 @@
       "id": 2,
       "step": 2,
       "name": "曹操分派",
-      "assignee": "曹操(caocao)",
+      "assignee": "曹操",
       "status": "已分配",
       "content": "接收任务，分派给各环节执行"
     },
@@ -32,7 +32,7 @@
       "id": 3,
       "step": 3,
       "name": "诸葛亮调研",
-      "assignee": "诸葛亮(zhugeliang)",
+      "assignee": "诸葛亮",
       "status": "待分配",
       "content": "调研行业晨报/工作总结最佳实践"
     },
@@ -40,7 +40,7 @@
       "id": 4,
       "step": 4,
       "name": "司马懿审诸葛亮",
-      "assignee": "司马懿(simayi)",
+      "assignee": "司马懿",
       "status": "待分配",
       "content": "审核诸葛亮调研报告"
     },
@@ -48,7 +48,7 @@
       "id": 5,
       "step": 5,
       "name": "曹植润色报告",
-      "assignee": "曹植(caozhi)",
+      "assignee": "曹植",
       "status": "待分配",
       "content": "润色调研结论+新晨报方案为正式报告"
     },
@@ -56,7 +56,7 @@
       "id": 6,
       "step": 6,
       "name": "司马懿审曹植",
-      "assignee": "司马懿(simayi)",
+      "assignee": "司马懿",
       "status": "待分配",
       "content": "审核润色后的报告"
     },
@@ -64,7 +64,7 @@
       "id": 7,
       "step": 7,
       "name": "曹操汇总",
-      "assignee": "曹操(caocao)",
+      "assignee": "曹操",
       "status": "待分配",
       "content": "汇总交付物，交付甄宓呈报主公"
     }
