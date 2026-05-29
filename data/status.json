@@ -41,21 +41,21 @@
       "step": 3,
       "name": "貂蝉编码",
       "assignee": "貂蝉",
-      "status": "执行中",
+      "status": "completed",
       "content": "coordinator.sh重构（拆分第1步）",
       "assign_time": "2026-05-29T10:05:00Z",
       "reported_next": true,
       "completed_at": "2026-05-29T10:04:00Z",
-      "reported_at": "2026-05-29T09:59:07Z"
+      "reported_at": "2026-05-29T10:35:26Z"
     },
     {
       "id": 4,
       "step": 4,
       "name": "司马懿审貂蝉",
       "assignee": "司马懿",
-      "status": "completed",
+      "status": "执行中",
       "content": "审核通过：coordinator.sh V6代码审查合格，openclaw agent CLI relay调用已全部移除，relay watch实现正确，relay_find_next V6修复正确，notify_step仅输出日志无CLI调用；validate-status.sh路径已修复为绝对路径；relay.conf副本已清理",
-      "assign_time": "2026-05-29T09:59:07Z",
+      "assign_time": "2026-05-29T10:35:26Z",
       "reported_next": true,
       "completed_at": "2026-05-29T10:02:00Z",
       "reported_at": "2026-05-29T10:08:15Z"
@@ -87,9 +87,8 @@
       "step": 7,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "执行中",
+      "status": "待开始",
       "content": "收集貂蝉代码、司马懿审核意见、曹植润色成果，汇总交付",
-      "assign_time": "2026-05-29T10:32:14Z",
       "reported_next": false
     }
   ],
@@ -103,6 +102,6 @@
       "note": "手动全链路模拟测试 PASS"
     }
   ],
-  "last_updated": "2026-05-29T10:32:14Z",
+  "last_updated": "2026-05-29T10:35:26Z",
   "no_task": false
 }
