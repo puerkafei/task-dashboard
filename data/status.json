@@ -1,110 +1,67 @@
 {
-  "work_id": "TASK-20260529-daily-report",
-  "title": "每日团队晨报改革 — 取长补短，让晨报真实可信",
-  "type": "非编程类（调研+修正）",
   "current_task": {
-    "work_id": "TASK-20260529-daily-report",
-    "title": "每日团队晨报改革",
-    "type": "非编程类",
-    "progress": 100,
-    "assign_time": "2026-05-29 12:12",
-    "parent": null,
-    "description": "调研行业最佳实践，修正曹操团队晨报工作流，让每日晨报变成真实可信、好用的一套工作内容总结报告",
-    "status": "✅ 已完成 — 待主公审阅"
+    "work_id": "TASK-20260529-flow-test",
+    "title": "全流程自动化接力测试",
+    "description": "验证 relay auto-advance 随完整的自动接力链式通知",
+    "assignee": "甄宓",
+    "priority": "测试",
+    "status": "✅ 初始化 — relay 自动接链测试",
+    "progress": 0,
+    "created_at": "2026-05-29 15:45:00",
+    "last_updated": "2026-05-29 15:45:00",
+    "started_at": "2026-05-29 15:45:00"
   },
   "steps": [
     {
       "id": 1,
-      "step": 1,
-      "name": "甄宓规划",
+      "name": "甄宓初始化任务",
       "assignee": "甄宓",
       "status": "completed",
-      "content": "规划晨报改革任务，写status.json"
+      "completed_at": "2026-05-29 15:45:00",
+      "reported_next": false,
+      "reported_at": null
     },
     {
       "id": 2,
-      "step": 2,
-      "name": "曹操分派",
+      "name": "曹操分派任务",
       "assignee": "曹操",
-      "status": "completed",
-      "content": "已接收任务并分派给诸葛亮调研、司马懿审核、曹植润色"
+      "status": "待执行",
+      "assign_time": null,
+      "completed_at": null
     },
     {
       "id": 3,
-      "step": 3,
-      "name": "诸葛亮调研",
+      "name": "诸葛亮调研测试",
       "assignee": "诸葛亮",
-      "status": "completed",
-      "content": "完成7种行业实践调研+根因链分析+新融合模板初稿",
-      "completed_at": "2026-05-29 12:03"
+      "status": "待执行",
+      "assign_time": null,
+      "completed_at": null
     },
     {
       "id": 4,
-      "step": 4,
-      "name": "司马懿审诸葛亮",
+      "name": "司马懿审核测试结果",
       "assignee": "司马懿",
-      "status": "completed",
-      "content": "审核通过（附保留意见：需补风险与应对章节）",
-      "completed_at": "2026-05-29 12:08"
+      "status": "待执行",
+      "assign_time": null,
+      "completed_at": null
     },
     {
       "id": 5,
-      "step": 5,
-      "name": "曹植润色报告",
-      "assignee": "曹植",
-      "status": "completed",
-      "content": "润色完成+补充风险与应对章节（443行最终报告）",
-      "completed_at": "2026-05-29 12:11"
+      "name": "曹操汇总测试报告",
+      "assignee": "曹操",
+      "status": "待执行",
+      "assign_time": null,
+      "completed_at": null
     },
     {
       "id": 6,
-      "step": 6,
-      "name": "司马懿审曹植",
-      "assignee": "司马懿",
-      "status": "completed",
-      "content": "审核通过，6项风险+应对完整落实",
-      "completed_at": "2026-05-29 12:13"
-    },
-    {
-      "id": 7,
-      "step": 7,
-      "name": "曹操汇总",
-      "assignee": "曹操",
-      "status": "completed",
-      "content": "汇总交付物，交付甄宓呈报主公",
-      "completed_at": "2026-05-29 12:15"
+      "name": "甄宓收到测试报告",
+      "assignee": "甄宓",
+      "status": "待执行",
+      "assign_time": null,
+      "completed_at": null
     }
   ],
-  "archived_tasks": [
-    {
-      "work_id": "TASK-20260528-audit-round2",
-      "title": "第二轮全盘审计：relay落地后全量对齐",
-      "type": "文档审查类",
-      "progress": 100,
-      "status": "✅ 已完成 — 无待修复项",
-      "note": "全员通过。7 AGENTS.md + 6 MEMORY.md + 11 Skill + coordinator全部对齐。relay-fix那次修复得彻底——通知链路、路径引用、字段规范、上传说明全部一致。P0+P1 原报告7项发现经二次核实后6项已存在/已修复，1项(relay.conf)确认格式一致无需修改。"
-    },
-    {
-      "work_id": "TASK-20260528-relay-fix",
-      "title": "relay根治",
-      "progress": 100,
-      "status": "✅ 已完成",
-      "release": "v2026.05.28.3"
-    },
-    {
-      "work_id": "TASK-20260528-detail-page",
-      "title": "详情页改造",
-      "progress": 100,
-      "status": "✅ 已完成",
-      "release": "v2026.05.28-detail-page"
-    },
-    {
-      "work_id": "TASK-20260528-audit-fix",
-      "title": "第一轮审计修复",
-      "progress": 100,
-      "status": "✅ 已完成",
-      "release": "v2026.05.28-audit-fix"
-    }
-  ],
-  "last_updated": "2026-05-29 12:23"
+  "archived_tasks": [],
+  "last_updated": "2026-05-29 15:45:00"
 }
