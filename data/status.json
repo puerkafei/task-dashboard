@@ -53,17 +53,21 @@
       "step": 4,
       "name": "司马懿审诸葛亮",
       "assignee": "司马懿",
-      "status": "执行中",
-      "content": "审核诸葛亮调研交付物",
-      "assign_time": "2026-05-29T09:12:57Z"
+      "status": "completed",
+      "content": "completed_by_test",
+      "assign_time": "2026-05-29T09:12:57Z",
+      "completed_at": "2026-05-29T09:04:00Z",
+      "reported_next": true,
+      "reported_at": "2026-05-29T09:12:59Z"
     },
     {
       "id": 5,
       "step": 5,
       "name": "曹植润色报告",
       "assignee": "曹植",
-      "status": "待分配",
-      "content": "润色调研报告"
+      "status": "执行中",
+      "content": "润色调研报告",
+      "assign_time": "2026-05-29T09:12:59Z"
     },
     {
       "id": 6,
@@ -91,6 +95,6 @@
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T09:12:57Z",
+  "last_updated": "2026-05-29T09:12:59Z",
   "no_task": false
 }
