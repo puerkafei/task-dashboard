@@ -26,40 +26,44 @@
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "已分配",
-      "content": "接收任务，分派给各环节执行"
+      "status": "completed",
+      "content": "已接收任务并分派给诸葛亮调研、司马懿审核、曹植润色"
     },
     {
       "id": 3,
       "step": 3,
       "name": "诸葛亮调研",
       "assignee": "诸葛亮",
-      "status": "待分配",
-      "content": "调研行业晨报/工作总结最佳实践"
+      "status": "completed",
+      "content": "完成7种行业实践调研+根因链分析+新融合模板初稿",
+      "completed_at": "2026-05-29 12:03"
     },
     {
       "id": 4,
       "step": 4,
       "name": "司马懿审诸葛亮",
       "assignee": "司马懿",
-      "status": "待分配",
-      "content": "审核诸葛亮调研报告"
+      "status": "completed",
+      "content": "审核通过（附保留意见：需补风险与应对章节）",
+      "completed_at": "2026-05-29 12:08"
     },
     {
       "id": 5,
       "step": 5,
       "name": "曹植润色报告",
       "assignee": "曹植",
-      "status": "待分配",
-      "content": "润色调研结论+新晨报方案为正式报告"
+      "status": "completed",
+      "content": "润色完成+补充风险与应对章节（443行最终报告）",
+      "completed_at": "2026-05-29 12:11"
     },
     {
       "id": 6,
       "step": 6,
       "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "待分配",
-      "content": "审核润色后的报告"
+      "status": "completed",
+      "content": "审核通过，6项风险+应对完整落实",
+      "completed_at": "2026-05-29 12:13"
     },
     {
       "id": 7,
@@ -102,5 +106,5 @@
       "release": "v2026.05.28-audit-fix"
     }
   ],
-  "last_updated": "2026-05-29 12:15"
+  "last_updated": "2026-05-29 12:23"
 }
