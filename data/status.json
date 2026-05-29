@@ -101,9 +101,11 @@
       "step": 8,
       "name": "甄宓呈报主公",
       "assignee": "甄宓",
-      "status": "执行中",
-      "content": "收到交付后呈报主公",
-      "assign_time": "2026-05-29T09:13:05Z"
+      "status": "completed",
+      "content": "呈报主公(测试)",
+      "assign_time": "2026-05-29T09:13:05Z",
+      "completed_at": "2026-05-29T09:14:00Z",
+      "reported_next": false
     }
   ],
   "archived_tasks": [],
