@@ -350,6 +350,16 @@ if last_completed_idx == -1:
         print(json.dumps({'action': 'all_done', 'work_id': work_id}))
         sys.exit(0)
 
+    running = [s for s in steps if s.get('status') == '执行中']
+    if running:
+        print(json.dumps({
+            'action': 'none',
+            'reason': 'in_progress',
+            'work_id': work_id,
+            'running_count': len(running)
+        }))
+        sys.exit(0)
+
     first_pending = None
     for i, s in enumerate(steps):
         if s.get('status') in pending_statuses:
@@ -368,12 +378,10 @@ if last_completed_idx == -1:
         }))
         sys.exit(0)
 
-    running = [s for s in steps if s.get('status') == '执行中']
     print(json.dumps({
         'action': 'none',
-        'reason': 'in_progress',
-        'work_id': work_id,
-        'running_count': len(running)
+        'reason': 'no_pending_no_running',
+        'work_id': work_id
     }))
     sys.exit(0)
 
@@ -865,6 +873,21 @@ for i, s in enumerate(steps):
         last_completed_idx = i
 
 if last_completed_idx == -1:
+    all_done = all(s.get('status') == 'completed' for s in steps)
+    if all_done:
+        print(json.dumps({'action': 'all_done', 'work_id': work_id}))
+        sys.exit(0)
+
+    running = [s for s in steps if s.get('status') == '执行中']
+    if running:
+        print(json.dumps({
+            'action': 'none',
+            'reason': 'in_progress',
+            'work_id': work_id,
+            'running_count': len(running)
+        }))
+        sys.exit(0)
+
     first_pending_idx = None
     first_pending_step = None
     for i, s in enumerate(steps):
@@ -874,9 +897,6 @@ if last_completed_idx == -1:
             break
 
     if first_pending_idx is not None and first_pending_step is not None:
-        for i in range(first_pending_idx):
-            if steps[i].get('status') not in ('completed', '执行中', pending_statuses + blocked_statuses):
-                pass
         steps[first_pending_idx]['status'] = '执行中'
         steps[first_pending_idx]['assign_time'] = now_utc
         data['last_updated'] = now_utc
@@ -892,17 +912,10 @@ if last_completed_idx == -1:
         }))
         sys.exit(0)
 
-    all_done = all(s.get('status') == 'completed' for s in steps)
-    if all_done:
-        print(json.dumps({'action': 'all_done', 'work_id': work_id}))
-        sys.exit(0)
-
-    running = [s for s in steps if s.get('status') == '执行中']
     print(json.dumps({
         'action': 'none',
-        'reason': 'in_progress',
-        'work_id': work_id,
-        'running_count': len(running)
+        'reason': 'no_pending_no_running',
+        'work_id': work_id
     }))
     sys.exit(0)
 
