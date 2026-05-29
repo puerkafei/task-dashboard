@@ -21,15 +21,17 @@
       "status": "completed",
       "content": "初始化status.json并触发relay",
       "completed_at": "2026-05-29T09:04:00Z",
-      "reported_next": false
+      "reported_next": true,
+      "reported_at": "2026-05-29T09:07:22Z"
     },
     {
       "id": 2,
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "待分配",
-      "content": "接收甄宓指令，分派诸葛亮调研"
+      "status": "执行中",
+      "content": "接收甄宓指令，分派诸葛亮调研",
+      "assign_time": "2026-05-29T09:07:22Z"
     },
     {
       "id": 3,
@@ -81,6 +83,6 @@
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T09:04:00Z",
+  "last_updated": "2026-05-29T09:07:22Z",
   "no_task": false
 }
