@@ -19,19 +19,19 @@
       "name": "甄宓规划",
       "assignee": "甄宓",
       "status": "completed",
-      "content": "初始化status.json并触发relay",
-      "completed_at": "2026-05-29T09:04:00Z",
+      "content": "completed_by_test",
+      "completed_at": "2026-05-29T09:01:00Z",
       "reported_next": true,
-      "reported_at": "2026-05-29T09:07:22Z"
+      "reported_at": "2026-05-29T09:12:53Z"
     },
     {
       "id": 2,
       "step": 2,
       "name": "曹操分派",
       "assignee": "曹操",
-      "status": "completed",
+      "status": "执行中",
       "content": "分派完成(测试)",
-      "assign_time": "2026-05-29T09:07:22Z",
+      "assign_time": "2026-05-29T09:12:53Z",
       "completed_at": "2026-05-29T09:08:00Z",
       "reported_next": true,
       "reported_at": "2026-05-29T09:12:31Z"
@@ -87,6 +87,6 @@
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T09:12:31Z",
+  "last_updated": "2026-05-29T09:12:53Z",
   "no_task": false
 }
