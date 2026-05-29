@@ -1,13 +1,15 @@
 #!/bin/bash
 # coordinator.sh — Automated Coordination Scheduler
-# <!-- V7 v2026.05.29.2 -->
+# <!-- V7 v2026.05.29.3 -->
 #
 # Polls agent status, detects status.json changes, commits/pushes to git,
 # sends blocker alerts to the master (主公), and manages timed reminders.
 #
-# Relay architecture V6: NO openclaw agent CLI calls. Only advance.
+# Relay architecture V7: NO openclaw agent CLI calls anywhere.
 # Agents detect status.json changes via relay watch and self-dispatch.
 # relay advance = mark completed + reported_next + next step 执行中 + git push.
+# relay auto = advance only (no notify, no relay_find_next pre-check).
+# Blocked step detection: blocked/error/failed/卡点 steps block advance.
 #
 # Usage:
 #   ./coordinator.sh {poll|watch|notify|reminder|validate|all|init-cron|relay|upload}
@@ -22,6 +24,15 @@
 #   init-cron   Print recommended crontab entries
 #   relay       Workflow auto-handoff (advance only, watch for self-dispatch)
 #   upload      Git push + GitHub Release (prepare|push|release|auto)
+#
+# Relay subcommands:
+#   relay check             Check status.json for completed/blocked step
+#   relay advance           Advance: mark completed → next step 执行中
+#   relay auto              advance only (no notify)
+#   relay auto-advance      same as auto (deprecated alias)
+#   relay notify [role]     Log relay target (NO agent CLI — architecture V7)
+#   relay watch [opts]      Detect status.json changes for self-dispatch
+#   relay check-session <id> Check if agent session ended
 #
 
 set -euo pipefail
@@ -206,17 +217,7 @@ notify_blocker() {
 
   info "Sending notification: ${message}"
 
-  # Primary: openclaw agent --agent main
-  if [[ "$COORDINATOR_NOTIFY_METHOD" == "primary" ]] && command -v openclaw &>/dev/null; then
-    if openclaw agent --agent main --message "$message" 2>/dev/null; then
-      info "Notification sent via openclaw agent"
-      return 0
-    else
-      warn "openclaw agent notification failed, trying fallback"
-    fi
-  fi
-
-  # Fallback: OpenClaw Webhook
+  # Primary: OpenClaw Webhook (NO openclaw agent CLI — architecture V7)
   if [[ -n "$OPENCLAW_HOOK_TOKEN" ]]; then
     local hook_url="http://${OPENCLAW_HOST}:${OPENCLAW_PORT}/hooks/agent"
     if curl -s -X POST "$hook_url" \
@@ -324,6 +325,19 @@ if not steps:
 work_id = data.get('current_task', {}).get('work_id', 'unknown')
 
 pending_statuses = ('待开始', '待分配', '')
+blocked_statuses = ('blocked', 'error', 'failed', '卡点')
+
+for s in steps:
+    if s.get('status') in blocked_statuses:
+        print(json.dumps({
+            'action': 'blocked',
+            'work_id': work_id,
+            'blocked_step_id': s.get('id'),
+            'blocked_step_name': s.get('name', ''),
+            'blocked_assignee': s.get('assignee', ''),
+            'blocked_status': s.get('status')
+        }))
+        sys.exit(0)
 
 last_completed_idx = -1
 for i, s in enumerate(steps):
@@ -336,13 +350,21 @@ if last_completed_idx == -1:
         print(json.dumps({'action': 'all_done', 'work_id': work_id}))
         sys.exit(0)
 
-    if steps[0].get('status') in pending_statuses:
+    first_pending = None
+    for i, s in enumerate(steps):
+        if s.get('status') in pending_statuses:
+            first_pending = (i, s)
+            break
+
+    if first_pending is not None:
+        idx, s = first_pending
         print(json.dumps({
             'action': 'init_needed',
             'work_id': work_id,
-            'first_step_id': steps[0].get('id'),
-            'first_step_name': steps[0].get('name', ''),
-            'first_assignee': steps[0].get('assignee', '')
+            'first_step_id': s.get('id'),
+            'first_step_name': s.get('name', ''),
+            'first_assignee': s.get('assignee', ''),
+            'first_step_idx': idx
         }))
         sys.exit(0)
 
@@ -472,6 +494,15 @@ relay_notify_handler() {
       wid=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin).get('work_id','unknown'))" 2>/dev/null || echo "unknown")
       relay_signal_all_done "$wid"
       ;;
+    blocked)
+      local blocked_step_id blocked_assignee blocked_status work_id
+      blocked_step_id=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('blocked_step_id',''))" 2>/dev/null || echo "")
+      blocked_assignee=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('blocked_assignee',''))" 2>/dev/null || echo "")
+      blocked_status=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('blocked_status',''))" 2>/dev/null || echo "")
+      work_id=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin).get('work_id',''))" 2>/dev/null || echo "")
+      error "relay notify: BLOCKED — step #${blocked_step_id} (${blocked_assignee}) status=${blocked_status} [work_id=${work_id}]"
+      notify_blocker "relay-blocked" "step #${blocked_step_id} blocked (${blocked_status}) in work_id=${work_id}"
+      ;;
     none|error)
       info "relay notify: no action needed (action=${action})"
       echo "$result"
@@ -510,12 +541,22 @@ relay_check_handler() {
       echo "$result" | python3 -m json.tool 2>/dev/null || echo "$result"
       ;;
     init_needed)
-      local first_step_id first_assignee first_step_name work_id
+      local first_step_id first_assignee first_step_name work_id first_step_idx
       first_step_id=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('first_step_id',''))" 2>/dev/null || echo "")
       first_assignee=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('first_assignee',''))" 2>/dev/null || echo "")
       first_step_name=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('first_step_name',''))" 2>/dev/null || echo "")
+      first_step_idx=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('first_step_idx',''))" 2>/dev/null || echo "")
       work_id=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin).get('work_id',''))" 2>/dev/null || echo "")
-      info "relay check: INIT NEEDED — first step #${first_step_id} (${first_assignee}: ${first_step_name}) not started [work_id=${work_id}]"
+      info "relay check: INIT NEEDED — first pending step #${first_step_id} at idx=${first_step_idx} (${first_assignee}: ${first_step_name}) [work_id=${work_id}]"
+      echo "$result" | python3 -m json.tool 2>/dev/null || echo "$result"
+      ;;
+    blocked)
+      local blocked_step_id blocked_assignee blocked_status work_id
+      blocked_step_id=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('blocked_step_id',''))" 2>/dev/null || echo "")
+      blocked_assignee=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('blocked_assignee',''))" 2>/dev/null || echo "")
+      blocked_status=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('blocked_status',''))" 2>/dev/null || echo "")
+      work_id=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin).get('work_id',''))" 2>/dev/null || echo "")
+      error "relay check: BLOCKED — step #${blocked_step_id} (${blocked_assignee}) status=${blocked_status} [work_id=${work_id}]"
       echo "$result" | python3 -m json.tool 2>/dev/null || echo "$result"
       ;;
     all_done)
@@ -543,60 +584,15 @@ relay_check_handler() {
 }
 
 relay_auto_handler() {
-  info "relay auto: advance status.json (mark reported_next + next step='执行中')"
-
-  local result
-  result=$(relay_find_next)
-
-  local action
-  action=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin).get('action',''))" 2>/dev/null || echo "")
-
-  case "$action" in
-    advance)
-      local next_assignee work_id current_step_id next_step_id step_name
-      next_assignee=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin).get('next_assignee',''))" 2>/dev/null || echo "")
-      work_id=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin).get('work_id',''))" 2>/dev/null || echo "")
-      current_step_id=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('current_step_id',''))" 2>/dev/null || echo "")
-      next_step_id=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('next_step_id',''))" 2>/dev/null || echo "")
-      step_name=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('next_name',''))" 2>/dev/null || echo "")
-
-      info "relay auto: step #${current_step_id} → step #${next_step_id} (${next_assignee}: ${step_name}) — advance only, no notify"
-
-      relay_advance_handler || warn "relay auto: advance failed (non-fatal, can retry via 'relay advance')"
-      ;;
-    init_needed)
-      local first_step_id first_assignee first_step_name work_id
-      first_step_id=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('first_step_id',''))" 2>/dev/null || echo "")
-      first_assignee=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('first_assignee',''))" 2>/dev/null || echo "")
-      first_step_name=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('first_step_name',''))" 2>/dev/null || echo "")
-      work_id=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin).get('work_id',''))" 2>/dev/null || echo "")
-
-      info "relay auto: init_needed — starting first step #${first_step_id} (${first_assignee}: ${first_step_name}) for work_id=${work_id}"
-
-      relay_advance_handler || warn "relay auto: advance (init) failed (non-fatal)"
-      ;;
-    all_done)
-      local wid
-      wid=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin).get('work_id','unknown'))" 2>/dev/null || echo "unknown")
-      info "relay auto: all steps done for work_id=${wid} — advance not needed"
-      ;;
-    none)
-      info "relay auto: no relay needed"
-      echo "$result"
-      ;;
-    error)
-      local err
-      err=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin).get('reason',''))" 2>/dev/null || echo "")
-      error "relay auto: error — ${err}"
-      return 1
-      ;;
-    *)
-      error "relay auto: unexpected action '${action}'"
-      return 1
-      ;;
-  esac
-
-  relay_cleanup
+  info "relay auto: advance only (no relay notify, no openclaw agent CLI)"
+  relay_advance_handler
+  local rc=$?
+  if [[ "$rc" -eq 0 ]]; then
+    info "relay auto: advance complete"
+  else
+    warn "relay auto: advance failed (rc=$rc)"
+  fi
+  return $rc
 }
 
 # --- 8b. RELAY — CLEANUP (zombie process reaper) ------------------------------
@@ -625,12 +621,51 @@ relay_cleanup() {
 # Agents use relay watch to detect if status.json has changed and whether
 # they need to take action (i.e., their assigned step is now '执行中').
 relay_watch_handler() {
-  local agent_id="${1:-}"
+  local agent_id=""
+  local loop_mode=false
+  local watch_interval=30
+  local use_inotify=false
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --loop)    loop_mode=true; shift ;;
+      --interval) watch_interval="$2"; shift 2 ;;
+      --inotify) use_inotify=true; shift ;;
+      *)         agent_id="$1"; shift ;;
+    esac
+  done
+
   local watch_hash_file="${RELAY_DEDUP_FILE%.txt}.watch.hash"
 
   if [[ ! -f "$RELAY_STATUS_JSON" ]]; then
     error "relay watch: status.json not found at ${RELAY_STATUS_JSON}"; return 1
   fi
+
+  if [[ "$loop_mode" == "true" ]] && command -v inotifywait &>/dev/null && [[ "$use_inotify" == "true" ]]; then
+    info "relay watch: inotifywait loop mode (interval=${watch_interval}s)"
+    while true; do
+      inotifywait -e modify -e create -e move "$RELAY_STATUS_JSON" --timeout "$((watch_interval * 1000))" 2>/dev/null || true
+      _relay_watch_check "$agent_id" "$watch_hash_file"
+      sleep 1
+    done
+    return 0
+  fi
+
+  if [[ "$loop_mode" == "true" ]]; then
+    info "relay watch: polling loop mode (interval=${watch_interval}s)"
+    while true; do
+      _relay_watch_check "$agent_id" "$watch_hash_file"
+      sleep "$watch_interval"
+    done
+    return 0
+  fi
+
+  _relay_watch_check "$agent_id" "$watch_hash_file"
+}
+
+_relay_watch_check() {
+  local agent_id="${1:-}"
+  local watch_hash_file="${2:-${RELAY_DEDUP_FILE%.txt}.watch.hash}"
 
   local current_hash
   current_hash=$(sha256sum "$RELAY_STATUS_JSON" | awk '{print $1}')
@@ -650,7 +685,6 @@ relay_watch_handler() {
 
   info "relay watch: status.json CHANGED (${previous_hash:+old: ${previous_hash}} → new: ${current_hash})"
 
-  # Parse status.json to check if this agent needs to act
   python3 -c "
 import json, sys
 
@@ -660,7 +694,11 @@ with open('${RELAY_STATUS_JSON}') as f:
 steps = data.get('steps', [])
 work_id = data.get('current_task', {}).get('work_id', 'unknown')
 
-# Find steps currently in '执行中' status
+blocked_statuses = ('blocked', 'error', 'failed', '卡点')
+for s in steps:
+    if s.get('status') in blocked_statuses:
+        print(f'BLOCKED_STEP: step_id={s.get(\"id\")} name={s.get(\"name\")} assignee={s.get(\"assignee\")} status={s.get(\"status\")}')
+
 active_steps = [s for s in steps if s.get('status') == '执行中']
 
 if not active_steps:
@@ -673,7 +711,6 @@ for s in active_steps:
     step_name = s.get('name', '')
     print(f'ACTIVE_STEP: step_id={step_id} name={step_name} assignee={assignee}')
 
-# Also check if all steps completed
 if all(s.get('status') == 'completed' for s in steps):
     print('ALL_DONE')
 " 2>/dev/null || echo "PARSE_ERROR"
@@ -808,6 +845,19 @@ work_id = data.get('current_task', {}).get('work_id', 'unknown')
 now_utc = '$(date -u +%Y-%m-%dT%H:%M:%SZ)'
 
 pending_statuses = ('待开始', '待分配', '')
+blocked_statuses = ('blocked', 'error', 'failed', '卡点')
+
+for s in steps:
+    if s.get('status') in blocked_statuses:
+        print(json.dumps({
+            'action': 'blocked',
+            'work_id': work_id,
+            'blocked_step_id': s.get('id'),
+            'blocked_step_name': s.get('name', ''),
+            'blocked_assignee': s.get('assignee', ''),
+            'blocked_status': s.get('status')
+        }))
+        sys.exit(0)
 
 last_completed_idx = -1
 for i, s in enumerate(steps):
@@ -815,18 +865,30 @@ for i, s in enumerate(steps):
         last_completed_idx = i
 
 if last_completed_idx == -1:
-    if steps[0].get('status') in pending_statuses:
-        steps[0]['status'] = '执行中'
-        steps[0]['assign_time'] = now_utc
+    first_pending_idx = None
+    first_pending_step = None
+    for i, s in enumerate(steps):
+        if s.get('status') in pending_statuses:
+            first_pending_idx = i
+            first_pending_step = s
+            break
+
+    if first_pending_idx is not None and first_pending_step is not None:
+        for i in range(first_pending_idx):
+            if steps[i].get('status') not in ('completed', '执行中', pending_statuses + blocked_statuses):
+                pass
+        steps[first_pending_idx]['status'] = '执行中'
+        steps[first_pending_idx]['assign_time'] = now_utc
         data['last_updated'] = now_utc
         with open('${status_path}', 'w') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         print(json.dumps({
             'action': 'initialized',
             'work_id': work_id,
-            'first_step_id': steps[0].get('id'),
-            'first_assignee': steps[0].get('assignee', ''),
-            'first_name': steps[0].get('name', '')
+            'first_step_id': first_pending_step.get('id'),
+            'first_assignee': first_pending_step.get('assignee', ''),
+            'first_name': first_pending_step.get('name', ''),
+            'first_step_idx': first_pending_idx
         }))
         sys.exit(0)
 
@@ -872,7 +934,7 @@ print(json.dumps({
     'current_step_name': steps[last_completed_idx].get('name'),
     'next_step_id': steps[next_idx].get('id'),
     'next_assignee': steps[next_idx].get('assignee', ''),
-    'next_name': steps[next_idx].get('name', '')
+    'next_name': steps[next_idx].get('name')
 }))
 " 2>&1
 
@@ -956,26 +1018,32 @@ relay_handler() {
       ;;
     help|--help|-h)
       cat <<HELP
-Relay Subcommands (v2026.05.29.2 — NO openclaw agent CLI for notify):
-  check             Check status.json for completed step → determine next
-  notify [role]     Log relay target (NO agent CLI notification — architecture change)
-  auto              advance only (mark reported_next + next step='执行中', handles init)
-  advance           Update status.json: reported_next=true + next step='执行中' (handles init)
-  auto-advance      advance only (same as auto — deprecated alias)
-  watch [agentId]   Detect status.json changes — agents use this to self-dispatch
+Relay Subcommands (V7 v2026.05.29.3 — NO openclaw agent CLI anywhere):
+  check             Check status.json for completed/blocked step → determine next
+  notify [role]     Log relay target (NO agent CLI notification — V7 architecture)
+  auto              advance only (mark reported_next + next step='执行中')
+  advance           Update status.json: reported_next=true + next step='执行中'
+  auto-advance      advance only (deprecated alias for auto)
+  watch [opts]      Detect status.json changes — agents self-dispatch
+    Options: --loop (poll continuously), --interval N (seconds, default 30)
+             --inotify (use inotifywait if available)
   check-session <agentId>  Check if agent's session has ended
   help              Show this help
 
   Actions returned by relay check/find_next:
-  advance    = completed step found, next step ready
-  init_needed = first step not started yet, needs initialization
-  all_done   = all steps completed
-  none       = in progress or no action needed
-  error      = something went wrong
+  advance      = completed step found, next step ready
+  init_needed  = first pending step not started (at any index, not just step 0)
+  blocked      = a step is in blocked/error/failed/卡点 status
+  all_done     = all steps completed
+  none         = in progress or no action needed
+  error        = something went wrong
 
-Architecture Note:
-  Relay notify does NOT call openclaw agent --deliver. Agents detect
-  status.json changes via relay watch and self-dispatch accordingly.
+Architecture Note (V7):
+  NO openclaw agent CLI calls anywhere in coordinator.sh.
+  - notify_blocker: uses webhook + Telegram only (no openclaw agent CLI)
+  - relay notify: logs target only (no openclaw agent CLI)
+  - relay auto/advance: writes status.json only (no notification)
+  - Agents detect status.json changes via relay watch and self-dispatch.
 
 Examples:
   coordinator.sh relay check
@@ -983,6 +1051,7 @@ Examples:
   coordinator.sh relay auto-advance
   coordinator.sh relay watch
   coordinator.sh relay watch opencode
+  coordinator.sh relay watch --loop --interval 60 --inotify
   coordinator.sh relay check-session zhugeliang
 HELP
       ;;
@@ -1397,7 +1466,7 @@ main() {
       ;;
     help|--help|-h)
       cat <<USAGE
-coordinator.sh — Automated Coordination Scheduler (v2026.05.29.2)
+coordinator.sh — Automated Coordination Scheduler (v2026.05.29.3)
 
 Usage:
   $(basename "$0") {poll|watch|notify|reminder|validate|all|init-cron|relay|upload|help}
@@ -1415,18 +1484,23 @@ Subcommands:
   help              Show this help message
 
 Relay Subcommands:
-  check             Check status.json for completed step → determine next
-  notify [role]     Log relay target (NO agent CLI notification)
+  check             Check status.json for completed/blocked step
+  notify [role]     Log relay target (NO agent CLI — V7 architecture)
   auto              advance only (mark reported_next + next step='执行中')
   advance           Update status.json: reported_next=true + next step='执行中'
   auto-advance      advance only (deprecated alias for auto)
-  watch [agentId]   Detect status.json changes — agents self-dispatch
-  check-session <agentId>  Check if agent's session has ended
+  watch [opts]      Detect status.json changes — agents self-dispatch
+    --loop          Poll continuously
+    --interval N    Poll interval in seconds (default 30)
+    --inotify       Use inotifywait if available
+  check-session <agentId>  Check if agent session ended
 
-Relay Architecture (v2026.05.29.1):
-  NO openclaw agent --deliver calls for relay notify.
-  Agents detect status.json changes via relay watch and self-dispatch.
-  relay advance writes to status.json; relay watch reads and detects changes.
+Relay Architecture (V7 v2026.05.29.3):
+  NO openclaw agent CLI calls anywhere in coordinator.sh.
+  notify_blocker: webhook + Telegram only.
+  relay advance: writes status.json only, no notification.
+  Agents detect changes via relay watch and self-dispatch.
+  Blocked/error/failed/卡点 steps block advance (new detection).
 
 Upload Subcommands:
   prepare           Prepare file manifest (from --files or status.json)
