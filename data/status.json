@@ -1,74 +1,9 @@
 {
-  "work_id": "TASK-20260529-daily-report",
-  "title": "每日团队晨报改革 — 取长补短，让晨报真实可信",
-  "type": "非编程类（调研+修正）",
-  "current_task": {
-    "work_id": "TASK-20260529-daily-report",
-    "title": "每日团队晨报改革",
-    "type": "非编程类",
-    "progress": 0,
-    "assign_time": "2026-05-29 12:00",
-    "parent": null,
-    "description": "调研行业最佳实践，修正曹操团队晨报工作流，让每日晨报变成真实可信、好用的一套工作内容总结报告。要求：1) 晨报必须区分已解决vs未解决；2) 必须以status.json数据为准；3) 最终交付一份任务报告给主公。"
-  },
-  "steps": [
-    {
-      "id": 1,
-      "step": 1,
-      "name": "甄宓规划",
-      "assignee": "甄宓(main)",
-      "status": "completed",
-      "content": "规划晨报改革任务：调研行业最佳实践→分析当前问题→设计新晨报模板→更新Skill→测试→汇总报告"
-    },
-    {
-      "id": 2,
-      "step": 2,
-      "name": "曹操分派",
-      "assignee": "曹操(caocao)",
-      "status": "已分配",
-      "content": "调研行业每日晨报/工作总结最佳实践（至少5个来源），分析晨报信息不对称根因，设计新晨报模板+更新曹操AGENTS.md/Skill，测试后汇总报告呈报主公"
-    },
-    {
-      "id": 3,
-      "step": 3,
-      "name": "诸葛亮调研",
-      "assignee": "诸葛亮(zhugeliang)",
-      "status": "待分配",
-      "content": "调研行业晨报/工作总结最佳实践范文和模板，整理至少5种成熟模式，分析优缺点"
-    },
-    {
-      "id": 4,
-      "step": 4,
-      "name": "司马懿审诸葛亮",
-      "assignee": "司马懿(simayi)",
-      "status": "待分配",
-      "content": "审核诸葛亮调研报告：来源是否可靠、覆盖是否全面、分析是否有洞见"
-    },
-    {
-      "id": 5,
-      "step": 5,
-      "name": "曹植润色报告",
-      "assignee": "曹植(caozhi)",
-      "status": "待分配",
-      "content": "将调研结论+新晨报方案润色为正式的任务报告"
-    },
-    {
-      "id": 6,
-      "step": 6,
-      "name": "司马懿审曹植",
-      "assignee": "司马懿(simayi)",
-      "status": "待分配",
-      "content": "审核润色后的任务报告，确保格式规范、内容准确"
-    },
-    {
-      "id": 7,
-      "step": 7,
-      "name": "曹操汇总",
-      "assignee": "曹操(caocao)",
-      "status": "待分配",
-      "content": "收集所有交付物，汇总任务报告，交付甄宓呈报主公"
-    }
-  ],
+  "work_id": null,
+  "title": null,
+  "type": null,
+  "current_task": null,
+  "steps": [],
   "archived_tasks": [
     {
       "work_id": "TASK-20260528-audit-round2",
@@ -100,5 +35,5 @@
       "release": "v2026.05.28-audit-fix"
     }
   ],
-  "last_updated": "2026-05-29 12:00"
+  "last_updated": "2026-05-29 12:07"
 }
