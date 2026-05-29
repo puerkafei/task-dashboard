@@ -19,16 +19,16 @@
       "assignee": "甄宓",
       "status": "completed",
       "completed_at": "2026-05-29 15:45:00",
-      "reported_next": false,
-      "reported_at": null,
+      "reported_next": true,
+      "reported_at": "2026-05-29T08:08:25Z",
       "step": 1
     },
     {
       "id": 2,
       "name": "曹操分派任务",
       "assignee": "曹操",
-      "status": "待执行",
-      "assign_time": null,
+      "status": "执行中",
+      "assign_time": "2026-05-29T08:08:25Z",
       "completed_at": null,
       "step": 2
     },
@@ -88,5 +88,5 @@
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29 15:45:00"
+  "last_updated": "2026-05-29T08:08:25Z"
 }
