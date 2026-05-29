@@ -49,35 +49,39 @@
       "id": 4,
       "name": "司马懿审核测试结果",
       "assignee": "司马懿",
-      "status": "执行中",
+      "status": "completed",
       "assign_time": "2026-05-29T08:09:36Z",
-      "completed_at": null,
-      "step": 4
+      "completed_at": "2026-05-29T08:10:19Z",
+      "step": 4,
+      "reported_next": false
     },
     {
       "id": 5,
       "name": "曹植润色报告",
       "assignee": "曹植",
-      "status": "待执行",
+      "status": "completed",
       "assign_time": null,
-      "completed_at": null,
-      "step": 5
+      "completed_at": "2026-05-29T08:10:19Z",
+      "step": 5,
+      "reported_next": false
     },
     {
       "id": 6,
       "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "待执行",
+      "status": "completed",
       "assign_time": null,
-      "completed_at": null,
-      "step": 6
+      "completed_at": "2026-05-29T08:10:19Z",
+      "step": 6,
+      "reported_next": true,
+      "reported_at": "2026-05-29T08:10:27Z"
     },
     {
       "id": 7,
       "name": "曹操汇总测试报告",
       "assignee": "曹操",
-      "status": "待执行",
-      "assign_time": null,
+      "status": "执行中",
+      "assign_time": "2026-05-29T08:10:27Z",
       "completed_at": null,
       "step": 7
     },
@@ -92,5 +96,5 @@
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T08:09:36Z"
+  "last_updated": "2026-05-29T08:10:27Z"
 }
