@@ -65,19 +65,21 @@
       "step": 5,
       "name": "曹植润色README",
       "assignee": "曹植",
-      "status": "执行中",
+      "status": "completed",
       "content": "润色 coordinator.sh README、更新 relay 使用说明",
       "assign_time": "2026-05-29T10:08:15Z",
-      "reported_next": false
+      "reported_next": true,
+      "completed_at": "2026-05-29T10:16:20.659751+00:00",
+      "reported_at": "2026-05-29T10:16:30Z"
     },
     {
       "id": 6,
       "step": 6,
       "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "待分配",
+      "status": "执行中",
       "content": "审核曹植润色内容",
-      "assign_time": "",
+      "assign_time": "2026-05-29T10:16:30Z",
       "reported_next": false
     },
     {
@@ -101,6 +103,6 @@
       "note": "手动全链路模拟测试 PASS"
     }
   ],
-  "last_updated": "2026-05-29T10:08:15Z",
+  "last_updated": "2026-05-29T10:16:30Z",
   "no_task": false
 }
