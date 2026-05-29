@@ -77,17 +77,21 @@
       "step": 6,
       "name": "司马懿审曹植",
       "assignee": "司马懿",
-      "status": "执行中",
-      "content": "审核曹植润色",
-      "assign_time": "2026-05-29T09:13:01Z"
+      "status": "completed",
+      "content": "completed_by_test",
+      "assign_time": "2026-05-29T09:13:01Z",
+      "completed_at": "2026-05-29T09:06:00Z",
+      "reported_next": true,
+      "reported_at": "2026-05-29T09:13:03Z"
     },
     {
       "id": 7,
       "step": 7,
       "name": "曹操汇总",
       "assignee": "曹操",
-      "status": "待分配",
-      "content": "汇总交付物"
+      "status": "执行中",
+      "content": "汇总交付物",
+      "assign_time": "2026-05-29T09:13:03Z"
     },
     {
       "id": 8,
@@ -99,6 +103,6 @@
     }
   ],
   "archived_tasks": [],
-  "last_updated": "2026-05-29T09:13:01Z",
+  "last_updated": "2026-05-29T09:13:03Z",
   "no_task": false
 }
